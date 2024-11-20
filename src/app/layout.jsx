@@ -1,6 +1,3 @@
-import Footer from '@/components/Footer';
-import { GridBackground } from '@/components/GridBackground';
-import Navbar from '@/components/NavBar';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -26,11 +23,7 @@ export default function RootLayout({ children }) {
     <html lang='en' suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <GridBackground>
-            <Navbar />
-            {children}
-          </GridBackground>
-          <Footer />
+          {children}
         </ThemeProvider>
       </body>
     </html>

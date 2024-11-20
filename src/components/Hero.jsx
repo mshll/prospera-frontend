@@ -21,10 +21,10 @@ function Hero() {
                 <ArrowUpRight className='ml-1 inline-block size-4 duration-200 group-hover:rotate-45' />
               </Badge>
             </Link>
-
-            <h1 className='mb-1 text-5xl font-medium'>
+            <h1 className='text-xl font-medium md:mb-1 md:text-5xl'>
               Build your
-              <FlipWords words={words} className={'text-primary'} /> <br />
+              <FlipWords words={words} className={'text-primary'} />
+              <br />
               <span className='mt-1 text-4xl font-bold leading-none md:text-[6rem]'>with Prospera</span>
             </h1>
           </>

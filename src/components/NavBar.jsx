@@ -2,12 +2,13 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { Menu } from 'lucide-react';
+import Link from 'next/link';
 import { ThemeSwitch } from './ThemeSwitch';
 
 const LogoDiv = (
-  <div className='flex items-center gap-2'>
+  <Link href='/' className='flex items-center justify-center gap-x-2'>
     <span className='text-2xl font-bold tracking-tight'>Prospera</span>
-  </div>
+  </Link>
 );
 
 const menuItems = [
@@ -27,7 +28,7 @@ const footerLinks = [
 ];
 
 const Navbar = () => (
-  <section className='sticky top-0 z-50 p-6'>
+  <section className='fixed top-0 z-50 w-full p-6 pb-28'>
     <div className='container rounded-full border border-border/80 bg-background/80 py-3 backdrop-blur-lg backdrop-filter'>
       {/* Desktop navbar */}
       <nav className='hidden justify-between lg:flex'>
@@ -46,9 +47,13 @@ const Navbar = () => (
           </div>
         </div>
         <div className='flex gap-2'>
-          <Button variant='ghost'>Log in</Button>
-          <Button>Sign up</Button>
           <ThemeSwitch variant='ghost' />
+          <Link href='/login'>
+            <Button variant='ghost'>Log in</Button>
+          </Link>
+          <Link href='/signup'>
+            <Button>Sign up</Button>
+          </Link>
         </div>
       </nav>
 
@@ -89,8 +94,12 @@ const Navbar = () => (
                     ))}
                   </div> */}
                   <div className='mt-2 flex flex-col gap-3'>
-                    <Button variant='outline'>Log in</Button>
-                    <Button>Sign up</Button>
+                    <Link href='/login'>
+                      <Button variant='ghost'>Log in</Button>
+                    </Link>
+                    <Link href='/signup'>
+                      <Button>Sign up</Button>
+                    </Link>
                   </div>
                 </div>
               </SheetContent>
