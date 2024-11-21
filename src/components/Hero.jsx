@@ -16,9 +16,12 @@ function Hero() {
         titleComponent={
           <>
             <Link href='/signup'>
-              <Badge className='group mb-2 rounded-full bg-primary text-xs text-primary-foreground' variant={'outline'}>
+              <Badge
+                className='group mb-2 rounded-full bg-primary px-6 text-xs tracking-wider text-primary-foreground'
+                variant={'outline'}
+              >
                 Start investing today
-                <ArrowUpRight className='ml-1 inline-block size-4 duration-200 group-hover:rotate-45' />
+                <ArrowUpRight className='ml-2 inline-block size-4 transition-all duration-200 group-hover:rotate-45' />
               </Badge>
             </Link>
             <h1 className='text-xl font-medium md:mb-1 md:text-5xl'>

@@ -78,7 +78,7 @@ function LoginForm() {
           {isLoading ? <LoaderCircle className='h-6 w-6 animate-spin' /> : 'Log In'}
         </AutoFormSubmit>
       </AutoForm>
-      <div className='flex items-center gap-4'>
+      {/* <div className='flex items-center gap-4'>
         <Separator className='flex-1' />
         <span className='text-xs uppercase text-muted-foreground/[.4]'>or</span>
         <Separator className='flex-1' />
@@ -96,7 +96,7 @@ function LoginForm() {
       >
         <GitHubLogoIcon className='h-6 w-6' />
         <span>Continue With GitHub</span>
-      </Button>
+      </Button> */}
     </>
   );
 }

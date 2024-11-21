@@ -14,7 +14,7 @@ function LoginPage() {
           {/* Add the logo at the top-left corner */}
           <div className='absolute left-10 top-0 z-10 m-6 translate-y-1/2'>
             <Link href='/' className='flex items-center gap-x-2'>
-              <span className='text-5xl font-bold tracking-tight'>Prospera</span>
+              <span className='text-5xl font-bold tracking-tight text-background dark:text-foreground'>Prospera</span>
             </Link>
           </div>
           <Image src={SignupImg} layout='fill' objectFit='cover' alt='Signup image' />
