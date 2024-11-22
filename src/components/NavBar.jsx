@@ -7,7 +7,7 @@ import { ThemeSwitch } from './ThemeSwitch';
 
 const LogoDiv = (
   <Link href='/' className='flex items-center justify-start gap-x-2'>
-    <span className='text-2xl font-bold tracking-tight'>Prospera</span>
+    <div className='text-2xl font-bold tracking-tight'>Prospera.</div>
   </Link>
 );
 

@@ -2,7 +2,8 @@
 import { Badge } from '@/components/ui/badge';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { FlipWords } from '@/components/ui/flip-words';
-import DashboardImg from '@/images/hero-dashboard.png';
+import DashboardImg from '@/images/hero.png';
+import DashboardImgLight from '@/images/hero-light.png';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,11 +35,19 @@ function Hero() {
         }
       >
         <Image
+          src={DashboardImgLight}
+          alt='hero'
+          height={720}
+          width={1400}
+          className='mx-auto hidden h-full rounded-2xl object-cover object-left-top dark:block'
+          draggable={false}
+        />
+        <Image
           src={DashboardImg}
           alt='hero'
           height={720}
           width={1400}
-          className='mx-auto h-full rounded-2xl object-cover object-left-top'
+          className='mx-auto h-full rounded-2xl object-cover object-left-top dark:hidden'
           draggable={false}
         />
       </ContainerScroll>

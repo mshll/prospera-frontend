@@ -6,7 +6,7 @@ const AmountCard = ({ title, value, currency, change, type }) => {
   const changeClass = type === 'up' ? 'text-success' : 'text-destructive';
 
   return (
-    <div className='box border-none px-4 py-3'>
+    <div className='box border-none'>
       <div className='flex size-full flex-col justify-center gap-2'>
         <div className='flex justify-between'>
           <h1 className='mb-2 text-xs font-bold uppercase text-muted-foreground'>{title}</h1>
