@@ -1,44 +1,66 @@
 'use client';
 import { Sidebar, SidebarBody, SidebarLink } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
-import { IconArrowLeft, IconBrandTabler, IconSettings, IconUserBolt } from '@tabler/icons-react';
+import {
+  IconArrowLeft,
+  IconBuilding,
+  IconBuildingPlus,
+  IconLayout2,
+  IconLayoutDashboard,
+  IconLogout2,
+  IconMoonFilled,
+  IconPlusMinus,
+  IconSunFilled,
+  IconUser,
+} from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 import { ThemeSwitch } from './ThemeSwitch';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { logout } from '@/actions/auth';
 
 function SideBar({ children }) {
   const links = [
     {
       label: 'Dashboard',
       href: '/dashboard',
-      icon: <IconBrandTabler className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      icon: <IconLayout2 className='h-5 w-5 flex-shrink-0 text-foreground' />,
     },
     {
-      label: 'Profile',
-      href: '#',
-      icon: <IconUserBolt className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      label: 'My Properties',
+      href: '/properties',
+      icon: <IconBuilding className='h-5 w-5 flex-shrink-0 text-foreground' />,
     },
     {
-      label: 'Settings',
-      href: '#',
-      icon: <IconSettings className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      label: 'Marketplace',
+      href: '/explore',
+      icon: <IconBuildingPlus className='h-5 w-5 flex-shrink-0 text-foreground' />,
     },
     {
-      label: 'Logout',
-      href: '#',
+      label: 'Transactions',
+      href: '/transactions',
+      icon: <IconPlusMinus className='h-5 w-5 flex-shrink-0 text-foreground' />,
+    },
+    {
+      label: 'Account',
+      href: '/account',
+      icon: <IconUser className='h-5 w-5 flex-shrink-0 text-foreground' />,
+    },
+    {
+      label: 'Back to Home',
+      href: '/',
       icon: <IconArrowLeft className='h-5 w-5 flex-shrink-0 text-foreground' />,
     },
   ];
+
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   return (
     <div
       className={cn(
-        'mx-auto flex h-screen w-full flex-1 flex-col overflow-hidden rounded-md border border-border md:flex-row',
+        'mx-auto flex h-screen w-full flex-1 flex-col overflow-hidden rounded-md border border-border bg-secondary md:flex-row',
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
@@ -53,19 +75,27 @@ function SideBar({ children }) {
             </div>
           </div>
           <div>
-            <div className='mb-3 flex flex-col'>
+            <div className='mb-4 flex flex-col gap-2'>
               <SidebarLink
                 link={{
                   label: 'Toggle theme',
                   href: '#',
                   icon: (
                     <div>
-                      <Sun className='h-[1.2rem] w-[1.2rem] transition-all dark:hidden' />
-                      <Moon className='hidden h-[1.2rem] w-[1.2rem] transition-all dark:block' />
+                      <IconSunFilled className='h-5 w-5 flex-shrink-0 text-foreground transition-all dark:hidden' />
+                      <IconMoonFilled className='hidden h-5 w-5 flex-shrink-0 text-foreground transition-all dark:block' />
                     </div>
                   ),
                 }}
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              />
+              <SidebarLink
+                link={{
+                  label: 'Logout',
+                  href: '#',
+                  icon: <IconLogout2 className='h-5 w-5 flex-shrink-0 text-foreground' />,
+                }}
+                onClick={() => logout()}
               />
             </div>
             <SidebarLink
@@ -75,7 +105,9 @@ function SideBar({ children }) {
                 icon: (
                   <Avatar className='h-6 w-6'>
                     <AvatarImage src='https://github.com/mshll.png' className='rounded-full border border-primary' />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarFallback>
+                      <IconUser className='h-5 w-5 text-foreground' />
+                    </AvatarFallback>
                   </Avatar>
                 ),
               }}

@@ -74,8 +74,8 @@ export function PortfolioChart() {
 
   return (
     <Card className='flex size-full flex-col rounded-lg'>
-      <CardHeader className='flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row'>
-        <div className='grid flex-1 gap-1 text-center sm:text-left'>
+      <CardHeader className='flex items-start gap-2 space-y-0 border-b py-5 sm:flex-row'>
+        <div className='grid flex-1 gap-1 sm:text-left'>
           <CardTitle>Portfolio Summary</CardTitle>
           <CardDescription>Performance of your portfolio over time.</CardDescription>
         </div>
@@ -170,7 +170,7 @@ export function PortfolioChart() {
                       {chartConfig[name]?.label || name}
                       <div className='ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums text-foreground'>
                         {value}
-                        <span className='font-normal text-muted-foreground'>KWD</span>
+                        <span className='text-muted-foreground'>KWD</span>
                       </div>
                       {/* Add this after the last item */}
                       {/* {index === 1 && (
@@ -186,7 +186,7 @@ export function PortfolioChart() {
                   )}
                 />
               }
-              cursor={false}
+              cursor={true}
               defaultIndex={1}
             />
             <Area

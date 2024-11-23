@@ -56,9 +56,12 @@ export function PropertyChart() {
     <Card className='flex size-full flex-col border-none bg-transparent shadow-none'>
       <CardContent className='size-full flex-1 p-0'>
         <div className='flex justify-between'>
-          <h1 className='text-xs font-bold uppercase text-muted-foreground'>Properties Overview</h1>
+          <h1 className='text-xs font-semibold text-muted-foreground'>Properties Overview</h1>
         </div>
-        <ChartContainer config={chartConfig} className='flex aspect-auto size-full min-h-[100px] flex-row'>
+        <ChartContainer
+          config={chartConfig}
+          className='flex aspect-auto size-full max-h-[300px] min-h-[100px] flex-row'
+        >
           <PieChart>
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel indicator='line' />} />
             <Pie data={chartData} dataKey='propertiesOwned' nameKey='property' innerRadius={35} strokeWidth={5}>

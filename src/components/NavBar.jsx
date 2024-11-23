@@ -27,63 +27,77 @@ const footerLinks = [
   { label: 'Cookie Settings', href: '#' },
 ];
 
-const Navbar = () => (
-  <section className='fixed top-0 z-50 w-full p-6 pb-28'>
-    <div className='container rounded-2xl border border-border/80 bg-background/80 py-3 backdrop-blur-lg backdrop-filter'>
-      {/* Desktop navbar */}
-      <nav className='hidden justify-between lg:flex'>
-        <div className='flex items-center gap-6'>
-          {LogoDiv}
-          <div className='flex items-center'>
-            {menuItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className={cn('text-muted-foreground', buttonVariants({ variant: 'ghost' }))}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className='flex gap-2'>
-          <ThemeSwitch variant='ghost' />
-          <Link href='/login'>
-            <Button variant='ghost'>Log in</Button>
-          </Link>
-          <Link href='/signup'>
-            <Button>Sign up</Button>
-          </Link>
-        </div>
-      </nav>
+const Navbar = () => {
+  // let user = null;
+  let user = true;
 
-      {/* Mobile navbar */}
-      <div className='block lg:hidden'>
-        <div className='flex items-center justify-between'>
-          {LogoDiv}
+  return (
+    <section className='fixed top-0 z-50 w-full p-6 pb-28'>
+      <div className='container rounded-2xl border border-border/80 bg-background/80 py-3 backdrop-blur-lg backdrop-filter'>
+        {/* Desktop navbar */}
+        <nav className='hidden justify-between lg:flex'>
+          <div className='flex items-center gap-6'>
+            {LogoDiv}
+            <div className='flex items-center'>
+              {menuItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={cn('text-muted-foreground', buttonVariants({ variant: 'ghost' }))}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
           <div className='flex gap-2'>
             <ThemeSwitch variant='ghost' />
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant='ghost' size='icon'>
-                  <Menu className='size-4' />
-                </Button>
-              </SheetTrigger>
-              <SheetContent className='overflow-y-auto' side='left'>
-                <SheetHeader>
-                  <SheetTitle>{LogoDiv}</SheetTitle>
-                </SheetHeader>
-                <div className='flex min-h-[90%] flex-1 flex-col justify-between'>
-                  <div className='my-8 flex flex-col gap-4'>
-                    {menuItems.map((item) => (
-                      <a key={item.label} href={item.href} className='font-semibold'>
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                  <div className='pt-2'>
-                    {/* <div className="border-t pt-4"> */}
-                    {/* <div className="grid grid-cols-2 justify-start">
+            {user ? (
+              <>
+                <Link href='/dashboard'>
+                  <Button>View Dashboard</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href='/login'>
+                  <Button variant='ghost'>Log in</Button>
+                </Link>
+                <Link href='/signup'>
+                  <Button>Sign up</Button>
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
+
+        {/* Mobile navbar */}
+        <div className='block lg:hidden'>
+          <div className='flex items-center justify-between'>
+            {LogoDiv}
+            <div className='flex gap-2'>
+              <ThemeSwitch variant='ghost' />
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant='ghost' size='icon'>
+                    <Menu className='size-4' />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent className='overflow-y-auto' side='left'>
+                  <SheetHeader>
+                    <SheetTitle>{LogoDiv}</SheetTitle>
+                  </SheetHeader>
+                  <div className='flex min-h-[90%] flex-1 flex-col justify-between'>
+                    <div className='my-8 flex flex-col gap-4'>
+                      {menuItems.map((item) => (
+                        <a key={item.label} href={item.href} className='font-semibold'>
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                    <div className='pt-2'>
+                      {/* <div className="border-t pt-4"> */}
+                      {/* <div className="grid grid-cols-2 justify-start">
                     {footerLinks.map((link) => (
                       <a
                       key={link.label}
@@ -94,27 +108,38 @@ const Navbar = () => (
                       </a>
                       ))}
                       </div> */}
-                    <div className='mt-2 flex flex-col gap-3'>
-                      <Link href='/login' passHref>
-                        <Button variant='outline' size='lg' className='w-full'>
-                          Log in
-                        </Button>
-                      </Link>
-                      <Link href='/signup'>
-                        <Button size='lg' className='w-full'>
-                          Sign up
-                        </Button>
-                      </Link>
+                      <div className='mt-2 flex flex-col gap-3'>
+                        {user ? (
+                          <Link href='/dashboard' passHref>
+                            <Button size='lg' className='w-full'>
+                              View Dashboard
+                            </Button>
+                          </Link>
+                        ) : (
+                          <>
+                            <Link href='/login' passHref>
+                              <Button variant='outline' size='lg' className='w-full'>
+                                Log in
+                              </Button>
+                            </Link>
+                            <Link href='/signup'>
+                              <Button size='lg' className='w-full'>
+                                Sign up
+                              </Button>
+                            </Link>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Navbar;
