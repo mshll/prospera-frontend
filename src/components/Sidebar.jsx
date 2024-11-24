@@ -26,32 +26,27 @@ function SideBar({ children }) {
     {
       label: 'Dashboard',
       href: '/dashboard',
-      icon: <IconLayout2 className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      icon: <IconLayout2 className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
     {
       label: 'My Properties',
-      href: '/properties',
-      icon: <IconBuilding className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      href: '/my-properties',
+      icon: <IconBuilding className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
     {
       label: 'Marketplace',
-      href: '/explore',
-      icon: <IconBuildingPlus className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      href: '/marketplace',
+      icon: <IconBuildingPlus className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
     {
       label: 'Transactions',
       href: '/transactions',
-      icon: <IconPlusMinus className='h-5 w-5 flex-shrink-0 text-foreground' />,
-    },
-    {
-      label: 'Account',
-      href: '/account',
-      icon: <IconUser className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      icon: <IconPlusMinus className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
     {
       label: 'Back to Home',
       href: '/',
-      icon: <IconArrowLeft className='h-5 w-5 flex-shrink-0 text-foreground' />,
+      icon: <IconArrowLeft className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
   ];
 
@@ -67,7 +62,7 @@ function SideBar({ children }) {
         <SidebarBody className='justify-between gap-10'>
           <div className='flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
             {open ? <Logo /> : <LogoIcon />}
-            <div className='mt-8 flex flex-col gap-2'>
+            <div className='mt-8 flex flex-col gap-1'>
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
@@ -75,15 +70,15 @@ function SideBar({ children }) {
             </div>
           </div>
           <div>
-            <div className='mb-4 flex flex-col gap-2'>
+            <div className='mb-1 flex flex-col'>
               <SidebarLink
                 link={{
                   label: 'Toggle theme',
                   href: '#',
                   icon: (
                     <div>
-                      <IconSunFilled className='h-5 w-5 flex-shrink-0 text-foreground transition-all dark:hidden' />
-                      <IconMoonFilled className='hidden h-5 w-5 flex-shrink-0 text-foreground transition-all dark:block' />
+                      <IconSunFilled className='h-4 w-4 flex-shrink-0 text-foreground transition-all dark:hidden' />
+                      <IconMoonFilled className='hidden h-4 w-4 flex-shrink-0 text-foreground transition-all dark:block' />
                     </div>
                   ),
                 }}
@@ -91,9 +86,16 @@ function SideBar({ children }) {
               />
               <SidebarLink
                 link={{
+                  label: 'Account',
+                  href: '/account',
+                  icon: <IconUser className='h-4 w-4 flex-shrink-0 text-foreground' />,
+                }}
+              />
+              <SidebarLink
+                link={{
                   label: 'Logout',
                   href: '#',
-                  icon: <IconLogout2 className='h-5 w-5 flex-shrink-0 text-foreground' />,
+                  icon: <IconLogout2 className='h-4 w-4 flex-shrink-0 text-foreground' />,
                 }}
                 onClick={() => logout()}
               />
@@ -103,10 +105,10 @@ function SideBar({ children }) {
                 label: 'Yousef Almasaeed',
                 href: '#',
                 icon: (
-                  <Avatar className='h-6 w-6'>
+                  <Avatar className='h-5 w-5 flex-shrink-0'>
                     <AvatarImage src='https://github.com/mshll.png' className='rounded-full border border-primary' />
                     <AvatarFallback>
-                      <IconUser className='h-5 w-5 text-foreground' />
+                      <IconUser className='h-4 w-4 flex-shrink-0 text-foreground' />
                     </AvatarFallback>
                   </Avatar>
                 ),
