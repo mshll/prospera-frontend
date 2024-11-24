@@ -28,7 +28,7 @@ const DashboardPage = async () => {
           {/* Left column */}
           <div className='col-span-8 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
             <div className='col-span-8 row-span-9 max-md:col-span-full'>
-              <div className='box'>
+              <div className='box size-full overflow-hidden'>
                 <div className='size-full'>
                   <PortfolioChart />
                 </div>
@@ -36,11 +36,11 @@ const DashboardPage = async () => {
             </div>
 
             {/* <div className='col-span-3 row-span-5 max-md:col-span-4 max-md:col-span-full'>
-              <div className='box'>3</div>
+              <div className='box size-full overflow-hidden'>3</div>
             </div> */}
 
             {/* <div className='col-span-8 row-span-4 max-md:col-span-full max-md:min-h-[20rem] max-md:col-span-full'>
-              <div className='box flex gap-2'>
+              <div className='box size-full overflow-hidden flex gap-2'>
                 <div className='relative z-10 size-full overflow-hidden'>
                   <div className='hide-scrollbar flex h-full gap-2 overflow-y-auto max-md:overflow-y-visible'>a</div>
                   <div className='pointer-events-none absolute bottom-0 left-0 z-10 h-8 w-full bg-gradient-to-b from-background/0 to-background/50'></div>
@@ -51,7 +51,7 @@ const DashboardPage = async () => {
 
           <div className='order-2 col-span-4 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
             <div className='col-span-4 row-span-9 max-md:col-span-full'>
-              <div className='box rounded-none'>
+              <div className='box size-full overflow-hidden rounded-none'>
                 <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden'>
                   <div className='flex items-center justify-between'>
                     <h1 className='font-semibold text-muted-foreground'>Your Properties</h1>
@@ -84,11 +84,11 @@ const DashboardPage = async () => {
             </div>
 
             {/* <div className='col-span-full max-md:min-h-[20rem] max-md:block'>
-              <div className='box'>7</div>
+              <div className='box size-full overflow-hidden'>7</div>
             </div> */}
 
             {/* <div className='col-span-4 row-span-1 max-md:col-span-full max-md:min-h-[5rem]'>
-                  <div className='box'>8</div>
+                  <div className='box size-full overflow-hidden'>8</div>
                 </div> */}
           </div>
         </div>

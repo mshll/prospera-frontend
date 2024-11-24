@@ -17,6 +17,8 @@ const buttonVariants = cva(
         expandIcon: 'group relative text-primary-foreground bg-primary hover:bg-primary/90',
         ringHover:
           'bg-primary text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:ring-2 hover:ring-primary/90 hover:ring-offset-2',
+        ringHoverOutline:
+          'border border-input bg-background transition-all duration-300 hover:bg-accent hover:text-accent-foreground hover:ring-2 hover:ring-accent hover:ring-offset-2',
         shine:
           'text-primary-foreground animate-shine bg-gradient-to-r from-primary via-primary/75 to-primary bg-[length:400%_100%] ',
         gooeyRight:
@@ -48,13 +50,13 @@ const Button = React.forwardRef(({ className, variant, size, asChild = false, Ic
     <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
       {Icon && iconPlacement === 'left' && (
         <div className='group-hover:translate-x-100 w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:pr-2 group-hover:opacity-100'>
-          <Icon className='h-5 w-5' />
+          <Icon className='h-4 w-4' />
         </div>
       )}
       <Slottable>{props.children}</Slottable>
       {Icon && iconPlacement === 'right' && (
         <div className='w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100'>
-          <Icon className='h-5 w-5' />
+          <Icon className='h-4 w-4' />
         </div>
       )}
     </Comp>

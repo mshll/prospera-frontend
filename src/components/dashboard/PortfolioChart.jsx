@@ -103,7 +103,7 @@ export function PortfolioChart() {
         </div>
       </CardHeader> */}
         <CardContent className='flex size-full px-2 pt-4 sm:px-6 sm:pt-6'>
-          <ChartContainer config={chartConfig} className='aspect-auto size-full min-h-[200px]'>
+          <ChartContainer config={chartConfig} className='aspect-auto size-full min-h-[100px]'>
             <AreaChart data={filteredData}>
               <defs>
                 <linearGradient id='fillAccountValue' x1='0' y1='0' x2='0' y2='1'>
@@ -201,6 +201,7 @@ export function PortfolioChart() {
                 fill='url(#fillAccountValue)'
                 stroke='var(--color-accountValue)'
                 stackId='a'
+                isAnimationActive={true}
               />
               <Area
                 dataKey='monthlyYield'
@@ -208,6 +209,7 @@ export function PortfolioChart() {
                 fill='url(#fillMonthlyYield)'
                 stroke='var(--color-monthlyYield)'
                 stackId='b'
+                isAnimationActive={true}
               />
               <ChartLegend content={<ChartLegendContent />} />
             </AreaChart>

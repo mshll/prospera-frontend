@@ -37,10 +37,12 @@ const MyPropertiesPage = async () => {
                   </div>
                 </div>
                 <div className='flex gap-3 md:px-4'>
-                  <Button size='sm' variant='outline'>
+                  <Button size='sm' variant='ringHoverOutline'>
                     Withdraw Funds
                   </Button>
-                  <Button size='sm'>Add Funds</Button>
+                  <Button size='sm' variant='ringHover'>
+                    Add Funds
+                  </Button>
                 </div>
               </div>
             </div>

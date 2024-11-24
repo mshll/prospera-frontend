@@ -4,7 +4,7 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { FlipWords } from '@/components/ui/flip-words';
 import DashboardImg from '@/images/hero.png';
 import DashboardImgLight from '@/images/hero-light.png';
-import { ArrowUpRight } from 'lucide-react';
+import { ChevronRightIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,13 +16,13 @@ function Hero() {
       <ContainerScroll
         titleComponent={
           <>
-            <Link href='/signup'>
+            <Link href='/signup' className='flex items-center justify-center'>
               <Badge
-                className='group mb-2 rounded-full bg-primary px-6 text-xs tracking-wider text-primary-foreground'
+                className='group mb-2 rounded-full bg-primary px-5 text-xs tracking-wider text-primary-foreground'
                 variant={'outline'}
               >
                 Start investing today
-                <ArrowUpRight className='ml-2 inline-block size-4 transition-all duration-200 group-hover:rotate-45' />
+                <ChevronRightIcon className='ml-2 inline-block size-3 transition-all duration-200 group-hover:ml-3' />
               </Badge>
             </Link>
             <h1 className='text-xl font-medium md:mb-1 md:text-5xl'>

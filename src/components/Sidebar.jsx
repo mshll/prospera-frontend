@@ -38,13 +38,18 @@ function SideBar({ children }) {
       href: '/marketplace',
       icon: <IconBuildingPlus className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
+    // {
+    //   label: 'Transactions',
+    //   href: '/transactions',
+    //   icon: <IconPlusMinus className='h-4 w-4 flex-shrink-0 text-foreground' />,
+    // },
     {
-      label: 'Transactions',
-      href: '/transactions',
-      icon: <IconPlusMinus className='h-4 w-4 flex-shrink-0 text-foreground' />,
+      label: 'Account',
+      href: '/account',
+      icon: <IconUser className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
     {
-      label: 'Back to Home',
+      label: 'Home Page',
       href: '/',
       icon: <IconArrowLeft className='h-4 w-4 flex-shrink-0 text-foreground' />,
     },
@@ -84,13 +89,13 @@ function SideBar({ children }) {
                 }}
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               />
-              <SidebarLink
+              {/* <SidebarLink
                 link={{
                   label: 'Account',
                   href: '/account',
                   icon: <IconUser className='h-4 w-4 flex-shrink-0 text-foreground' />,
                 }}
-              />
+              /> */}
               <SidebarLink
                 link={{
                   label: 'Logout',
@@ -126,7 +131,7 @@ export default SideBar;
 
 export const Logo = () => {
   return (
-    <Link href='/' className='relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-foreground'>
+    <Link href='/' className='relative z-20 flex items-center space-x-2 p-2 py-1 text-sm font-normal text-foreground'>
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -139,7 +144,7 @@ export const Logo = () => {
 };
 export const LogoIcon = () => {
   return (
-    <Link href='#' className='relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-foreground'>
+    <Link href='#' className='relative z-20 flex items-center space-x-2 p-2 py-1 text-sm font-normal text-foreground'>
       <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className='mt-2'>
         <svg version='1.2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24.151' width='24' height='24.151'>
           <path

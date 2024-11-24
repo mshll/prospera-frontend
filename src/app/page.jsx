@@ -2,6 +2,7 @@ import CTA1 from '@/components/CTA1';
 import Footer from '@/components/Footer';
 import { GridBackground } from '@/components/GridBackground';
 import Hero from '@/components/Hero';
+import LandingCarousel from '@/components/LandingCarousel';
 import Navbar from '@/components/NavBar';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         <Navbar />
         <div className='flex min-h-screen flex-col items-center justify-center text-foreground'>
           <Hero />
+          <LandingCarousel />
           <CTA1 />
         </div>
         <Footer />

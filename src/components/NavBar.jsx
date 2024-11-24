@@ -1,7 +1,7 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { Menu } from 'lucide-react';
+import { ArrowRightIcon, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { ThemeSwitch } from './ThemeSwitch';
 
@@ -55,7 +55,7 @@ const Navbar = () => {
             {user ? (
               <>
                 <Link href='/dashboard'>
-                  <Button>View Dashboard</Button>
+                  <Button variant='shine'>View Dashboard</Button>
                 </Link>
               </>
             ) : (
