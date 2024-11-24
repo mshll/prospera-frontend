@@ -17,10 +17,10 @@ const ListingsContainerHeadings = () => {
   return (
     <>
       <div className='mt-4 space-y-4'>
-        <div className='relative'>
-          <Input placeholder='Search for a city or property...' className='py-2 pl-10 pr-4 focus:border-transparent' />
+        {/* <div className='relative'>
+          <Input placeholder='Search for a city or property...' className='py-2 pl-10 pr-4 w-full focus:border-transparent' />
           <SearchIcon className='text absolute left-3 top-1/2 -translate-y-1/2 transform' />
-        </div>
+        </div> */}
         <Breadcrumb className='text-muted-foreground'>
           <BreadcrumbList>
             <BreadcrumbItem>

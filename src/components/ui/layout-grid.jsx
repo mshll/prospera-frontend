@@ -7,11 +7,6 @@ export const LayoutGrid = ({ cards }) => {
   const [selected, setSelected] = useState(null);
   const [lastSelected, setLastSelected] = useState(null);
 
-  const handleClick = (card) => {
-    setLastSelected(selected);
-    setSelected(card);
-  };
-
   const handleOutsideClick = () => {
     setLastSelected(selected);
     setSelected(null);
@@ -22,7 +17,7 @@ export const LayoutGrid = ({ cards }) => {
       {cards.map((card, i) => (
         <div key={i} className={cn(card.className, '')}>
           <motion.div
-            onClick={() => handleClick(card)}
+            // onClick={() => handleClick(card)}
             className={cn(
               card.className,
               'relative overflow-hidden',
