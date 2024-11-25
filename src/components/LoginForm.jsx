@@ -42,11 +42,9 @@ function LoginForm() {
         onSubmit={(data) => {
           // setIsLoading(true);
           // const promise = login(data);
-
           // toast.promise(promise, {
           //   loading: 'Logging in...',
           // });
-
           // promise.then((res) => {
           //   setIsLoading(false);
           //   if (!res) {
@@ -69,7 +67,12 @@ function LoginForm() {
           password: {
             inputProps: {
               type: 'password',
-              // placeholder: '••••••••',
+              placeholder: '••••••••',
+            },
+          },
+          username: {
+            inputProps: {
+              placeholder: 'e.g. awesome_user',
             },
           },
         }}
@@ -78,25 +81,6 @@ function LoginForm() {
           {isLoading ? <LoaderCircle className='h-6 w-6 animate-spin' /> : 'Log In'}
         </AutoFormSubmit>
       </AutoForm>
-      {/* <div className='flex items-center gap-4'>
-        <Separator className='flex-1' />
-        <span className='text-xs uppercase text-muted-foreground/[.4]'>or</span>
-        <Separator className='flex-1' />
-      </div>
-      <Button
-        variant='outline'
-        className='w-full gap-3'
-        onClick={() => {
-          toast("You didn't think this would actually work, did you?", {
-            action: {
-              label: ':(',
-            },
-          });
-        }}
-      >
-        <GitHubLogoIcon className='h-6 w-6' />
-        <span>Continue With GitHub</span>
-      </Button> */}
     </>
   );
 }

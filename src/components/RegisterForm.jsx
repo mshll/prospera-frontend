@@ -21,6 +21,22 @@ const formSchema = z
       .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is ${MAX_FILE_SIZE / 1000000}MB.`)
       .describe('Profile image'),
 
+    firstName: z
+      .string({
+        required_error: 'First name is required.',
+      })
+      .min(3, {
+        message: 'First name must be at least 1 character.',
+      }),
+
+    lastName: z
+      .string({
+        required_error: 'Last name is required.',
+      })
+      .min(3, {
+        message: 'Last name must be at least 1 character.',
+      }),
+
     username: z
       .string({
         required_error: 'Username is required.',
@@ -102,13 +118,25 @@ function RegisterForm() {
           password: {
             inputProps: {
               type: 'password',
-              // placeholder: '••••••••',
+              placeholder: '••••••••',
             },
           },
           confirm: {
             inputProps: {
               type: 'password',
-              // placeholder: '••••••••',
+              placeholder: '••••••••',
+            },
+          },
+          username: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. awesome_user',
+            },
+          },
+          email: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. johndoe@gmail.com',
             },
           },
           image: {
@@ -116,6 +144,18 @@ function RegisterForm() {
             inputProps: {
               accept: 'image/*',
               required: true,
+            },
+          },
+          firstName: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. John',
+            },
+          },
+          lastName: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. Doe',
             },
           },
           acceptTerms: {
