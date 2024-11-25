@@ -3,7 +3,7 @@ import { ChevronRightIcon } from 'lucide-react';
 
 function CTA1() {
   return (
-    <section className='w-full pb-32'>
+    <section className='w-full py-20 md:py-32'>
       <div className='container'>
         <div className='flex w-full flex-col gap-16 overflow-hidden rounded-lg border border-border bg-primary p-8 md:rounded-2xl lg:flex-row lg:items-center lg:p-16'>
           <div className='flex-1 text-background'>

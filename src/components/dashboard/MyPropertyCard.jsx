@@ -9,9 +9,12 @@ function MyPropertyCard({ investment, property }) {
       <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />
       <div className='flex flex-1 flex-wrap items-center justify-between gap-3'>
         <div className='flex flex-col justify-center gap-2'>
-          <div className='text-lg font-semibold'>
-            {property.name}
-            <Badge variant='outline' className='ml-2 py-[0.05rem] text-[.5rem]'>
+          <div className='flex items-center gap-3 font-semibold'>
+            <div className='text-lg'>{property.name}</div>
+            <Badge
+              className='h-4 rounded-full bg-border py-1 text-[.5rem] tracking-wider text-primary'
+              variant={'outline'}
+            >
               {property.type}
             </Badge>
           </div>

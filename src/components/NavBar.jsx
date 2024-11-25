@@ -32,7 +32,7 @@ const Navbar = () => {
   let user = true;
 
   return (
-    <section className='fixed top-0 z-50 w-full p-6 pb-28'>
+    <section className='fixed top-0 z-50 w-full px-6 pt-6'>
       <div className='container rounded-2xl border border-border/80 bg-background/80 py-3 backdrop-blur-lg backdrop-filter'>
         {/* Desktop navbar */}
         <nav className='hidden justify-between lg:flex'>

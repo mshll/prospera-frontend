@@ -21,7 +21,7 @@ const carouselItems = [
 function LandingCarousel() {
   return (
     <div className='relative flex w-full flex-col items-center justify-center gap-6 pb-32'>
-      <h2 className='text-center text-2xl font-semibold max-sm:px-6'>Trusted by leading companies</h2>
+      <h2 className='text-center text-4xl font-semibold max-sm:px-6 md:mb-10'>Trusted by leading companies</h2>
       <LogoCarousel items={carouselItems} length={7} />
     </div>
   );

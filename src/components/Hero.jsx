@@ -18,11 +18,11 @@ function Hero() {
           <>
             <Link href='/signup' className='flex items-center justify-center'>
               <Badge
-                className='group mb-2 rounded-full bg-primary px-5 text-xs tracking-wider text-primary-foreground'
+                className='group mb-2 rounded-full border-primary bg-background px-3 text-xs tracking-wider text-primary'
                 variant={'outline'}
               >
                 Start investing today
-                <ChevronRightIcon className='ml-2 inline-block size-3 transition-all duration-200 group-hover:ml-3' />
+                <ChevronRightIcon className='ml-1 inline-block size-3 transition-all duration-200 group-hover:ml-3' />
               </Badge>
             </Link>
             <h1 className='text-xl font-medium md:mb-1 md:text-5xl'>

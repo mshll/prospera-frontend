@@ -1,4 +1,5 @@
 import CTA1 from '@/components/CTA1';
+import { Features } from '@/components/Features';
 import Footer from '@/components/Footer';
 import { GridBackground } from '@/components/GridBackground';
 import Hero from '@/components/Hero';
@@ -15,6 +16,7 @@ export default function Home() {
           <Hero />
           <LandingCarousel />
           <CTA1 />
+          <Features />
         </div>
         <Footer />
       </main>
