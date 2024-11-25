@@ -5,12 +5,24 @@ import { Card } from '@/components/ui/card';
 import { ListingsContainer } from '@/components/Listings/ListingsContainer';
 import ListingsContainerHeadings from '@/components/Listings/ListingsContainerHeadings';
 import { Input } from '@/components/ui/input';
-import { Bath, BathIcon, BedDouble, Car, ExpandIcon, MapPin, MapPinHouseIcon, SearchIcon } from 'lucide-react';
+import {
+  ArrowRightFromLine,
+  Bath,
+  BathIcon,
+  BedDouble,
+  Car,
+  ExpandIcon,
+  MapPin,
+  MapPinHouseIcon,
+  MoveRight,
+  SearchIcon,
+} from 'lucide-react';
 import { PropertyImagesGrid } from '@/components/property/PropertyImagesGrid';
 import { Button } from '@/components/ui/button';
 import { IconCarGarage, IconCircleXFilled, IconPinFilled } from '@tabler/icons-react';
 import Map from '@/components/Map';
 import PropertyDetailsParagraph from '@/components/Listings/PropertyDetailsParagraph';
+import Link from 'next/link';
 
 const HouseListingsPage = () => {
   const [activeView, setActiveView] = useState('map');
@@ -125,7 +137,7 @@ const HouseListingsPage = () => {
           <Input placeholder='Search for a city or property...' className='py-2 pl-10 pr-4 focus:border-transparent' />
           <SearchIcon className='absolute left-3 top-1/2 -translate-y-1/2 transform text-gray-500' />
         </div> */}
-        <Card className='grid h-screen rounded-3xl bg-background shadow-2xl lg:grid-cols-2'>
+        <div className='grid h-screen rounded-3xl bg-background shadow-2xl lg:grid-cols-2'>
           <div className='row-span-full h-full w-full overflow-hidden'>
             <div className='flex h-full flex-col overflow-hidden bg-secondary p-4 px-10'>
               <ListingsContainerHeadings />
@@ -159,18 +171,26 @@ const HouseListingsPage = () => {
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                   className='relative h-full p-4 px-2 transition-opacity duration-300'
                 >
+                  <div className='w-full'>
+                    <div className='flex items-center justify-between'>
+                      <div className='mb-[-20px] px-10'>
+                        <p className='text-2xl font-semibold'>Property Details</p>
+                      </div>
+                      <Button
+                        onClick={handleMapOpen}
+                        variant='icon'
+                        className='cursor-pointer border-none bg-muted px-3 text-secondary-foreground hover:text-secondary-foreground/40'
+                      >
+                        <ArrowRightFromLine size={22} />
+                      </Button>
+                    </div>
+                  </div>
+
                   {/* Property Images */}
                   <PropertyImagesGrid images={selectedProperty?.images} />
 
                   {/* Property Details */}
                   <div className='px-10'>
-                    <button
-                      onClick={handleMapOpen}
-                      className='absolute left-[-15px] top-4 cursor-pointer border-none bg-transparent text-secondary-foreground hover:text-secondary-foreground/70'
-                      aria-label='Open Map'
-                    >
-                      <IconCircleXFilled size={30} />
-                    </button>
                     <div className='flex items-center justify-between gap-2'>
                       <div>
                         <h1 className='text-3xl font-semibold'>{selectedProperty?.title}</h1>
@@ -194,7 +214,7 @@ const HouseListingsPage = () => {
               )}
             </AnimatePresence>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   );

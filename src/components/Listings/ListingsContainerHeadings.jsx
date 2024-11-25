@@ -17,10 +17,6 @@ const ListingsContainerHeadings = () => {
   return (
     <>
       <div className='mt-4 space-y-4'>
-        {/* <div className='relative'>
-          <Input placeholder='Search for a city or property...' className='py-2 pl-10 pr-4 w-full focus:border-transparent' />
-          <SearchIcon className='text absolute left-3 top-1/2 -translate-y-1/2 transform' />
-        </div> */}
         <Breadcrumb className='text-muted-foreground'>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -36,21 +32,23 @@ const ListingsContainerHeadings = () => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+        <div className='relative'>
+          <Input
+            placeholder='Search for a city or property...'
+            className='w-full py-2 pl-10 pr-4 focus:border-transparent'
+          />
+          <SearchIcon className='text absolute left-3 top-1/2 -translate-y-1/2 transform' />
+        </div>
 
         <h1 className='text-3xl font-medium text-secondary-foreground'>
           Available for Investment in <span className='font-semibold text-primary'>"Kuwait City"</span>
         </h1>
 
         <div className='flex justify-between'>
-          <div>
-            <p className='font-medium text-muted-foreground'>
-              <span className='text-primary'>14</span> of <span className='text-primary'>144</span> properties available
-            </p>
-          </div>
-          <div className='block sm:hidden'>
+          <div className='mb-3 block sm:hidden'>
             <Select>
               <SelectTrigger className='w-[180px]'>
-                <SelectValue placeholder='Theme' />
+                <SelectValue placeholder='Filter' />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value='light'>Light</SelectItem>
@@ -62,6 +60,11 @@ const ListingsContainerHeadings = () => {
         </div>
       </div>
       <ListingsHeaderButtonsSection />
+      <div className=''>
+        <p className='font-medium text-muted-foreground'>
+          <span className='text-primary'>14</span> of <span className='text-primary'>144</span> properties available
+        </p>
+      </div>
     </>
   );
 };

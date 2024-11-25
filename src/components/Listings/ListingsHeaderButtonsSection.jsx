@@ -2,7 +2,7 @@ import { Button } from '../ui/button';
 
 const ListingsHeaderButtonsSection = () => {
   return (
-    <div className='mt-6 hidden flex-wrap justify-center gap-4 sm:flex'>
+    <div className='mb-4 mt-6 hidden flex-wrap justify-center gap-4 sm:flex'>
       {['View all', 'Houses', 'Apartments', 'Villas', 'Condos', 'Industrial'].map((item) => (
         <Button
           key={item}

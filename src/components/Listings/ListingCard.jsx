@@ -57,7 +57,7 @@ const ListingCard = ({
                 onClick={handleLike}
               />
             </div>
-            <p className='text-lg font-semibold'>{title}</p>
+            <p className='text-lg font-medium'>{title}</p>
             <div>
               <label className='mb-1 block text-xs font-medium text-muted-foreground sm:text-sm'>
                 Shares Available

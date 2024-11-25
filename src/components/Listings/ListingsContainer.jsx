@@ -97,8 +97,8 @@ import Image from 'next/image';
 
 export const ListingsContainer = ({ handleOpen, handleClose, properties, handleViewSelectedLocation }) => {
   return (
-    <div className='mt-4 size-full justify-center overflow-auto'>
-      <div className='hide-scrollbar mt-6 gap-6 overflow-y-auto pb-4'>
+    <div className='hide-scrollbar size-full justify-center overflow-auto'>
+      <div className='gap-6 overflow-y-auto pb-4'>
         {properties.map((property) => (
           <ListingCard
             key={property.id}
