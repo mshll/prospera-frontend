@@ -1,5 +1,6 @@
 'use client';
 
+import { login } from '@/actions/auth';
 // import { login } from '@/actions/auth';
 import AutoForm, { AutoFormSubmit } from '@/components/ui/auto-form';
 import { Button } from '@/components/ui/button';
@@ -12,12 +13,12 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 
 const formSchema = z.object({
-  username: z
+  email: z
     .string({
-      required_error: 'Username is required.',
+      required_error: 'Email is required.',
     })
-    .min(3, {
-      message: 'Username must be at least 3 characters.',
+    .email({
+      message: 'Please enter a valid email address.',
     }),
 
   password: z
@@ -40,24 +41,24 @@ function LoginForm() {
     <>
       <AutoForm
         onSubmit={(data) => {
-          // setIsLoading(true);
-          // const promise = login(data);
-          // toast.promise(promise, {
-          //   loading: 'Logging in...',
-          // });
-          // promise.then((res) => {
-          //   setIsLoading(false);
-          //   if (!res) {
-          //     toast.error('Username or password is incorrect, please try again.');
-          //     setValues({
-          //       ...values,
-          //       password: '',
-          //     });
-          //   } else {
-          //     toast.success('Logged in successfully.');
-          //     redirect(redirectUrl);
-          //   }
-          // });
+          setIsLoading(true);
+          const promise = login(data);
+          toast.promise(promise, {
+            loading: 'Logging in...',
+          });
+          promise.then((res) => {
+            setIsLoading(false);
+            if (!res) {
+              toast.error('email or password is incorrect, please try again.');
+              setValues({
+                ...values,
+                password: '',
+              });
+            } else {
+              toast.success('Logged in successfully.');
+              redirect(redirectUrl);
+            }
+          });
         }}
         values={values}
         onValuesChange={setValues}
@@ -70,7 +71,7 @@ function LoginForm() {
               placeholder: '••••••••',
             },
           },
-          username: {
+          email: {
             inputProps: {
               placeholder: 'e.g. awesome_user',
             },

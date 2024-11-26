@@ -13,15 +13,15 @@ const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/web
 
 const formSchema = z
   .object({
-    image: z
-      .any()
-      .refine(
-        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-        'Please upload a valid image file (jpeg, jpg, png, webp).',
-      )
-      .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is ${MAX_FILE_SIZE / 1000000}MB.`)
-      .optional()
-      .describe('Update profile image'),
+    // image: z
+    //   .any()
+    //   .refine(
+    //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+    //     'Please upload a valid image file (jpeg, jpg, png, webp).',
+    //   )
+    //   .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is ${MAX_FILE_SIZE / 1000000}MB.`)
+    //   .optional()
+    //   .describe('Update profile image'),
 
     firstName: z
       .string({
@@ -49,26 +49,25 @@ const formSchema = z
         message: 'Please enter a valid email address.',
       }),
 
-    password: z
-      .string({
-        required_error: 'Password is required.',
-      })
-      .min(8, {
-        message: 'Password must be at least 8 characters.',
-      }),
+    newpassword: z.string().optional().describe('New password'),
 
     confirm: z
-      .string({
-        required_error: 'Confirm password is required.',
-      })
+      .string()
       .min(8, {
         message: 'Confirm password must be at least 8 characters.',
       })
-      .describe('Confirm password.'),
+      .describe('Confirm new password')
+      .optional(),
+
+    currpassword: z
+      .string({
+        required_error: 'Password is required.',
+      })
+      .describe('Current password'),
   })
-  .refine((data) => data.password === data.confirm, {
+  .refine((data) => data.newpassword === data.confirm, {
     message: 'Passwords do not match.',
-    path: ['confirm'],
+    path: ['confirm', 'newpassword'],
   });
 
 function UpdateProfileForm({ className }) {
@@ -78,25 +77,14 @@ function UpdateProfileForm({ className }) {
     lastName: 'Doe',
     email: 'johndoe@gmail.com',
     username: 'awesome_user',
-    password: '',
+    currpassword: '',
+    newpassword: '',
     confirm: '',
   });
   const [isLoading, setIsLoading] = useState(false);
 
   // flsfh
   const elementRef = useRef(null);
-
-  useEffect(() => {
-    // const element = elementRef.current;
-    // if (element) {
-    //   // Move the element to the desired location
-    //   const parent = document.getElementById('names-parent');
-    //   if (parent) {
-    //     parent.appendChild(element);
-    //     element.classList.remove('hidden');
-    //   }
-    // }
-  }, []);
 
   return (
     <AutoForm
@@ -126,7 +114,13 @@ function UpdateProfileForm({ className }) {
       className={clsx('min-w-[10rem]', className)}
       formSchema={formSchema}
       fieldConfig={{
-        password: {
+        currpassword: {
+          inputProps: {
+            type: 'password',
+            placeholder: '••••••••',
+          },
+        },
+        newpassword: {
           inputProps: {
             type: 'password',
             placeholder: '••••••••',
@@ -150,12 +144,12 @@ function UpdateProfileForm({ className }) {
             placeholder: 'e.g. johndoe@gmail.com',
           },
         },
-        image: {
-          fieldType: 'file',
-          inputProps: {
-            accept: 'image/*',
-          },
-        },
+        // image: {
+        //   fieldType: 'file',
+        //   inputProps: {
+        //     accept: 'image/*',
+        //   },
+        // },
         firstName: {
           inputProps: {
             required: true,
@@ -173,7 +167,7 @@ function UpdateProfileForm({ className }) {
       }}
       dependencies={[
         {
-          sourceField: 'password',
+          sourceField: 'newpassword',
           type: DependencyType.HIDES,
           targetField: 'confirm',
           when: (value) => !value,

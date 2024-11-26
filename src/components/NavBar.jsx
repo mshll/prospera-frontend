@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { ArrowRightIcon, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { ThemeSwitch } from './ThemeSwitch';
+import { getUser } from '@/actions/token';
 
 const LogoDiv = (
   <Link href='/' className='flex items-center justify-start gap-x-2'>
@@ -27,9 +28,8 @@ const footerLinks = [
   { label: 'Cookie Settings', href: '#' },
 ];
 
-const Navbar = () => {
-  // let user = null;
-  let user = true;
+const Navbar = async () => {
+  const user = await getUser();
 
   return (
     <section className='fixed top-0 z-50 w-full px-6 pt-6'>

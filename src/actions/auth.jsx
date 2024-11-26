@@ -5,12 +5,12 @@ import { redirect } from 'next/navigation';
 import { baseUrl, getHeaders } from './config';
 import { deleteToken, setToken } from './token';
 
-export async function login(formData) {
+export async function login(data) {
   try {
-    const response = await fetch(`${baseUrl}/mini-project/api/auth/login`, {
+    const response = await fetch(`${baseUrl}/auth/login`, {
       method: 'POST',
       headers: await getHeaders(),
-      body: JSON.stringify(formData),
+      body: JSON.stringify(data),
     });
     const { token } = await response.json();
     await setToken(token);
@@ -22,20 +22,19 @@ export async function login(formData) {
 }
 
 export async function register(data) {
-  const formData = new FormData();
-  formData.append('username', data.username);
-  formData.append('password', data.password);
-  formData.append('image', data.image);
+  console.log(data);
 
   try {
-    const response = await fetch(`${baseUrl}/mini-project/api/auth/register`, {
+    const response = await fetch(`${baseUrl}/auth/signup`, {
       method: 'POST',
-      body: formData,
+      headers: await getHeaders({ auth: false }),
+      body: JSON.stringify(data),
     });
+
+    console.log(response);
 
     const { token } = await response.json();
     await setToken(token);
-    revalidatePath('/users');
     return true;
   } catch (error) {
     console.error(error);

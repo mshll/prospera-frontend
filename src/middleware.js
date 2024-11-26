@@ -2,20 +2,19 @@ import { NextResponse } from 'next/server';
 import { getUser } from './actions/token';
 
 const privateRoutes = ['/dashboard', '/profile'];
-const publicRoutes = ['/login', '/register'];
+const publicRoutes = ['/login', '/signup'];
 
-// TODO - uncomment the code below to enable authentication middleware
 export default async function middleware(req) {
-  // const path = req.nextUrl.pathname;
-  // const isPublicRoute = publicRoutes.includes(path);
-  // const isPrivateRoute = privateRoutes.includes(path) || path.startsWith('/dashboard');
-  // const user = await getUser();
+  const path = req.nextUrl.pathname;
+  const isPublicRoute = publicRoutes.includes(path);
+  const isPrivateRoute = privateRoutes.includes(path) || path.startsWith('/dashboard');
+  const user = await getUser();
 
-  // if (isPrivateRoute && !user) return NextResponse.redirect(new URL('/login', req.nextUrl));
+  if (isPrivateRoute && !user) return NextResponse.redirect(new URL('/login', req.nextUrl));
 
-  // if (isPublicRoute && user) return NextResponse.redirect(new URL('/', req.nextUrl));
+  if (isPublicRoute && user) return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
 
-  // return NextResponse.next();
+  return NextResponse.next();
 }
 
 // Routes Middleware should not run on

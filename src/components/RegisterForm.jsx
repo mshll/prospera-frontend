@@ -6,20 +6,23 @@ import { LoaderCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import * as z from 'zod';
 import { DependencyType } from './ui/auto-form/types';
+import { register } from '@/actions/auth';
+import { toast } from 'sonner';
+import { redirect } from 'next/navigation';
 
 const MAX_FILE_SIZE = 25000000;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
 const formSchema = z
   .object({
-    image: z
-      .any()
-      .refine(
-        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-        'Please upload a valid image file (jpeg, jpg, png, webp).',
-      )
-      .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is ${MAX_FILE_SIZE / 1000000}MB.`)
-      .describe('Profile image'),
+    // image: z
+    //   .any()
+    //   .refine(
+    //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+    //     'Please upload a valid image file (jpeg, jpg, png, webp).',
+    //   )
+    //   .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is ${MAX_FILE_SIZE / 1000000}MB.`)
+    //   .describe('Profile image'),
 
     firstName: z
       .string({
@@ -86,44 +89,29 @@ function RegisterForm() {
   const [values, setValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // flsfh
-  const elementRef = useRef(null);
-
-  // useEffect(() => {
-  //   const element = elementRef.current;
-  //   if (element) {
-  //     // Move the element to the desired location
-  //     const parent = document.getElementById('names-parent');
-  //     if (parent) {
-  //       parent.appendChild(element);
-  //       element.classList.remove('hidden');
-  //     }
-  //   }
-  // }, []);
-
   return (
     <>
       <AutoForm
         onSubmit={(data) => {
-          // setIsLoading(true);
-          // const promise = register(data);
-          // toast.promise(promise, {
-          //   loading: 'Registering...',
-          // });
-          // promise.then((res) => {
-          //   setIsLoading(false);
-          //   if (!res) {
-          //     toast.error('An error occurred, please try again.');
-          //     setValues({
-          //       ...values,
-          //       password: '',
-          //       confirm: '',
-          //     });
-          //   } else {
-          //     toast.success('Registered successfully.');
-          //     redirect('/dashboard');
-          //   }
-          // });
+          setIsLoading(true);
+          const promise = register(data);
+          toast.promise(promise, {
+            loading: 'Registering...',
+          });
+          promise.then((res) => {
+            setIsLoading(false);
+            if (!res) {
+              toast.error('An error occurred, please try again.');
+              setValues({
+                ...values,
+                password: '',
+                confirm: '',
+              });
+            } else {
+              toast.success('Registered successfully.');
+              redirect('/dashboard');
+            }
+          });
         }}
         values={values}
         onValuesChange={setValues}
@@ -154,24 +142,19 @@ function RegisterForm() {
               placeholder: 'e.g. johndoe@gmail.com',
             },
           },
-          image: {
-            fieldType: 'file',
-            inputProps: {
-              accept: 'image/*',
-              required: true,
-            },
-          },
+          // image: {
+          //   fieldType: 'file',
+          //   inputProps: {
+          //     accept: 'image/*',
+          //     required: true,
+          //   },
+          // },
           firstName: {
             inputProps: {
               required: true,
               placeholder: 'e.g. John',
             },
             halfWidth: true,
-            // renderParent: ({ children }) => (
-            //   <div id='names-parent' className='flex flex-row gap-2'>
-            //     <div className='flex-1'>{children}</div>
-            //   </div>
-            // ),
           },
           lastName: {
             inputProps: {
@@ -179,11 +162,6 @@ function RegisterForm() {
               placeholder: 'e.g. Doe',
             },
             halfWidth: true,
-            // renderParent: ({ children }) => (
-            //   <div className='flex-1' ref={elementRef}>
-            //     {children}
-            //   </div>
-            // ),
           },
           acceptTerms: {
             fieldType: 'checkbox',
