@@ -2,8 +2,9 @@
 import { Badge } from '@/components/ui/badge';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { FlipWords } from '@/components/ui/flip-words';
-import DashboardImg from '@/images/hero-dashboard.png';
-import { ArrowUpRight } from 'lucide-react';
+import DashboardImg from '@/images/hero.png';
+import DashboardImgLight from '@/images/hero-light.png';
+import { ChevronRightIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,10 +16,13 @@ function Hero() {
       <ContainerScroll
         titleComponent={
           <>
-            <Link href='/signup'>
-              <Badge className='group mb-2 rounded-full bg-primary text-xs text-primary-foreground' variant={'outline'}>
+            <Link href='/signup' className='flex items-center justify-center'>
+              <Badge
+                className='group mb-2 rounded-full border-primary bg-primary px-3 text-xs tracking-wider text-background'
+                variant={'outline'}
+              >
                 Start investing today
-                <ArrowUpRight className='ml-1 inline-block size-4 duration-200 group-hover:rotate-45' />
+                <ChevronRightIcon className='ml-1 inline-block size-3 transition-all duration-200 group-hover:ml-3' />
               </Badge>
             </Link>
             <h1 className='text-xl font-medium md:mb-1 md:text-5xl'>
@@ -31,11 +35,19 @@ function Hero() {
         }
       >
         <Image
+          src={DashboardImgLight}
+          alt='hero'
+          height={720}
+          width={1400}
+          className='mx-auto hidden h-full rounded-2xl object-cover object-left-top dark:block'
+          draggable={false}
+        />
+        <Image
           src={DashboardImg}
           alt='hero'
           height={720}
           width={1400}
-          className='mx-auto h-full rounded-2xl object-cover object-left-top'
+          className='mx-auto h-full rounded-2xl object-cover object-left-top dark:hidden'
           draggable={false}
         />
       </ContainerScroll>

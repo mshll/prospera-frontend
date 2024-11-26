@@ -37,6 +37,8 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --success: 120 40% 50%;
+    --success-foreground: 0 0% 100%;
     --map-filter: none;
   }
 
@@ -74,16 +76,35 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     --map-filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    --success: 120 40% 50%;
+    --success-foreground: 240 43% 90%;
   }
 }
 @layer base {
   * {
     @apply border-border;
+    transition:
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   body {
     @apply bg-background text-foreground;
   }
+
+  .box {
+    @apply size-full overflow-hidden;
+  }
+  .font-outline {
+    -webkit-text-stroke: 1px hsl(var(--background));
+  }
+  .font-outline-2 {
+    -webkit-text-stroke: 2px hsl(var(--background));
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 4px hsl(var(--background));
+  }
 }
+
 
 @layer utilities {
   .hide-scrollbar {

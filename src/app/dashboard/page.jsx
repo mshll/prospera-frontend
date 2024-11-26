@@ -1,218 +1,99 @@
-import React from 'react';
-
-import { Badge } from '@/components/ui/badge';
-import { BedSingle } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import { Bath } from 'lucide-react';
-import { Ruler } from 'lucide-react';
-import { Maximize2 } from 'lucide-react';
-import { Bell } from 'lucide-react';
-
-import { Input } from '@/components/ui/input';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-
+import { getAllProperties, getMyInvestments } from '@/actions/properties';
 import AptOne from '@/app/assets/apt1.jpg';
+
+import ListingCard from '@/components/ListingCard';
+import SideBar from '@/components/Sidebar';
+import AmountCard from '@/components/dashboard/AmountCard';
+import InfoSection from '@/components/dashboard/InfoSection';
+import { PortfolioChart } from '@/components/dashboard/PortfolioChart';
+import PropertyCard from '@/components/dashboard/PropertyCard';
+import { PropertyChart } from '@/components/dashboard/PropertyChart';
+import { Button } from '@/components/ui/button';
+import { getGreeting } from '@/lib/utils';
+import clsx from 'clsx';
+import { ChevronRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import Image from 'next/image';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import Link from 'next/link';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { WalletMinimal } from 'lucide-react';
+const DashboardPage = async () => {
+  const properties = await getAllProperties();
+  const myInvestments = await getMyInvestments();
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-
-const DashboardPage = () => {
   return (
-    <div className='flex h-screen flex-col'>
-      <div>
-        <div className='relative m-5 rounded-lg p-6 shadow-md'>
-          <div className='flex items-center justify-between'>
-            <div className='flex flex-row'>
-              <div>
-                <Avatar>
-                  <AvatarImage
-                    src='https://github.com/yousefalm1.png'
-                    className='rounded-full border-2 border-purple-400'
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </div>
-              <div className='ml-2 mr-8'>
-                <h1 className='text-xs text-muted-foreground'>@yousefalm</h1>
-                <h1 className=''>Yousef Almasaeed</h1>
-              </div>
+    <SideBar>
+      <main className='relative w-full overflow-auto rounded-l-2xl bg-background'>
+        <div className='grid h-screen max-h-[75rem] min-h-[50rem] grid-cols-12 grid-rows-10 gap-4 p-4 max-md:h-auto max-md:max-h-none max-md:grid-rows-none max-md:gap-y-10 max-md:py-6'>
+          <InfoSection />
 
-              <div className=' '>
-                <Button variant='secondary' className='w-full rounded-xl bg-purple-400 px-4 py-5 text-base'>
-                  Deposit <WalletMinimal />
-                </Button>
+          {/* Left column */}
+          <div className='col-span-8 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
+            <div className='col-span-8 row-span-9 max-md:col-span-full'>
+              <div className='box size-full overflow-hidden'>
+                <div className='size-full'>
+                  <PortfolioChart />
+                </div>
               </div>
             </div>
 
-            <div className='flex flex-row items-center space-x-8'>
-              <div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <Bell />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Billing</DropdownMenuItem>
-                    <DropdownMenuItem>Team</DropdownMenuItem>
-                    <DropdownMenuItem>Subscription</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+            {/* <div className='col-span-3 row-span-5 max-md:col-span-4 max-md:col-span-full'>
+              <div className='box size-full overflow-hidden'>3</div>
+            </div> */}
+
+            {/* <div className='col-span-8 row-span-4 max-md:col-span-full max-md:min-h-[20rem] max-md:col-span-full'>
+              <div className='box size-full overflow-hidden flex gap-2'>
+                <div className='relative z-10 size-full overflow-hidden'>
+                  <div className='hide-scrollbar flex h-full gap-2 overflow-y-auto max-md:overflow-y-visible'>a</div>
+                  <div className='pointer-events-none absolute bottom-0 left-0 z-10 h-8 w-full bg-gradient-to-b from-background/0 to-background/50'></div>
+                </div>
               </div>
-              <div>
-                <Input />
+            </div> */}
+          </div>
+
+          <div className='order-2 col-span-4 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
+            <div className='col-span-4 row-span-9 max-md:col-span-full'>
+              <div className='box size-full overflow-hidden rounded-none'>
+                <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden'>
+                  <div className='flex items-center justify-between'>
+                    <h1 className='font-semibold text-muted-foreground'>Your Properties</h1>
+                    <Link href='/my-properties'>
+                      <Button variant='ghost' size='sm' className='text-muted-foreground'>
+                        View all
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
+                    <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
+                      {myInvestments.map((investment, idx) => (
+                        <PropertyCard
+                          key={idx}
+                          investment={investment}
+                          property={properties.find((property) => property.id === investment.propertyId)}
+                        />
+                      ))}
+                      {myInvestments.length == 0 && (
+                        <div className='flex flex-1 flex-col items-center justify-center text-center text-xs text-muted-foreground'>
+                          You have no investments yet.
+                        </div>
+                      )}
+                      <div className='h-16 w-full'>&nbsp;</div> {/* Spacer */}
+                    </div>
+                    <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-card'></div>
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* <div className='col-span-full max-md:min-h-[20rem] max-md:block'>
+              <div className='box size-full overflow-hidden'>7</div>
+            </div> */}
+
+            {/* <div className='col-span-4 row-span-1 max-md:col-span-full max-md:min-h-[5rem]'>
+                  <div className='box size-full overflow-hidden'>8</div>
+                </div> */}
           </div>
         </div>
-
-        <div className='m-5 grid grid-cols-1 gap-6 border-y border-muted-foreground md:grid-cols-4 lg:grid-cols-4'>
-          <div className='relative rounded-lg shadow-xl'>
-            <div className='m-5'>
-              <h1 className='text-base text-muted-foreground'>Total portfolio value</h1>
-              <p className='text-3xl font-bold'>5,569</p>
-            </div>
-
-            <div className='absolute bottom-0 left-0 h-1/3 w-full rounded-b-lg bg-gray-100'>
-              <div className='m-3 flex flex-row justify-between'>
-                <div>
-                  <h1 className='text-sm font-bold text-red-500'>
-                    -1k
-                    <span className='ml-2 font-normal text-muted-foreground'>From last month</span>
-                  </h1>
-                </div>
-                <div>
-                  <a href='' className='border-b-2 text-sm font-bold'>
-                    View more
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='relative rounded-lg shadow-md'>
-            <div className='m-5'>
-              <h1 className='text-base text-muted-foreground'>Total portfolio value</h1>
-              <p className='text-3xl font-bold'>5,569</p>
-            </div>
-
-            <div className='absolute bottom-0 left-0 h-1/3 w-full rounded-b-lg bg-gray-100'>
-              <div className='m-3 flex flex-row justify-between'>
-                <div>
-                  <h1 className='text-sm font-bold text-red-500'>
-                    -1k
-                    <span className='ml-2 font-normal text-muted-foreground'>From last month</span>
-                  </h1>
-                </div>
-                <div>
-                  <a href='' className='border-b-2 text-sm font-bold'>
-                    View more
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='relative rounded-lg shadow-md'>
-            <div className='m-5'>
-              <h1 className='text-base text-muted-foreground'>Total portfolio value</h1>
-              <p className='text-3xl font-bold'>5,569</p>
-            </div>
-
-            <div className='absolute bottom-0 left-0 h-1/3 w-full rounded-b-lg bg-gray-100'>
-              <div className='m-3 flex flex-row justify-between'>
-                <div>
-                  <h1 className='text-sm font-bold text-red-500'>
-                    -1k
-                    <span className='ml-2 font-normal text-muted-foreground'>From last month</span>
-                  </h1>
-                </div>
-                <div>
-                  <a href='' className='border-b-2 text-sm font-bold'>
-                    View more
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className='relative rounded-lg bg-green-300 p-20 shadow-md'>
-            Return on Investment (ROI)
-            <div className='absolute bottom-0 left-0 h-1/3 w-full rounded-b-lg bg-green-100'></div>
-          </div>
-        </div>
-      </div>
-
-      <div className='m-5 grid grid-cols-1 gap-4 md:grid-cols-[2fr_1fr] lg:grid-cols-[2fr_1fr]'>
-        <div className='relative rounded-lg bg-red-400 p-44 shadow-md'></div>
-        <div className='relative rounded-lg bg-red-400 p-44 shadow-md'></div>
-      </div>
-
-      <div className='m-5 grid grid-cols-1 gap-4 lg:grid-cols-[5fr_1fr]'>
-        <div className='relative rounded-lg p-4 shadow-md'>
-          <div className='flex flex-row justify-between'>
-            <div className='flex flex-row'>
-              <h1 className='text-2xl font-bold'>Listing Board</h1>
-              <Badge variant={'Secondary'} className='ml-5 bg-green-200 font-bold text-green-600'>
-                Newly added
-              </Badge>
-            </div>
-            <div className='flex flex-row'>
-              <Button className='ml-4 font-bold' variant='outline'>
-                View All Listings
-              </Button>
-            </div>
-          </div>
-
-          <div className='mt-5 flex'>
-            <Card className='w-[350px] rounded-lg shadow-md'>
-              <Image src={AptOne} alt='Luxury Apartment' className='h-[200px] w-full rounded-t-lg object-cover' />
-              <CardContent>
-                <CardTitle className='mt-2 text-lg font-bold'>Luxury Apartment</CardTitle>
-                <CardDescription>
-                  <p className='text-sm text-gray-500'>Al Agung Tower, Kuwait City, Kuwait</p>
-                  <div className='mt-2 flex items-center justify-between'>
-                    <p className='text-2xl font-bold text-gray-700'>
-                      0,000 <span className='text-sm text-gray-500'>/month</span>
-                    </p>
-                    <Button className=' '>View Details</Button>
-                  </div>
-                </CardDescription>
-              </CardContent>
-              <CardFooter className='mt-2 border-t border-gray-100'>
-                <div className='flex space-x-7 text-sm'>
-                  <div className='flex items-center'>
-                    <BedSingle className='h-5 w-5' />
-                    <p className='ml-2 text-gray-500'>2 Beds</p>
-                  </div>
-                  <div className='flex items-center'>
-                    <Bath className='h-5 w-5' />
-                    <p className='ml-2 text-gray-500'>2 Baths</p>
-                  </div>
-                  <div className='flex items-center'>
-                    <Maximize2 className='h-5 w-5' />
-                    <p className='ml-2 text-gray-500'>1000 sqft</p>
-                  </div>
-                </div>
-              </CardFooter>
-            </Card>
-          </div>
-        </div>
-        <div className='relative rounded-lg bg-red-400 p-44 shadow-md'></div>
-      </div>
-    </div>
+      </main>
+    </SideBar>
   );
 };
 

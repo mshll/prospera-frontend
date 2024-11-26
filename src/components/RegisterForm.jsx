@@ -3,7 +3,7 @@
 // import { register } from '@/actions/auth';
 import AutoForm, { AutoFormSubmit } from '@/components/ui/auto-form';
 import { LoaderCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as z from 'zod';
 import { DependencyType } from './ui/auto-form/types';
 
@@ -20,6 +20,22 @@ const formSchema = z
       )
       .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is ${MAX_FILE_SIZE / 1000000}MB.`)
       .describe('Profile image'),
+
+    firstName: z
+      .string({
+        required_error: 'First name is required.',
+      })
+      .min(3, {
+        message: 'First name must be at least 1 character.',
+      }),
+
+    lastName: z
+      .string({
+        required_error: 'Last name is required.',
+      })
+      .min(3, {
+        message: 'Last name must be at least 1 character.',
+      }),
 
     username: z
       .string({
@@ -70,6 +86,21 @@ function RegisterForm() {
   const [values, setValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  // flsfh
+  const elementRef = useRef(null);
+
+  // useEffect(() => {
+  //   const element = elementRef.current;
+  //   if (element) {
+  //     // Move the element to the desired location
+  //     const parent = document.getElementById('names-parent');
+  //     if (parent) {
+  //       parent.appendChild(element);
+  //       element.classList.remove('hidden');
+  //     }
+  //   }
+  // }, []);
+
   return (
     <>
       <AutoForm
@@ -102,13 +133,25 @@ function RegisterForm() {
           password: {
             inputProps: {
               type: 'password',
-              // placeholder: '••••••••',
+              placeholder: '••••••••',
             },
           },
           confirm: {
             inputProps: {
               type: 'password',
-              // placeholder: '••••••••',
+              placeholder: '••••••••',
+            },
+          },
+          username: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. awesome_user',
+            },
+          },
+          email: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. johndoe@gmail.com',
             },
           },
           image: {
@@ -117,6 +160,30 @@ function RegisterForm() {
               accept: 'image/*',
               required: true,
             },
+          },
+          firstName: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. John',
+            },
+            halfWidth: true,
+            // renderParent: ({ children }) => (
+            //   <div id='names-parent' className='flex flex-row gap-2'>
+            //     <div className='flex-1'>{children}</div>
+            //   </div>
+            // ),
+          },
+          lastName: {
+            inputProps: {
+              required: true,
+              placeholder: 'e.g. Doe',
+            },
+            halfWidth: true,
+            // renderParent: ({ children }) => (
+            //   <div className='flex-1' ref={elementRef}>
+            //     {children}
+            //   </div>
+            // ),
           },
           acceptTerms: {
             fieldType: 'checkbox',

@@ -1,6 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import localFont from 'next/font/local';
+import { Toaster } from '@/components/ui/sonner';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 
@@ -14,7 +15,8 @@ const geistMono = localFont({
   variable: '--font-geist-mono',
   weight: '100 900',
 });
-const poppins = Poppins({
+
+export const poppins = Poppins({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-poppins',
@@ -22,7 +24,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: 'Prospera',
+  title: 'Prospera.',
   description: 'Real estate investing, simplified',
 };
 
@@ -34,6 +36,7 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           {children}
+          <Toaster richColors position='top-center' />
         </ThemeProvider>
       </body>
     </html>
