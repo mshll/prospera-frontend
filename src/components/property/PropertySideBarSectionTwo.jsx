@@ -10,7 +10,7 @@ const PropertySideBarSectionTwoContainer = () => {
       <div className='flex items-center gap-2 pt-4'>
         <div>
           <Avatar className='h-14 w-14'>
-            <AvatarImage src='https://github.com/shadcn.png' />
+            <AvatarImage src='https://github.com/yousefalm1.png' />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </div>

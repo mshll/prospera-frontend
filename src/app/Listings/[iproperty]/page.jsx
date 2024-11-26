@@ -11,7 +11,7 @@ const Property = () => {
   };
   return (
     <div className='p-4'>
-      <PropertyImagesGrid />
+      {/* <PropertyImagesGrid /> */}
 
       <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
         <PropertyMainSection />

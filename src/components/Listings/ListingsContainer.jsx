@@ -95,16 +95,34 @@ import Image from 'next/image';
 //   },
 // ];
 
-export const ListingsContainer = ({ handleOpen, handleClose, properties, handleViewSelectedLocation }) => {
+export const ListingsContainer = ({
+  handleOpen,
+  properties,
+  handleViewSelectedLocation,
+  event,
+  selectedProperty,
+  selectedFilterOption,
+  filteredProperties,
+  searchTerm,
+  onSearchChange,
+  totalProperties,
+  totalPropertiesShown,
+  filterOptions,
+  selectedFilter,
+  setSelectedFilter,
+}) => {
   return (
     <div className='hide-scrollbar size-full justify-center overflow-auto'>
       <div className='gap-6 overflow-y-auto pb-4'>
-        {properties.map((property) => (
+        {filteredProperties.map((property) => (
           <ListingCard
             key={property.id}
+            searchTerm={searchTerm}
+            onSearchChange={onSearchChange}
+            selectedProperty={selectedProperty}
             {...property}
             handleOpen={() => handleOpen(property)}
-            handleViewSelectedLocation={() => handleViewSelectedLocation(property)}
+            handleViewSelectedLocation={(event) => handleViewSelectedLocation(property, event)}
           />
         ))}
       </div>

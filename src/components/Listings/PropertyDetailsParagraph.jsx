@@ -15,7 +15,7 @@ const PropertyDetailsParagraph = ({ text, maxLength = 400 }) => {
   }
 
   return (
-    <div className='mt-4'>
+    <div className='mt-6'>
       <h1 className='mb-2 font-bold'>Properties Details</h1>
       <p className='text-sm font-medium text-muted-foreground'>
         {isExpanded ? text : text.slice(0, maxLength) + '...'}{' '}
