@@ -27,6 +27,7 @@ import { Slider } from '@/components/ui/slider';
 import useDebounce from '@/hooks/useDebouce';
 import { set } from 'lodash';
 import { Label } from '@/components/ui/label';
+import SideBar from '@/components/Sidebar';
 
 const properties = [
   {
@@ -189,187 +190,189 @@ const HouseListingsPage = () => {
   const totalProperties = properties.length;
 
   return (
-    <div className='relative w-full'>
-      <div>
-        <div className='grid h-screen rounded-3xl bg-background shadow-2xl lg:grid-cols-2'>
-          <div className='row-span-full h-full w-full overflow-hidden'>
-            <div className='flex h-full flex-col overflow-hidden bg-secondary p-4 px-10'>
-              <ListingsContainerHeadings
-                setSearchTerm={setSearchTerm}
-                totalProperties={totalProperties}
-                totalPropertiesShown={totalPropertiesShown}
-                searchTerm={searchTerm}
-                filterOptions={filterOptions}
-                onSearchChange={handleInputChange}
-                selectedFilter={selectedFilter}
-                onS
-                setSelectedFilter={setSelectedFilter}
-              />
-              <ListingsContainer
-                filteredProperties={filteredProperties}
-                handleOpen={handleDetailsOpen}
-                // selectedFilterOption={selectedFilterOption}
-                properties={properties}
-                selectedProperty={selectedProperty}
-                handleViewSelectedLocation={handleViewSelectedLocation}
-              />
+    <SideBar>
+      <main className='relative w-full overflow-auto rounded-l-2xl bg-background'>
+        <div>
+          <div className='grid h-screen rounded-3xl bg-background shadow-2xl lg:grid-cols-9'>
+            <div className='col-span-4 row-span-full h-full w-full overflow-hidden'>
+              <div className='flex h-full flex-col overflow-hidden bg-secondary p-4 px-10'>
+                <ListingsContainerHeadings
+                  setSearchTerm={setSearchTerm}
+                  totalProperties={totalProperties}
+                  totalPropertiesShown={totalPropertiesShown}
+                  searchTerm={searchTerm}
+                  filterOptions={filterOptions}
+                  onSearchChange={handleInputChange}
+                  selectedFilter={selectedFilter}
+                  onS
+                  setSelectedFilter={setSelectedFilter}
+                />
+                <ListingsContainer
+                  filteredProperties={filteredProperties}
+                  handleOpen={handleDetailsOpen}
+                  // selectedFilterOption={selectedFilterOption}
+                  properties={properties}
+                  selectedProperty={selectedProperty}
+                  handleViewSelectedLocation={handleViewSelectedLocation}
+                />
+              </div>
             </div>
-          </div>
 
-          <div className='relative hidden lg:block'>
-            <AnimatePresence mode='wait'>
-              {activeView === 'map' ? (
-                <motion.div
-                  key='map'
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className='h-full w-full'
-                >
-                  <Map properties={filteredProperties} viewSelectedLocation={viewSelectedLocation} />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key='details'
-                  initial={{ opacity: 0, x: '100%' }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: '100%' }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  className='relative h-full p-4 px-2 transition-opacity duration-300'
-                >
-                  <div className='w-full'>
-                    <div className='mx-10 flex items-center justify-between'>
-                      <div className='mb-[-20px]'>
-                        <p className='text-2xl font-semibold'>Property Details</p>
-                      </div>
-                      <Button
-                        onClick={handleMapOpen}
-                        variant='icon'
-                        className='cursor-pointer border-none bg-muted px-3 text-secondary-foreground hover:text-secondary-foreground/40'
-                      >
-                        <ArrowRightFromLine size={22} />
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* Property Images */}
-                  <PropertyImagesGrid images={selectedProperty?.images} />
-
-                  {/* Property Details */}
-                  <div className='px-10'>
-                    <div className='flex items-center justify-between gap-2'>
-                      <div>
-                        <h1 className='text-3xl font-semibold'>{selectedProperty?.title}</h1>
-
-                        <p className='my-2 font-medium text-muted-foreground'>
-                          <span className='mr-1 inline-block'>
-                            <MapPinHouseIcon className='inline h-6 w-6 text-secondary-foreground' />
-                          </span>
-                          {selectedProperty.location}
-                        </p>
-                      </div>
-                      <div>
-                        <p className='text-2xl font-bold text-primary'>
-                          400 KWD <span className='text-sm font-medium text-muted-foreground'>/ Share</span>
-                        </p>
-                        <p className='text-right text-2xl font-medium text-muted-foreground'>
-                          {selectedProperty.propertyValue} KWD
-                        </p>
-                      </div>
-                    </div>
-                    <div className='my-4 flex flex-wrap justify-start gap-4'>
-                      <Button variant='outline' size='sm' className='w-full sm:w-auto'>
-                        <ExpandIcon className='mr-1 h-4 w-4' /> 100sqt
-                      </Button>
-                      <Button variant='outline' size='sm' className='w-full sm:w-auto'>
-                        <BedDouble className='mr-1 h-4 w-4' /> 3 Bedrooms
-                      </Button>
-                      <Button variant='outline' size='sm' className='w-full sm:w-auto'>
-                        <Bath className='mr-1 h-4 w-4' /> 2 Bathrooms
-                      </Button>
-                      <Button variant='outline' size='sm' className='w-full sm:w-auto'>
-                        <IconCarGarage className='mr-1 h-4 w-4' /> 2 Garages
-                      </Button>
-                      <Button variant='outline' className='w-full sm:w-auto'>
-                        <CameraIcon className='mr-1 h-4 w-4' /> 24/7 security
-                      </Button>
-                    </div>
-
-                    <div className='rounded-lg bg-card p-3 text-sm'>
-                      <div className='mb-2 flex items-center justify-between'>
-                        <div className='flex items-center space-x-2'>
-                          <Input
-                            type='number'
-                            value={userNumberOfShares}
-                            onChange={(e) => {
-                              const value = Math.min(Number(e.target.value), selectedProperty?.sharesAvailable || 0);
-                              handleRentInputChange({ target: { value } });
-                            }}
-                            className='h-8 w-16 text-center'
-                            min={1}
-                            max={selectedProperty?.sharesAvailable}
-                          />
-                          <span className='text-muted-foreground'>
-                            / {selectedProperty?.sharesAvailable} shares available
-                          </span>
+            <div className='relative col-span-5 hidden lg:block'>
+              <AnimatePresence mode='wait'>
+                {activeView === 'map' ? (
+                  <motion.div
+                    key='map'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className='h-full w-full'
+                  >
+                    <Map properties={filteredProperties} viewSelectedLocation={viewSelectedLocation} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key='details'
+                    initial={{ opacity: 0, x: '100%' }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: '100%' }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    className='relative h-full p-4 px-2 transition-opacity duration-300'
+                  >
+                    <div className='w-full'>
+                      <div className='mx-10 flex items-center justify-between'>
+                        <div className='mb-[-20px]'>
+                          <p className='text-2xl font-semibold'>Property Details</p>
                         </div>
-                        <div className='text-right'>
-                          <div className='font-semibold text-green-600'>{calculatedRent.toFixed(2)} KWD</div>
-                          <div className='text-xs text-muted-foreground'>Estimated Rent</div>
+                        <Button
+                          onClick={handleMapOpen}
+                          variant='icon'
+                          className='cursor-pointer border-none bg-muted px-3 text-secondary-foreground hover:text-secondary-foreground/40'
+                        >
+                          <ArrowRightFromLine size={22} />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Property Images */}
+                    <PropertyImagesGrid images={selectedProperty?.images} />
+
+                    {/* Property Details */}
+                    <div className='px-10'>
+                      <div className='flex items-center justify-between gap-2'>
+                        <div>
+                          <h1 className='text-3xl font-semibold'>{selectedProperty?.title}</h1>
+
+                          <p className='my-2 font-medium text-muted-foreground'>
+                            <span className='mr-1 inline-block'>
+                              <MapPinHouseIcon className='inline h-6 w-6 text-secondary-foreground' />
+                            </span>
+                            {selectedProperty.location}
+                          </p>
+                        </div>
+                        <div>
+                          <p className='text-2xl font-bold text-primary'>
+                            400 KWD <span className='text-sm font-medium text-muted-foreground'>/ Share</span>
+                          </p>
+                          <p className='text-right text-2xl font-medium text-muted-foreground'>
+                            {selectedProperty.propertyValue} KWD
+                          </p>
                         </div>
                       </div>
+                      <div className='my-4 flex flex-wrap justify-start gap-4'>
+                        <Button variant='outline' size='sm' className='w-full sm:w-auto'>
+                          <ExpandIcon className='mr-1 h-4 w-4' /> 100sqt
+                        </Button>
+                        <Button variant='outline' size='sm' className='w-full sm:w-auto'>
+                          <BedDouble className='mr-1 h-4 w-4' /> 3 Bedrooms
+                        </Button>
+                        <Button variant='outline' size='sm' className='w-full sm:w-auto'>
+                          <Bath className='mr-1 h-4 w-4' /> 2 Bathrooms
+                        </Button>
+                        <Button variant='outline' size='sm' className='w-full sm:w-auto'>
+                          <IconCarGarage className='mr-1 h-4 w-4' /> 2 Garages
+                        </Button>
+                        <Button variant='outline' className='w-full sm:w-auto'>
+                          <CameraIcon className='mr-1 h-4 w-4' /> 24/7 security
+                        </Button>
+                      </div>
 
-                      <Slider
-                        value={[userNumberOfShares]}
-                        onValueChange={(value) => handleRentInputChange({ target: { value: value[0] } })}
-                        max={selectedProperty?.sharesAvailable}
-                        step={1}
-                        className='my-2'
-                        min={1}
-                      />
-
-                      {selectedProperty && (
-                        <div className='flex justify-between text-xs text-muted-foreground'>
-                          <p>Monthly Property Rent: {selectedProperty.rent} KWD</p>
-                        </div>
-                      )}
-                    </div>
-                    <PropertyDetailsParagraph text={selectedProperty.description} />
-
-                    <BuySharesModal />
-                    <hr className='mt-8' />
-
-                    <div className='mt-6'>
-                      <div className='flex items-center justify-between'>
-                        <div className='flex items-center gap-2'>
-                          <Avatar className='h-20 w-20'>
-                            <AvatarImage src='https://github.com/yousefalm1.png' />
-                            <AvatarFallback>CN</AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <h1 className='mb-2 font-semibold'>Yousef Almasaeed</h1>
-                            <p className='ml-4 text-sm text-muted-foreground'>Property Manager</p>
+                      <div className='rounded-lg bg-card p-3 text-sm'>
+                        <div className='mb-2 flex items-center justify-between'>
+                          <div className='flex items-center space-x-2'>
+                            <Input
+                              type='number'
+                              value={userNumberOfShares}
+                              onChange={(e) => {
+                                const value = Math.min(Number(e.target.value), selectedProperty?.sharesAvailable || 0);
+                                handleRentInputChange({ target: { value } });
+                              }}
+                              className='h-8 w-16 text-center'
+                              min={1}
+                              max={selectedProperty?.sharesAvailable}
+                            />
+                            <span className='text-muted-foreground'>
+                              / {selectedProperty?.sharesAvailable} shares available
+                            </span>
+                          </div>
+                          <div className='text-right'>
+                            <div className='font-semibold text-green-600'>{calculatedRent.toFixed(2)} KWD</div>
+                            <div className='text-xs text-muted-foreground'>Estimated Rent</div>
                           </div>
                         </div>
-                        <div className='flex space-x-2'>
-                          <Button className='flex w-full items-center justify-center'>
-                            <PhoneCall className='mr-1' /> Call Agent
-                          </Button>
-                          <Button variant='outline' className='flex w-full items-center justify-center'>
-                            <Mail />
-                          </Button>
+
+                        <Slider
+                          value={[userNumberOfShares]}
+                          onValueChange={(value) => handleRentInputChange({ target: { value: value[0] } })}
+                          max={selectedProperty?.sharesAvailable}
+                          step={1}
+                          className='my-2'
+                          min={1}
+                        />
+
+                        {selectedProperty && (
+                          <div className='flex justify-between text-xs text-muted-foreground'>
+                            <p>Monthly Property Rent: {selectedProperty.rent} KWD</p>
+                          </div>
+                        )}
+                      </div>
+                      <PropertyDetailsParagraph text={selectedProperty.description} />
+
+                      <BuySharesModal />
+                      <hr className='mt-8' />
+
+                      <div className='mt-6'>
+                        <div className='flex items-center justify-between'>
+                          <div className='flex items-center gap-2'>
+                            <Avatar className='h-20 w-20'>
+                              <AvatarImage src='https://github.com/yousefalm1.png' />
+                              <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
+                            <div>
+                              <h1 className='mb-2 font-semibold'>Yousef Almasaeed</h1>
+                              <p className='ml-4 text-sm text-muted-foreground'>Property Manager</p>
+                            </div>
+                          </div>
+                          <div className='flex space-x-2'>
+                            <Button className='flex w-full items-center justify-center'>
+                              <PhoneCall className='mr-1' /> Call Agent
+                            </Button>
+                            <Button variant='outline' className='flex w-full items-center justify-center'>
+                              <Mail />
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </SideBar>
   );
 };
 

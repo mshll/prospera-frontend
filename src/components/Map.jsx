@@ -1,10 +1,11 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import Image from 'next/image';
 import L from 'leaflet';
-import '@/app/Listings/style.css';
+import '@/app/marketplace/style.css';
 import { Button } from '@/components/ui/button';
 import { MapPinHouseIcon } from 'lucide-react';
 import { useEffect } from 'react';
+import clsx from 'clsx';
 
 const ChangeMapView = ({ center, zoom }) => {
   const map = useMap();
@@ -26,13 +27,13 @@ const ChangeMapView = ({ center, zoom }) => {
   return null;
 };
 
-const Map = ({ properties, viewSelectedLocation }) => {
+const Map = ({ properties, viewSelectedLocation, className }) => {
   const customIcon = L.icon({
     iconUrl:
-      'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRvdCI+PGNpcmNsZSBjeD0iMTIuMSIgY3k9IjEyLjEiIHI9IjEiLz48L3N2Zz4=',
-    iconSize: [120, 120],
-    iconAnchor: [18, 36],
-    popupAnchor: [42, 15],
+      'data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItbWFwLXBpbiI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE4LjM2NCA0LjYzNmE5IDkgMCAwIDEgLjIwMyAxMi41MTlsLS4yMDMgLjIxbC00LjI0MyA0LjI0MmEzIDMgMCAwIDEgLTQuMDk3IC4xMzVsLS4xNDQgLS4xMzVsLTQuMjQ0IC00LjI0M2E5IDkgMCAwIDEgMTIuNzI4IC0xMi43Mjh6bS02LjM2NCAzLjM2NGEzIDMgMCAxIDAgMCA2YTMgMyAwIDAgMCAwIC02eiIgLz48L3N2Zz4=',
+    iconSize: [24, 24],
+    // iconAnchor: [18, 36],
+    popupAnchor: [0, -20],
   });
 
   const defaultCenter = [29.27, 47.9774];
@@ -44,7 +45,7 @@ const Map = ({ properties, viewSelectedLocation }) => {
       zoom={defaultZoom}
       scrollWheelZoom={false}
       style={{ width: '100%', height: '100%' }}
-      className='shadow-lg'
+      className={clsx('col-span-2 shadow-lg', className)}
     >
       <ChangeMapView
         center={viewSelectedLocation ? [viewSelectedLocation.latitude, viewSelectedLocation.longitude] : defaultCenter}

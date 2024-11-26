@@ -3,7 +3,7 @@ import AptOne from '@/app/assets/apt1.jpg';
 
 function PropertyCard({ investment, property }) {
   return (
-    <div className='flex gap-3 rounded-md border border-border bg-secondary p-4'>
+    <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
       <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />
       <div className='flex w-full flex-col flex-wrap justify-center gap-2'>
         <div className='text-lg font-semibold'>{property.name}</div>

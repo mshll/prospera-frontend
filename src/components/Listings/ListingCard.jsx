@@ -66,20 +66,22 @@ const ListingCard = ({
             </div>
             <p className='text-lg font-medium'>{title}</p>
             <div>
-              <label className='mb-1 block text-xs font-medium text-muted-foreground sm:text-sm'>
-                Shares Available
-              </label>
-              <Progress value={sharesAvailable} />
-              <div className='mt-1 flex justify-between text-xs text-muted-foreground'>
-                <span>{sharesAvailable}</span>
-                <span>{totalShares}</span>
+              <div className='flex justify-between'>
+                <label className='mb-1 block text-xs font-medium text-muted-foreground sm:text-sm'>
+                  Shares Available
+                </label>
+                <div className='mt-1 flex justify-between text-xs text-muted-foreground'>
+                  {sharesAvailable} / {totalShares}
+                </div>
               </div>
-              <div className='mt-4 text-center sm:flex sm:justify-between'>
+              <Progress value={sharesAvailable} />
+
+              <div className='mt-4 items-center text-center sm:flex sm:justify-between'>
                 <p className='text-sm font-medium text-muted-foreground'>
                   <MapPinHouseIcon className='inline h-4 w-4 text-secondary-foreground' /> {location}
                 </p>
                 <Button variant='outline' size='sm' onClick={handleViewSelectedLocation}>
-                  <Locate /> View On Map
+                  <Locate size={14} /> View On Map
                 </Button>
               </div>
             </div>

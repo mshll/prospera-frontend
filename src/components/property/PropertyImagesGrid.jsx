@@ -10,7 +10,7 @@ export function PropertyImagesGrid({ images }) {
   }));
 
   return (
-    <div className='h-[550px] w-full'>
+    <div className='h-[400px] w-full'>
       <LayoutGrid cards={cards} />
     </div>
   );

@@ -105,3 +105,11 @@
 .leaflet-control-attribution {
   filter: var(--map-filter);
 }
+
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+.leaflet-marker-icon{
+  @apply dark:invert;
+}

@@ -5,7 +5,7 @@ import { Badge } from '../ui/badge';
 
 function MyPropertyCard({ investment, property }) {
   return (
-    <div className='flex gap-3 rounded-md border border-border bg-secondary p-4'>
+    <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
       <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />
       <div className='flex flex-1 flex-wrap items-center justify-between gap-3'>
         <div className='flex flex-col justify-center gap-2'>
