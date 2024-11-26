@@ -14,8 +14,8 @@
     --card-foreground: 0 0% 0%;
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --primary: 253 91% 58%;
-    --primary-foreground: 253 91% 98%;
+    --primary: 250 80% 72.4%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 253 5% 89%;
     --secondary-foreground: 253 5% 29%;
     --accent: 253 12% 82%;
@@ -42,31 +42,31 @@
     --map-filter: none;
   }
 
-  .dark {
-    --background: 253 43% 3%;
-    --foreground: 253 31% 98%;
-    --muted: 253 7% 13%;
-    --muted-foreground: 253 13% 63%;
-    --popover: 253 43% 3%;
-    --popover-foreground: 253 31% 98%;
-    --card: 253 43% 4%;
-    --card-foreground: 253 31% 99%;
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --primary: 253 91% 58%;
-    --primary-foreground: 253 91% 98%;
-    --secondary: 253 7% 9%;
-    --secondary-foreground: 253 7% 69%;
-    --accent: 253 13% 14%;
-    --accent-foreground: 253 13% 74%;
-    --destructive: 339.2 90.36% 51.18%;
-    --destructive-foreground: 0 0% 100%;
-    --ring: 253 91% 58%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+.dark {
+    --background: 240 43% 4.1%;
+    --foreground: 240 43% 90%;
+    --card: 240 43% 6%;
+    --card-foreground: 240 43% 90%;
+    --popover: 240 43% 6%;
+    --popover-foreground: 240 43% 90%;
+    --primary: 250 80% 82.4%;
+    --primary-foreground: 240 43% 4.1%;
+    --secondary: 240 43% 10%;
+    --secondary-foreground: 240 43% 90%;
+    --muted: 240 43% 10%;
+    --muted-foreground: 240 43% 65%;
+    --accent: 240 43% 15%;
+    --accent-foreground: 240 43% 90%;
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 240 43% 90%;
+    --border: 240 43% 15%;
+    --input: 240 43% 20%;
+    --ring: 240 43% 90%;
+    --chart-1: 250 80% 82.4%;
+    --chart-2: 219 77% 53.9%;
+    --chart-3: 37 79% 58.8%;
+    --chart-4: 136 46.2% 56.3%;
+    --chart-5: 343 60.7% 47%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -75,11 +75,12 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-    --map-filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
     --success: 120 40% 50%;
     --success-foreground: 240 43% 90%;
+    --map-filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
   }
 }
+
 @layer base {
   * {
     @apply border-border;

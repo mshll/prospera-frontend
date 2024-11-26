@@ -78,10 +78,10 @@ const ListingCard = ({
 
               <div className='mt-4 items-center text-center sm:flex sm:justify-between'>
                 <p className='text-sm font-medium text-muted-foreground'>
-                  <MapPinHouseIcon className='inline h-4 w-4 text-secondary-foreground' /> {location}
+                  <MapPinHouseIcon className='inline h-4 w-4 text-muted-foreground' /> {location}
                 </p>
                 <Button variant='outline' size='sm' onClick={handleViewSelectedLocation}>
-                  <Locate size={14} /> View On Map
+                  <Locate size={14} className='me-1' /> View On Map
                 </Button>
               </div>
             </div>
