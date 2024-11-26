@@ -11,7 +11,7 @@ function Footer() {
       links: [
         { name: 'Accounts', href: '/accounts' },
         { name: 'Investments', href: '/investments' },
-        { name: 'How It Works', href: '/cards' },
+        { name: 'How It Works', href: '/how' },
       ],
     },
     {
@@ -45,7 +45,7 @@ function Footer() {
         <div className='flex w-full flex-col items-start justify-between gap-10 px-4 py-10 md:flex-row'>
           <div className='flex flex-col items-start justify-center gap-6 text-start'>
             <Link href='/' className='flex items-center justify-center gap-x-2'>
-              <h1 className='text-3xl font-bold tracking-tight'>Prospera</h1>
+              <div className='text-2xl font-bold tracking-tight'>Prospera.</div>
             </Link>
             <p className='text-sm text-muted-foreground'>{metadata.description}</p>
             <div className='flex items-center justify-start gap-x-4'>

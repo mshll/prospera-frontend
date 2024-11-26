@@ -25,30 +25,32 @@ export default function AutoFormFile({ label, isRequired, fieldConfigItem, field
   };
 
   return (
-    <FormItem>
-      {showLabel && <AutoFormLabel label={fieldConfigItem?.label || label} isRequired={isRequired} />}
-      {!file && (
-        <FormControl>
-          <Input type='file' {...fieldPropsWithoutShowLabel} onChange={handleFileChange} value={''} />
-        </FormControl>
-      )}
-      {file && (
-        <div className='flex h-[40px] w-full flex-row items-center justify-start space-x-2 rounded-md border bg-muted/[.3] p-2 text-foreground focus-visible:ring-0 focus-visible:ring-offset-0'>
-          <Image
-            src={URL.createObjectURL(file)}
-            alt='preview'
-            className='h-8 w-8 rounded-sm object-cover'
-            width={32}
-            height={32}
-          />
-          <p className='flex-1'>{fileName}</p>
-          <button onClick={handleRemoveClick} aria-label='Remove image'>
-            <Trash2 size={16} />
-          </button>
-        </div>
-      )}
-      <AutoFormTooltip fieldConfigItem={fieldConfigItem} />
-      <FormMessage />
-    </FormItem>
+    <div className='flex flex-row items-center space-x-2'>
+      <FormItem className='flex w-full flex-col justify-start'>
+        {showLabel && <AutoFormLabel label={fieldConfigItem?.label || label} isRequired={isRequired} />}
+        {!file && (
+          <FormControl>
+            <Input type='file' {...fieldPropsWithoutShowLabel} onChange={handleFileChange} value={''} />
+          </FormControl>
+        )}
+        {file && (
+          <div className='flex h-[40px] w-full flex-row items-center justify-start space-x-2 rounded-md border bg-muted/[.3] p-2 text-foreground focus-visible:ring-0 focus-visible:ring-offset-0'>
+            <Image
+              src={URL.createObjectURL(file)}
+              alt='preview'
+              className='h-8 w-8 rounded-sm object-cover'
+              width={32}
+              height={32}
+            />
+            <p className='flex-1'>{fileName}</p>
+            <button onClick={handleRemoveClick} aria-label='Remove image'>
+              <Trash2 size={16} />
+            </button>
+          </div>
+        )}
+        <AutoFormTooltip fieldConfigItem={fieldConfigItem} />
+        <FormMessage />
+      </FormItem>
+    </div>
   );
 }
