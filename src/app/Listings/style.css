@@ -1,0 +1,107 @@
+/* styles.css */
+
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+
+  width: 300px !important;
+}
+
+.leaflet-popup-tip {
+  @apply bg-card;
+}
+.leaflet-popup-close-button {
+  color: #fff;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  z-index: 10;
+  margin: 8px;
+}
+
+.leaflet-popup-close-button:hover {
+  opacity: 1;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.popup-text {
+  padding: 20px;
+  @apply bg-card;
+}
+
+.popup-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  @apply text-foreground;
+}
+
+.popup-location {
+  font-size: 14px;
+  @apply text-muted-foreground;
+  margin-bottom: 12px;
+}
+
+/* .leaflet-popup-tip {
+  opacity: 0 !important;
+} */
+.popup-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.popup-price,
+.popup-yield {
+  font-size: 16px;
+  font-weight: 600;
+  @apply text-primary;
+}
+
+.popup-shares {
+  font-size: 14px;
+  @apply text-muted-foreground;
+  margin-bottom: 16px;
+}
+
+.popup-button {
+  width: 100%;
+  padding: 12px;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  @apply bg-primary hover:bg-primary/90;
+  font-weight: 600;
+}
+
+.leaflet-container {
+  font-family: 'Inter', sans-serif;
+}
+
+.leaflet-container {
+  font-family: 'Inter', sans-serif; /* Ensure this font is loaded in your HTML */
+}
+
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: var(--map-filter);
+}
