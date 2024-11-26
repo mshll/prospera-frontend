@@ -18,7 +18,7 @@ function Hero() {
           <>
             <Link href='/signup' className='flex items-center justify-center'>
               <Badge
-                className='group mb-2 rounded-full border-primary bg-background px-3 text-xs tracking-wider text-primary'
+                className='group mb-2 rounded-full border-primary bg-primary px-3 text-xs tracking-wider text-background'
                 variant={'outline'}
               >
                 Start investing today

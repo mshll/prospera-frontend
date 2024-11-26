@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@/components/ThemeProvider';
 import localFont from 'next/font/local';
+import { Toaster } from '@/components/ui/sonner';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           {children}
+          <Toaster richColors position='top-center' />
         </ThemeProvider>
       </body>
     </html>

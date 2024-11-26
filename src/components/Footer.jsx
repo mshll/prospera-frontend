@@ -11,7 +11,7 @@ function Footer() {
       links: [
         { name: 'Accounts', href: '/accounts' },
         { name: 'Investments', href: '/investments' },
-        { name: 'How It Works', href: '/cards' },
+        { name: 'How It Works', href: '/how' },
       ],
     },
     {

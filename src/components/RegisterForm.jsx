@@ -3,7 +3,7 @@
 // import { register } from '@/actions/auth';
 import AutoForm, { AutoFormSubmit } from '@/components/ui/auto-form';
 import { LoaderCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as z from 'zod';
 import { DependencyType } from './ui/auto-form/types';
 
@@ -86,6 +86,21 @@ function RegisterForm() {
   const [values, setValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  // flsfh
+  const elementRef = useRef(null);
+
+  // useEffect(() => {
+  //   const element = elementRef.current;
+  //   if (element) {
+  //     // Move the element to the desired location
+  //     const parent = document.getElementById('names-parent');
+  //     if (parent) {
+  //       parent.appendChild(element);
+  //       element.classList.remove('hidden');
+  //     }
+  //   }
+  // }, []);
+
   return (
     <>
       <AutoForm
@@ -151,12 +166,24 @@ function RegisterForm() {
               required: true,
               placeholder: 'e.g. John',
             },
+            halfWidth: true,
+            // renderParent: ({ children }) => (
+            //   <div id='names-parent' className='flex flex-row gap-2'>
+            //     <div className='flex-1'>{children}</div>
+            //   </div>
+            // ),
           },
           lastName: {
             inputProps: {
               required: true,
               placeholder: 'e.g. Doe',
             },
+            halfWidth: true,
+            // renderParent: ({ children }) => (
+            //   <div className='flex-1' ref={elementRef}>
+            //     {children}
+            //   </div>
+            // ),
           },
           acceptTerms: {
             fieldType: 'checkbox',

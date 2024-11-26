@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 240 20% 98%;
@@ -24,7 +23,7 @@
     --border: 240 10% 88%;
     --input: 240 10% 90%;
     --ring: 240 20% 10%;
-    --radius: 0.35rem;
+    --radius: 0.6rem;
     --chart-1: 250 80% 72.4%;
     --chart-2: 219 77% 53.9%;
     --chart-3: 37 89% 68.8%;
@@ -83,7 +82,9 @@
 @layer base {
   * {
     @apply border-border;
-    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   body {
     @apply bg-background text-foreground;
@@ -91,5 +92,14 @@
 
   .box {
     @apply size-full overflow-hidden;
+  }
+  .font-outline {
+    -webkit-text-stroke: 1px hsl(var(--background));
+  }
+  .font-outline-2 {
+    -webkit-text-stroke: 2px hsl(var(--background));
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 4px hsl(var(--background));
   }
 }

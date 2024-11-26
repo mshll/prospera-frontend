@@ -13,7 +13,7 @@ const LogoDiv = (
 
 const menuItems = [
   { label: 'Invest', href: '#' },
-  { label: 'How It Works', href: '#' },
+  { label: 'How It Works', href: '/how' },
   { label: 'About Us', href: '#' },
   { label: 'Learn', href: '#' },
 ];

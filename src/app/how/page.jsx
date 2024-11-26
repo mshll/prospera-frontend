@@ -5,20 +5,15 @@ import { GridBackground } from '@/components/GridBackground';
 import Hero from '@/components/Hero';
 import LandingCarousel from '@/components/LandingCarousel';
 import Navbar from '@/components/NavBar';
-import Faq from '@/components/Faq';
 
-export default function Home() {
+export default function HowPage() {
   return (
     <>
       <main className='relative w-full'>
         <GridBackground />
         <Navbar />
-        <div className='flex min-h-screen flex-col items-center justify-center text-foreground'>
-          <Hero />
-          <LandingCarousel />
-          <CTA1 />
+        <div className='flex min-h-screen flex-col items-center justify-center pt-32 text-foreground'>
           <HowItWorks />
-          <Faq />
         </div>
         <Footer />
       </main>

@@ -25,19 +25,6 @@ export const StickyScroll = ({ content, contentClassName }) => {
     setActiveCard(closestBreakpointIndex);
   });
 
-  const backgroundColors = ['var(--slate-900)', 'var(--black)', 'var(--neutral-900)'];
-  const linearGradients = [
-    'linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))',
-    'linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))',
-    'linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))',
-  ];
-
-  const [backgroundGradient, setBackgroundGradient] = useState(linearGradients[0]);
-
-  useEffect(() => {
-    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-  }, [activeCard]);
-
   return (
     <motion.div
       animate={
@@ -48,6 +35,15 @@ export const StickyScroll = ({ content, contentClassName }) => {
       className='relative flex justify-center gap-x-10 rounded-md p-10'
       ref={ref}
     >
+      <div
+        className={cn(
+          'sticky top-[30%] hidden h-[30rem] w-[25rem] overflow-visible rounded-xl bg-background lg:block',
+          contentClassName,
+        )}
+      >
+        {content[activeCard].content ?? null}
+      </div>
+
       <div className='div relative flex items-start px-4'>
         <div className='max-w-2xl'>
           {content.map((item, index) => (
@@ -81,7 +77,7 @@ export const StickyScroll = ({ content, contentClassName }) => {
                 animate={{
                   opacity: activeCard === index ? 1 : 0.1,
                 }}
-                className='mt-6 max-w-sm text-justify text-lg text-muted-foreground'
+                className='mt-6 max-w-md text-lg text-muted-foreground'
               >
                 {item.description}
               </motion.p>
@@ -89,15 +85,6 @@ export const StickyScroll = ({ content, contentClassName }) => {
           ))}
           {/* <div className='h-40' /> */}
         </div>
-      </div>
-      <div
-        style={{ background: backgroundGradient }}
-        className={cn(
-          'sticky top-[30%] hidden h-96 w-96 overflow-hidden rounded-md bg-background lg:block',
-          contentClassName,
-        )}
-      >
-        {content[activeCard].content ?? null}
       </div>
     </motion.div>
   );

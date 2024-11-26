@@ -11,15 +11,20 @@ import { PropertyChart } from '@/components/dashboard/PropertyChart';
 import { Button } from '@/components/ui/button';
 import { getGreeting } from '@/lib/utils';
 import clsx from 'clsx';
-import { ChevronRightIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
+import { ChevronRightIcon, ClipboardIcon, TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import MyPropertiesList from '@/components/dashboard/MyPropertiesList';
+import { DataTable } from '@/components/DataTable';
+import { myTransactions } from '@/actions/transactions';
+import UpdateProfileForm from '@/components/UpdateProfileForm';
+import ReferButton from '@/components/ReferButton';
 
 const AccountPage = async () => {
   const properties = await getAllProperties();
   const myInvestments = await getMyInvestments();
+  const transactions = await myTransactions();
 
   return (
     <SideBar>
@@ -40,69 +45,55 @@ const AccountPage = async () => {
                   <Button size='sm' variant='ringHoverOutline'>
                     ?
                   </Button>
-                  <Button size='sm' variant='ringHover'>
-                    Edit Profile
-                  </Button>
+                  <ReferButton />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* <div className='col-span-3 row-span-2 max-md:col-span-full'>
-            <AmountCard title='Portfolio Value' value='105,569' currency='KWD' change='1k' type='down' />
-          </div>
-          <div className='col-span-3 row-span-2 max-md:col-span-full'>
-            <AmountCard title='Cash Balance' value='44,444' currency='KWD' change='1k' type='down' />
-          </div>
-          <div className='col-span-3 row-span-2 max-md:col-span-full'>
-            <AmountCard title='Monthly Yield' value='2,098' currency='KWD' change='500' type='up' />
-          </div> */}
-
-          {/* Left column */}
-          {/* <MyPropertiesList properties={properties} myInvestments={myInvestments} /> */}
-
-          {/* <div className='col-span-4 row-span-2 max-md:order-1 max-md:col-span-full'>
-            <div className='box'>
-              <div className='size-full overflow-visible'>
-                <PropertyChart />
-              </div>
-            </div>
-          </div> */}
-
-          {/* <div className='order-2 col-span-4 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
-            <div className='col-span-4 row-span-9 max-md:col-span-full'>
+          <div className='col-span-4 row-span-11 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
+            <div className='col-span-4 row-span-11 max-md:col-span-full'>
               <div className='box rounded-none'>
                 <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden'>
-                  <div className='flex items-center justify-between'>
-                    <h1 className='font-semibold text-muted-foreground'>Recently Liked</h1>
-                    <Link href='/my-properties'>
+                  <div className='mt-2 flex items-center justify-between'>
+                    <h1 className='font-semibold text-muted-foreground'>Edit Profile</h1>
+                    {/* <Link href='/my-properties'>
                       <Button variant='ghost' size='sm' className='text-muted-foreground'>
                         View all
                       </Button>
-                    </Link>
+                    </Link> */}
                   </div>
                   <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
-                    <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
-                      {myInvestments.map((investment, idx) => (
-                        <PropertyCard
-                          key={idx}
-                          investment={investment}
-                          property={properties.find((property) => property.id === investment.propertyId)}
-                        />
-                      ))}
-                      {myInvestments.length == 0 && (
-                        <div className='flex flex-1 flex-col items-center justify-center text-center text-xs text-muted-foreground'>
-                          You haven&apos;t liked any properties yet.
-                        </div>
-                      )}
-                      <div className='h-16 w-full'>&nbsp;</div>
+                    <div className='hide-scrollbar relative flex size-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
+                      <UpdateProfileForm className='size-full p-3' />
                     </div>
-                    <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-background'></div>
+                    <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-card'></div>
                   </div>
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
+
+          {/* Left column */}
+          <div className='col-span-8 row-span-11 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
+            <div className='col-span-8 row-span-11 max-md:col-span-full'>
+              <div className='box'>
+                <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden pt-2'>
+                  <div className='flex items-center justify-between'>
+                    <h1 className='font-semibold text-muted-foreground'>Recent Transactions</h1>
+                    <div className='flex gap-2'>select</div>
+                  </div>
+                  <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
+                    <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
+                      <DataTable data={transactions} />
+                    </div>
+                    <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-card'></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/*  */}
         </div>
       </main>

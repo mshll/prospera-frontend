@@ -77,7 +77,7 @@ const DashboardPage = async () => {
                       )}
                       <div className='h-16 w-full'>&nbsp;</div> {/* Spacer */}
                     </div>
-                    <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-background'></div>
+                    <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-card'></div>
                   </div>
                 </div>
               </div>
