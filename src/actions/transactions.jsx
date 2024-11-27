@@ -49,60 +49,26 @@ export const myTransactions = async () => {
   return transactions;
 };
 
-export const depositMoney = async (formData) => {
+export const depositFunds = async (formData) => {
   const userData = Object.fromEntries(formData);
 
-  try {
-    const response = await fetch(`${baseUrl}/mini-project/api/transactions/deposit`, {
-      method: 'PUT',
-      headers: await getHeaders(),
-      body: JSON.stringify(userData),
-    });
+  const response = await fetch(`${baseUrl}/transactions/deposit`, {
+    method: 'POST',
+    headers: await getHeaders(),
+    body: JSON.stringify(userData),
+  });
 
-    revalidatePath('/dashboard');
-    revalidatePath('/dashboard/transactions');
-    return response.ok;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
+  revalidatePath('/dashboard');
 };
 
-export const withdrawMoney = async (formData) => {
+export const withdrawFunds = async (formData) => {
   const userData = Object.fromEntries(formData);
 
-  try {
-    const response = await fetch(`${baseUrl}/mini-project/api/transactions/withdraw`, {
-      method: 'PUT',
-      headers: await getHeaders(),
-      body: JSON.stringify(userData),
-    });
+  const response = await fetch(`${baseUrl}/transactions/withdraw`, {
+    method: 'POST',
+    headers: await getHeaders(),
+    body: JSON.stringify(userData),
+  });
 
-    revalidatePath('/dashboard');
-    revalidatePath('/dashboard/transactions');
-    return response.ok;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
-
-export const transfer = async (formData, username) => {
-  const userData = Object.fromEntries(formData);
-
-  try {
-    const response = await fetch(`${baseUrl}/mini-project/api/transactions/transfer/${username}`, {
-      method: 'PUT',
-      headers: await getHeaders(),
-      body: JSON.stringify(userData),
-    });
-
-    revalidatePath('/dashboard');
-    revalidatePath('/dashboard/transactions');
-    revalidatePath('/users');
-    return response.ok;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
+  revalidatePath('/dashboard');
 };

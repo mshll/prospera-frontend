@@ -2,6 +2,7 @@ import 'server-only';
 
 import { jwtDecode } from 'jwt-decode';
 import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
 export async function setToken(token) {
   const cookieStore = await cookies();
@@ -13,10 +14,13 @@ export async function getToken() {
   const token = cookieStore.get('token')?.value;
   return token;
 }
-
 export async function deleteToken() {
-  const cookieStore = await cookies();
-  cookieStore.delete('token');
+  const response = NextResponse.next();
+  response.cookies.set('token', '', {
+    expires: new Date(0), // Expire immediately
+    path: '/', // Set the path for which the cookie is cleared
+  });
+  return response;
 }
 
 export async function getUser() {

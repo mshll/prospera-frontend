@@ -1,9 +1,27 @@
+'use client';
 import { Button } from '../ui/button';
 import AmountCard from './AmountCard';
 import { PropertyChart } from './PropertyChart';
 import { getGreeting } from '@/lib/utils';
+import {
+  ResponsiveModal,
+  ResponsiveModalBody,
+  ResponsiveModalClose,
+  ResponsiveModalContent,
+  ResponsiveModalDescription,
+  ResponsiveModalFooter,
+  ResponsiveModalHeader,
+  ResponsiveModalTitle,
+  ResponsiveModalTrigger,
+} from '@/components/ui/responsive-modal';
+import { CreditCardIcon } from 'lucide-react';
+import { depositFunds, depositMoney } from '@/actions/transactions';
+import { toast } from 'sonner';
+import { Input } from '../ui/input';
+import DepositForm from './DepositForm';
+import WithdrawForm from './WithdrawForm';
 
-function InfoSection() {
+function InfoSection({ myProfile }) {
   return (
     <>
       <div className='col-span-full row-span-1'>
@@ -20,22 +38,18 @@ function InfoSection() {
               </div>
             </div>
             <div className='flex gap-3 md:px-4'>
-              <Button size='sm' variant='ringHoverOutline'>
-                Withdraw Funds
-              </Button>
-              <Button size='sm' variant='ringHover'>
-                Add Funds
-              </Button>
+              <WithdrawForm />
+              <DepositForm />
             </div>
           </div>
         </div>
       </div>
 
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
-        <AmountCard title='Portfolio Value' value='105,569' currency='KWD' change='1k' type='down' />
+        <AmountCard title='Cash Balance' value={myProfile.balance} currency='KWD' change='1k' type='down' />
       </div>
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
-        <AmountCard title='Cash Balance' value='44,444' currency='KWD' change='1k' type='down' />
+        <AmountCard title='Portfolio Value' value='105,569' currency='KWD' change='1k' type='down' />
       </div>
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
         <AmountCard title='Monthly Yield' value='2,098' currency='KWD' change='500' type='up' />

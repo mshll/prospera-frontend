@@ -1,4 +1,5 @@
 import { getAllProperties, getMyInvestments } from '@/actions/properties';
+import { getMyProfile, myProfile } from '@/actions/users';
 import AptOne from '@/app/assets/apt1.jpg';
 
 import ListingCard from '@/components/ListingCard';
@@ -17,13 +18,14 @@ import Link from 'next/link';
 
 const DashboardPage = async () => {
   const properties = await getAllProperties();
-  const myInvestments = await getMyInvestments();
+  const myProfile = await getMyProfile();
+  // const myInvestments = await getMyInvestments();
 
   return (
     <SideBar>
       <main className='relative w-full overflow-auto rounded-l-2xl bg-background'>
         <div className='grid h-screen max-h-[75rem] min-h-[50rem] grid-cols-12 grid-rows-10 gap-4 p-4 max-md:h-auto max-md:max-h-none max-md:grid-rows-none max-md:gap-y-10 max-md:py-6'>
-          <InfoSection />
+          <InfoSection myProfile={myProfile} />
 
           {/* Left column */}
           <div className='col-span-8 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-md:col-span-full max-md:grid-rows-none max-md:gap-4'>
@@ -63,7 +65,7 @@ const DashboardPage = async () => {
                   </div>
                   <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
                     <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
-                      {myInvestments.map((investment, idx) => (
+                      {/* {myInvestments.map((investment, idx) => (
                         <PropertyCard
                           key={idx}
                           investment={investment}
@@ -74,7 +76,7 @@ const DashboardPage = async () => {
                         <div className='flex flex-1 flex-col items-center justify-center text-center text-xs text-muted-foreground'>
                           You have no investments yet.
                         </div>
-                      )}
+                      )} */}
                       <div className='h-16 w-full'>&nbsp;</div> {/* Spacer */}
                     </div>
                     <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-card'></div>
