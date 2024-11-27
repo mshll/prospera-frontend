@@ -1,4 +1,4 @@
-import { getAllProperties, getMyInvestments } from '@/actions/properties';
+import { getAllProperties, getMyInvestments, viewAllInvestments } from '@/actions/properties';
 import AptOne from '@/app/assets/apt1.jpg';
 
 import ListingCard from '@/components/ListingCard';
@@ -19,7 +19,7 @@ import MyPropertiesList from '@/components/dashboard/MyPropertiesList';
 
 const MyPropertiesPage = async () => {
   const properties = await getAllProperties();
-  const myInvestments = await getMyInvestments();
+  const myInvestments = await viewAllInvestments();
 
   return (
     <SideBar>

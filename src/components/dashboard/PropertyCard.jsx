@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import AptOne from '@/app/assets/apt1.jpg';
+import { formatCurrency } from '@/lib/utils';
 
 function PropertyCard({ investment, property }) {
   return (
@@ -11,7 +12,7 @@ function PropertyCard({ investment, property }) {
           <div className='flex flex-col justify-between'>
             <div className='text-[.6rem] uppercase text-muted-foreground'>Value (KWD)</div>
             <div className='justify-between font-semibold text-primary'>
-              {(property.value / investment.sharesOwned).toFixed(2)}
+              {formatCurrency((investment.sharesOwned / property.totalShares) * property.currentValue)}
             </div>
           </div>
           <div className='border-l border-border'></div>
@@ -21,9 +22,13 @@ function PropertyCard({ investment, property }) {
           </div>
           <div className='border-l border-border'></div>
           <div className='flex flex-col justify-between'>
-            <div className='text-[.6rem] uppercase text-muted-foreground'>Mo Yld (KWD)</div>
+            <div className='text-[.6rem] uppercase text-muted-foreground'>Monthly Yield (%)</div>
             <div className='font-semibold text-primary'>
-              {(property.rentalIncome / investment.sharesOwned).toFixed(2)}
+              {(
+                ((property.rentalIncome * (investment.sharesOwned / property.totalShares)) /
+                  (property.currentValue * (investment.sharesOwned / property.totalShares))) *
+                100
+              ).toFixed(2)}
             </div>
           </div>
         </div>
