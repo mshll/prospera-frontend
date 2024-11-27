@@ -13,6 +13,7 @@ import {
   ResponsiveModalTitle,
   ResponsiveModalTrigger,
 } from '@/components/ui/responsive-modal';
+import { buyShares } from '@/actions/buyShares';
 
 const BuySharesModal = ({
   locationName,
@@ -21,6 +22,7 @@ const BuySharesModal = ({
   totalNumberOfShares,
   currentShares,
   rentalIncome,
+  propertyId,
 }) => {
   const [numberOfShares, setNumberOfShares] = useState('');
 
@@ -61,11 +63,21 @@ const BuySharesModal = ({
               </div>
             </div>
           </ResponsiveModalTitle>
+
           <ResponsiveModalDescription className='px-6'>
             <p className='mt-4 text-xl font-semibold text-secondary-foreground'>Create Share Order</p>
             <div>
               <h1 className='mt-4 text-xs'>Number of shares to purchase</h1>
-              <Input value={numberOfShares} onChange={handleInputChange} type='number' min='0' max={currentShares} />
+              <Input
+                value={numberOfShares}
+                onChange={handleInputChange}
+                type='number'
+                name='amount'
+                min='0'
+                max={currentShares}
+              />
+              <input type='hidden' value={propertyId} />
+
               <div className='mb-4 mt-6 flex flex-col gap-4'>
                 <div className='flex justify-between'>
                   <p>Total Investment (KWD)</p>
@@ -90,6 +102,7 @@ const BuySharesModal = ({
         <ResponsiveModalFooter className='px-6 pb-6'>
           <Button
             className='w-full'
+            type='submit'
             disabled={numberOfShares <= 0 || numberOfShares > currentShares || totalPurchase > userBalance}
           >
             Buy Shares

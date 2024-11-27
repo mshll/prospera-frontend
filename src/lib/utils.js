@@ -17,13 +17,16 @@ export function getGreeting() {
   }
 }
 
-export function formatCurrency(amount, isCompact = true, locale = 'en-KW') {
+export function formatCurrency(amount, config = { isCompact: true, locale: 'en-KW', includeCurrency: false }) {
+  const { isCompact, locale, includeCurrency } = config;
+
   const formatted = new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: 'KWD',
     notation: isCompact ? 'compact' : 'standard',
   }).format(amount);
 
-  // return formatted.replace('KWD', '') + ' KWD';
-  return formatted.replace('KWD', '');
+  return formatted.replace('KWD', '') + (includeCurrency ? 'KWD' : '');
 }
+
+const func = ({}) => {};
