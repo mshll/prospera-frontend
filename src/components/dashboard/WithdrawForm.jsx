@@ -1,72 +1,87 @@
 'use client';
 import { useState } from 'react';
-import Image from 'next/image';
-import AptOne from '@/app/assets/apt1.jpg';
+import { withdrawFunds } from '@/actions/transactions';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { BanknoteIcon, LoaderCircle } from 'lucide-react';
 import {
   ResponsiveModal,
   ResponsiveModalBody,
-  ResponsiveModalClose,
   ResponsiveModalContent,
   ResponsiveModalDescription,
   ResponsiveModalFooter,
   ResponsiveModalHeader,
   ResponsiveModalTitle,
   ResponsiveModalTrigger,
-} from '@/components/ui/responsive-modal';
-import { withdrawFunds } from '@/actions/transactions';
-import { IconCash } from '@tabler/icons-react';
+} from '../ui/responsive-modal';
 import { toast } from 'sonner';
 
-const WithdrawForm = () => {
-  return (
-    <div className='flex gap-3 md:px-4'>
-      <ResponsiveModal>
-        <ResponsiveModalTrigger asChild>
-          <Button size='sm' variant='ringHoverOutline'>
-            Withdraw Funds
-          </Button>
-        </ResponsiveModalTrigger>
-        <ResponsiveModalContent>
-          <ResponsiveModalHeader>
-            <ResponsiveModalTitle>Withdraw Funds</ResponsiveModalTitle>
-            <ResponsiveModalDescription>
-              Withdraw funds from your account quickly and securely. Please enter the amount you wish to withdraw.
-            </ResponsiveModalDescription>
-          </ResponsiveModalHeader>
-          <ResponsiveModalBody>
-            <form action={withdrawFunds}>
-              <div className='flex flex-col gap-4 py-3'>
-                <div className='flex flex-col gap-1'>
-                  <label htmlFor='withdraw-amount' className='text-sm text-muted-foreground'>
-                    Withdrawal Amount
-                  </label>
-                  <Input type='number' name='amount' placeholder='Enter amount' />
-                  <ResponsiveModalFooter className='mt-4'>
-                    <Button
-                      type='submit'
-                      onClick={() => {
-                        toast.success('Withdrawal initiated', {
-                          description: 'Your withdrawal is being processed. Please check your account balance.',
-                        });
-                      }}
-                    >
-                      <IconCash size={16} className='me-1' />
-                      Withdraw Now
-                    </Button>
+const WithdrawForm = ({ children, userBalance }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [amount, setAmount] = useState('');
 
-                    <ResponsiveModalClose asChild>
-                      <Button variant='outline'>Cancel</Button>
-                    </ResponsiveModalClose>
-                  </ResponsiveModalFooter>
-                </div>
+  const handleWithdraw = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const promise = withdrawFunds(e.target.amount.value);
+    toast.promise(promise, {
+      loading: 'Processing withdrawal...',
+      success: 'Funds withdrawn successfully.',
+      error: 'Failed to withdraw funds. Please try again.',
+    });
+    promise.finally(() => {
+      setIsLoading(false);
+      setOpen(false);
+    });
+  };
+
+  return (
+    <ResponsiveModal open={open} onOpenChange={setOpen}>
+      <ResponsiveModalTrigger>{children}</ResponsiveModalTrigger>
+      <ResponsiveModalContent>
+        <ResponsiveModalHeader>
+          <ResponsiveModalTitle>Withdraw Funds</ResponsiveModalTitle>
+          <ResponsiveModalDescription>Withdraw available funds to your linked bank account.</ResponsiveModalDescription>
+        </ResponsiveModalHeader>
+        <ResponsiveModalBody>
+          <form onSubmit={handleWithdraw}>
+            <div className='flex flex-col gap-4 py-3'>
+              <div className='flex flex-col gap-1'>
+                <label htmlFor='withdraw-amount' className='text-sm text-muted-foreground'>
+                  Withdrawal Amount
+                </label>
+                <Input
+                  type='number'
+                  name='amount'
+                  placeholder='Enter amount'
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
+                  min='0'
+                  max={userBalance}
+                />
+                <ResponsiveModalFooter className='mt-4'>
+                  <Button type='submit' disabled={isLoading || amount <= 0 || amount > userBalance}>
+                    {isLoading ? (
+                      <LoaderCircle className='h-6 w-6 animate-spin' />
+                    ) : (
+                      <>
+                        <BanknoteIcon size={16} className='me-1' />
+                        Withdraw Now
+                      </>
+                    )}
+                  </Button>
+                  <Button type='button' variant='outline' onClick={() => setOpen(false)}>
+                    Cancel
+                  </Button>
+                </ResponsiveModalFooter>
               </div>
-            </form>
-          </ResponsiveModalBody>
-        </ResponsiveModalContent>
-      </ResponsiveModal>
-    </div>
+            </div>
+          </form>
+        </ResponsiveModalBody>
+      </ResponsiveModalContent>
+    </ResponsiveModal>
   );
 };
 

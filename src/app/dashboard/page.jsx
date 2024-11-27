@@ -5,10 +5,14 @@ import InfoSection from '@/components/dashboard/InfoSection';
 import { PortfolioChart } from '@/components/dashboard/PortfolioChart';
 import PropertyCard from '@/components/dashboard/PropertyCard';
 import { Button } from '@/components/ui/button';
+import { calculateMonthlyIncome } from '@/lib/utils';
 import Link from 'next/link';
 
 const DashboardPage = async () => {
   const profile = await getMyProfile();
+
+  const chartData = generateChartData(profile);
+  console.log(chartData);
 
   return (
     <SideBar>
@@ -20,7 +24,7 @@ const DashboardPage = async () => {
             <div className='col-span-8 row-span-9 max-md:col-span-full'>
               <div className='box size-full overflow-hidden'>
                 <div className='size-full'>
-                  <PortfolioChart />
+                  <PortfolioChart chartData={chartData} />
                 </div>
               </div>
             </div>
@@ -61,5 +65,40 @@ const DashboardPage = async () => {
     </SideBar>
   );
 };
+
+// Function to generate chartData from profile data
+function generateChartData(profile) {
+  const dataPoints = {};
+
+  profile.investments.forEach((investment) => {
+    investment.property.propertyValues.forEach((valueEntry) => {
+      // const date = valueEntry.valueDate.split('T')[0];
+      const date = valueEntry.valueDate;
+
+      if (!dataPoints[date]) {
+        dataPoints[date] = { date, accountValue: 0, monthlyYield: 0 };
+      }
+
+      const shareValue = valueEntry.propertyValue / investment.property.totalShares;
+      const investmentValue = shareValue * investment.sharesOwned;
+
+      dataPoints[date].accountValue += investmentValue;
+
+      const monthlyYield = calculateMonthlyIncome({
+        rentalIncome: investment.property.rentalIncome,
+        sharesOwned: investment.sharesOwned,
+        totalShares: investment.property.totalShares,
+        currentValue: valueEntry.propertyValue,
+        asYield: true,
+      });
+
+      dataPoints[date].monthlyYield += parseFloat(monthlyYield);
+    });
+  });
+
+  const chartData = Object.values(dataPoints).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  return chartData;
+}
 
 export default DashboardPage;

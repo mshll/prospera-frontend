@@ -18,6 +18,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import MyPropertiesList from '@/components/dashboard/MyPropertiesList';
 import { getMyProfile } from '@/actions/users';
 import LikedPropertyCard from '@/components/dashboard/LikedPropertyCard';
+import WithdrawForm from '@/components/dashboard/WithdrawForm';
+import DepositForm from '@/components/dashboard/DepositForm';
 
 const MyPropertiesPage = async () => {
   const properties = await getAllProperties();
@@ -39,12 +41,16 @@ const MyPropertiesPage = async () => {
                   </div>
                 </div>
                 <div className='flex gap-3 md:px-4'>
-                  <Button size='sm' variant='ringHoverOutline'>
-                    Withdraw Funds
-                  </Button>
-                  <Button size='sm' variant='ringHover'>
-                    Add Funds
-                  </Button>
+                  <WithdrawForm userBalance={profile.balance}>
+                    <Button size='sm' variant='ringHoverOutline'>
+                      Withdraw Funds
+                    </Button>
+                  </WithdrawForm>
+                  <DepositForm userBalance={profile.balance}>
+                    <Button size='sm' variant='ringHover'>
+                      Add Funds
+                    </Button>
+                  </DepositForm>
                 </div>
               </div>
             </div>
@@ -61,7 +67,7 @@ const MyPropertiesPage = async () => {
           </div> */}
 
           {/* Left column */}
-          <MyPropertiesList myInvestments={profile.investments} />
+          <MyPropertiesList myInvestments={profile.investments} profile={profile} />
 
           <div className='col-span-4 row-span-2 max-md:order-1 max-md:col-span-full'>
             <div className='box'>

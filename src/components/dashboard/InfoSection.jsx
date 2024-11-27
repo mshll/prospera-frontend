@@ -39,8 +39,16 @@ function InfoSection({ profile }) {
               </div>
             </div>
             <div className='flex gap-3 md:px-4'>
-              <WithdrawForm />
-              <DepositForm />
+              <WithdrawForm userBalance={profile.balance}>
+                <Button size='sm' variant='ringHoverOutline'>
+                  Withdraw Funds
+                </Button>
+              </WithdrawForm>
+              <DepositForm userBalance={profile.balance}>
+                <Button size='sm' variant='ringHover'>
+                  Add Funds
+                </Button>
+              </DepositForm>
             </div>
           </div>
         </div>

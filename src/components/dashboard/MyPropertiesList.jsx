@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import PropertyCard from './PropertyCard';
 import MyPropertyCard from './MyPropertyCard';
 
-function MyPropertiesList({ myInvestments }) {
+function MyPropertiesList({ myInvestments, profile }) {
   const investmentTypes = ['Homes', 'Apartments', 'Condos', 'Villas', 'Industrial'];
   const [selectedType, setSelectedType] = useState('All');
 
@@ -40,7 +40,7 @@ function MyPropertiesList({ myInvestments }) {
             <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
               <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
                 {investments.map((investment, idx) => (
-                  <MyPropertyCard key={idx} investment={investment} property={investment.property} />
+                  <MyPropertyCard key={idx} investment={investment} property={investment.property} profile={profile} />
                 ))}
                 {investments.length == 0 && (
                   <div className='flex flex-1 flex-col items-center justify-center text-center text-xs text-muted-foreground'>

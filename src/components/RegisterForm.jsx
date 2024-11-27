@@ -1,7 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-// import { register } from '@/actions/auth';
 import AutoForm, { AutoFormSubmit } from '@/components/ui/auto-form';
 import { LoaderCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -87,7 +85,6 @@ const formSchema = z
   });
 
 function RegisterForm() {
-  const router = useRouter();
   const [values, setValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -111,7 +108,7 @@ function RegisterForm() {
               });
             } else {
               toast.success('Registered successfully.');
-              router.push('/dashboard');
+              redirect('/dashboard');
             }
           });
         }}

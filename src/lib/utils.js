@@ -30,4 +30,9 @@ export function formatCurrency(amount, config = { isCompact: true, locale: 'en-K
   return formatted.replace('KWD', '').replace(/\D00(?=\D*$)/, '') + (includeCurrency ? 'KWD' : '');
 }
 
-const func = ({}) => {};
+export function calculateMonthlyIncome({ rentalIncome, sharesOwned, totalShares, currentValue, asYield = true }) {
+  const monthlyIncome = rentalIncome * (sharesOwned / totalShares);
+  const monthlyYield = (monthlyIncome / (currentValue * (sharesOwned / totalShares))) * 100;
+
+  return asYield ? monthlyYield.toFixed(2) : formatCurrency(monthlyIncome);
+}
