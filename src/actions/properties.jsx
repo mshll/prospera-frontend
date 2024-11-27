@@ -20,3 +20,21 @@ export const viewAllInvestments = async () => {
   const properties = await response.json();
   return properties;
 };
+
+export const likeProperty = async (propertyId) => {
+  const response = await fetch(`${baseUrl}/users/like/${propertyId}`, {
+    method: 'POST',
+    headers: await getHeaders(),
+  });
+  revalidatePath('/dashboard');
+  revalidatePath('/account');
+};
+
+export const unlikeProperty = async (propertyId) => {
+  const response = await fetch(`${baseUrl}/users/unlike/${propertyId}`, {
+    method: 'POST',
+    headers: await getHeaders(),
+  });
+  revalidatePath('/dashboard');
+  revalidatePath('/account');
+};

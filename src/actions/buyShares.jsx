@@ -5,6 +5,7 @@ import { baseUrl, getHeaders } from './config';
 
 export async function buyShares(formData, propertyId) {
   const user = Object.fromEntries(formData);
+
   console.log(propertyId, formData);
 
   const response = await fetch(`${baseUrl}/transactions/buy-share?propertyId=${propertyId}`, {

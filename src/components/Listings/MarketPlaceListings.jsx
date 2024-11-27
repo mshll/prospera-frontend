@@ -113,6 +113,7 @@ const HouseListingsPage = ({ properties, profile }) => {
               properties={properties}
               selectedProperty={selectedProperty}
               handleViewSelectedLocation={handleViewSelectedLocation}
+              profile={profile}
             />
           </div>
         </div>
@@ -242,15 +243,7 @@ const HouseListingsPage = ({ properties, profile }) => {
                   </div>
                   <PropertyDetailsParagraph text={selectedProperty.description} />
 
-                  <BuySharesModal
-                    locationName={selectedProperty.locationName}
-                    locationAddress={selectedProperty.locationAddress}
-                    userBalance={profile.balance}
-                    rentalIncome={selectedProperty.rentalIncome}
-                    currentValue={selectedProperty.currentValue}
-                    totalNumberOfShares={selectedProperty.totalShares}
-                    currentShares={selectedProperty.availableShares}
-                  />
+                  <BuySharesModal property={selectedProperty} userBalance={profile.balance} />
 
                   {/* <ReferButton /> */}
                   <hr className='mt-8' />

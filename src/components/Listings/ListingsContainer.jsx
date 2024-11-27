@@ -110,6 +110,7 @@ export const ListingsContainer = ({
   filterOptions,
   selectedFilter,
   setSelectedFilter,
+  profile,
 }) => {
   return (
     <div className='hide-scrollbar size-full justify-center overflow-auto'>
@@ -123,6 +124,7 @@ export const ListingsContainer = ({
             {...property}
             handleOpen={() => handleOpen(property)}
             handleViewSelectedLocation={(event) => handleViewSelectedLocation(property, event)}
+            profile={profile}
           />
         ))}
       </div>

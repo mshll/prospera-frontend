@@ -6,10 +6,12 @@ import AptOne from '@/app/assets/apt1.jpg';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Bookmark, Heart, Locate, MapPinHouseIcon, TargetIcon } from 'lucide-react';
+import { Bookmark, Locate, MapPinHouseIcon, TargetIcon } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 
 import { MapPin } from 'lucide-react';
+import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
+import { likeProperty, unlikeProperty } from '@/actions/properties';
 
 const ListingCard = ({
   searchTerm,
@@ -32,13 +34,14 @@ const ListingCard = ({
   numberOfShares,
   id,
   handleViewSelectedLocation,
+  profile,
 }) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(profile.likedProperties.includes(id));
 
   const handleLike = (event) => {
-    event.stopPropagation();
-
+    isLiked ? unlikeProperty(id) : likeProperty(id);
     setIsLiked(!isLiked);
+    event.stopPropagation();
   };
 
   const isSelected = selectedProperty?.id === id;
@@ -66,10 +69,11 @@ const ListingCard = ({
               <h1 className='text-sm font-medium text-muted-foreground'>
                 <span className='text-2xl font-semibold text-primary'>{currentValue / totalShares} KWD</span> /share
               </h1>
-              <Heart
-                className={`h-6 w-6 cursor-pointer ${isLiked ? 'text-destructive' : 'text-muted-foreground'}`}
-                onClick={handleLike}
-              />
+              {isLiked ? (
+                <IconHeartFilled className='h-6 w-6 cursor-pointer text-destructive' onClick={handleLike} />
+              ) : (
+                <IconHeart className='h-6 w-6 cursor-pointer text-muted-foreground' onClick={handleLike} />
+              )}
             </div>
             <p className='text-lg font-medium'>{locationName}</p>
             <div>
