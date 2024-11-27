@@ -1,4 +1,4 @@
-import { getAllProperties, getMyInvestments } from '@/actions/properties';
+import { getAllProperties } from '@/actions/properties';
 import AptOne from '@/app/assets/apt1.jpg';
 
 import ListingCard from '@/components/ListingCard';
@@ -17,14 +17,12 @@ import Link from 'next/link';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import MyPropertiesList from '@/components/dashboard/MyPropertiesList';
 import { DataTable } from '@/components/DataTable';
-import { myTransactions } from '@/actions/transactions';
 import UpdateProfileForm from '@/components/UpdateProfileForm';
 import ReferButton from '@/components/ReferButton';
+import { getMyProfile } from '@/actions/users';
 
 const AccountPage = async () => {
-  const properties = await getAllProperties();
-  const myInvestments = await getMyInvestments();
-  const transactions = await myTransactions();
+  const profile = await getMyProfile();
 
   return (
     <SideBar>
@@ -85,7 +83,7 @@ const AccountPage = async () => {
                   </div>
                   <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
                     <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
-                      <DataTable data={transactions} />
+                      <DataTable data={profile.transactions} />
                     </div>
                     <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-card'></div>
                   </div>

@@ -39,6 +39,8 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
   const defaultCenter = [29.27, 47.9774];
   const defaultZoom = 12;
   const selectedZoom = 16;
+
+  console.log(properties);
   return (
     <MapContainer
       center={defaultCenter}
@@ -62,7 +64,7 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
             <div className='popup-content'>
               <Image
                 // src={property.images[0]}
-                alt={property.name}
+                alt={property.locationName}
                 width={300}
                 height={200}
                 objectFit='cover'

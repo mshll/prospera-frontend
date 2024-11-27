@@ -2,7 +2,7 @@
 import { Button } from '../ui/button';
 import AmountCard from './AmountCard';
 import { PropertyChart } from './PropertyChart';
-import { getGreeting } from '@/lib/utils';
+import { formatCurrency, getGreeting } from '@/lib/utils';
 import {
   ResponsiveModal,
   ResponsiveModalBody,
@@ -21,7 +21,8 @@ import { Input } from '../ui/input';
 import DepositForm from './DepositForm';
 import WithdrawForm from './WithdrawForm';
 
-function InfoSection({ myProfile }) {
+function InfoSection({ profile }) {
+  const isCompact = profile.balance > 1000000; // make it compact if balance is greater than 1M
   return (
     <>
       <div className='col-span-full row-span-1'>
@@ -46,7 +47,13 @@ function InfoSection({ myProfile }) {
       </div>
 
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
-        <AmountCard title='Cash Balance' value={myProfile.balance} currency='KWD' change='1k' type='down' />
+        <AmountCard
+          title='Cash Balance'
+          value={formatCurrency(profile.balance, { isCompact: isCompact })}
+          currency='KWD'
+          change='1k'
+          type='down'
+        />
       </div>
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
         <AmountCard title='Portfolio Value' value='105,569' currency='KWD' change='1k' type='down' />

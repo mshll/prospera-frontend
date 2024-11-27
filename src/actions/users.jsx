@@ -4,22 +4,13 @@ import { revalidatePath } from 'next/cache';
 import { baseUrl, getHeaders } from './config';
 
 export const getAllUsers = async () => {
-  const response = await fetch(`${baseUrl}/mini-project/api/auth/users`, {
+  const response = await fetch(`${baseUrl}/users/`, {
     method: 'GET',
     headers: await getHeaders(),
   });
 
   let users = await response.json();
   return users;
-};
-
-export const myProfile = async () => {
-  const response = await fetch(`${baseUrl}/users/me`, {
-    method: 'GET',
-    headers: await getHeaders(),
-  });
-  const user = response.json();
-  return user;
 };
 
 export const getMyProfile = async () => {

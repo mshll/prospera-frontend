@@ -2,7 +2,10 @@ import Image from 'next/image';
 import AptOne from '@/app/assets/apt1.jpg';
 import { formatCurrency } from '@/lib/utils';
 
-function PropertyCard({ investment, property }) {
+function PropertyCard({ investment }) {
+  const property = investment.property;
+  console.log(investment);
+
   return (
     <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
       <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />

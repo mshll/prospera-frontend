@@ -24,9 +24,10 @@ export function formatCurrency(amount, config = { isCompact: true, locale: 'en-K
     style: 'currency',
     currency: 'KWD',
     notation: isCompact ? 'compact' : 'standard',
+    maximumFractionDigits: 2,
   }).format(amount);
 
-  return formatted.replace('KWD', '') + (includeCurrency ? 'KWD' : '');
+  return formatted.replace('KWD', '').replace(/\D00(?=\D*$)/, '') + (includeCurrency ? 'KWD' : '');
 }
 
 const func = ({}) => {};

@@ -28,7 +28,7 @@ import { property, set } from 'lodash';
 import { Label } from '@/components/ui/label';
 import SideBar from '@/components/Sidebar';
 import ReferButton from '../ReferButton';
-import BuyShareModal from './BuyShareModal';
+// import BuyShareModal from './BuyShareModal';
 
 const HouseListingsPage = ({ properties, profile }) => {
   const [inputValue, setInputValue] = useState(''); // Immediate input value
@@ -218,7 +218,7 @@ const HouseListingsPage = ({ properties, profile }) => {
                         <div className='text-xs text-muted-foreground'>Estimated Rent</div>
                       </div>
                     </div>
-                    <BuyShareModal />
+                    {/* <BuyShareModal /> */}
 
                     <Slider
                       value={[userNumberOfShares]}

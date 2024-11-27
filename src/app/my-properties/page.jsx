@@ -1,4 +1,4 @@
-import { getAllProperties, getMyInvestments, viewAllInvestments } from '@/actions/properties';
+import { getAllProperties } from '@/actions/properties';
 import AptOne from '@/app/assets/apt1.jpg';
 
 import ListingCard from '@/components/ListingCard';
@@ -16,10 +16,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import MyPropertiesList from '@/components/dashboard/MyPropertiesList';
+import { getMyProfile } from '@/actions/users';
 
 const MyPropertiesPage = async () => {
   const properties = await getAllProperties();
-  const myInvestments = await viewAllInvestments();
+  const profile = await getMyProfile();
 
   return (
     <SideBar>
@@ -59,7 +60,7 @@ const MyPropertiesPage = async () => {
           </div> */}
 
           {/* Left column */}
-          <MyPropertiesList properties={properties} myInvestments={myInvestments} />
+          <MyPropertiesList myInvestments={profile.investments} />
 
           <div className='col-span-4 row-span-2 max-md:order-1 max-md:col-span-full'>
             <div className='box'>
@@ -83,14 +84,14 @@ const MyPropertiesPage = async () => {
                   </div>
                   <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
                     <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
-                      {myInvestments.map((investment, idx) => (
+                      {profile.investments.map((investment) => (
                         <PropertyCard
-                          key={idx}
+                          key={'investment-' + investment.id}
                           investment={investment}
-                          property={properties.find((property) => property.id === investment.propertyId)}
+                          property={properties.find((property) => property.id === investment.property.id)}
                         />
                       ))}
-                      {myInvestments.length == 0 && (
+                      {profile.investments.length == 0 && (
                         <div className='flex flex-1 flex-col items-center justify-center text-center text-xs text-muted-foreground'>
                           You haven&apos;t liked any properties yet.
                         </div>
