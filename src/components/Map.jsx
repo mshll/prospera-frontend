@@ -61,7 +61,7 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
           <Popup className='custom-popup'>
             <div className='popup-content'>
               <Image
-                src={property.images[0]}
+                // src={property.images[0]}
                 alt={property.name}
                 width={300}
                 height={200}
@@ -69,17 +69,18 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
                 className='popup-image'
               />
               <div className='popup-text'>
-                <h3 className='popup-title'>{property.title}</h3>
+                <h3 className='popup-title'>{property.locationName}</h3>
                 <p className='popup-location'>
                   <MapPinHouseIcon className='inline h-4 w-4 text-secondary-foreground' /> {property.location}
                 </p>
                 <div className='popup-details'>
                   <span className='popup-price'>
-                    {property.pricePerShare} KWD <span className='text-muted-foreground'> /share</span>
+                    {property.currentValue / property.numberOfShares} KWD{' '}
+                    <span className='text-muted-foreground'> /share</span>
                   </span>
                 </div>
                 <div className='popup-shares'>
-                  <span>{property.sharesAvailable} shares available</span>
+                  <span>{property.availableShares} shares available</span>
                 </div>
                 <Button variant='secondary' className='popup-button'>
                   View Details

@@ -14,12 +14,21 @@ export const getAllUsers = async () => {
 };
 
 export const myProfile = async () => {
-  const response = await fetch(`${baseUrl}/mini-project/api/auth/me`, {
+  const response = await fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: await getHeaders(),
   });
   const user = response.json();
   return user;
+};
+
+export const getMyProfile = async () => {
+  const response = await fetch(`${baseUrl}/users/me`, {
+    method: 'GET',
+    headers: await getHeaders(),
+  });
+  const profile = await response.json();
+  return profile;
 };
 
 export const updateProfile = async ({ image }) => {
