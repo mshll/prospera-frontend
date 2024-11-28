@@ -56,8 +56,8 @@ const ListingsContainerHeadings = ({
             Showing Results for <span className='font-semibold text-primary'>&quot;{searchTerm}&quot;</span>
           </h1>
         ) : (
-          <h1 className='pt-2 text-3xl font-medium text-secondary-foreground'>
-            Available for Investment in <span className='font-semibold text-primary'>Kuwait</span>
+          <h1 className='pt-2 text-3xl font-medium leading-tight text-secondary-foreground'>
+            Explore properties and start earning rent
           </h1>
         )}
 

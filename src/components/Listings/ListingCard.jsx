@@ -10,6 +10,7 @@ import { Bookmark, Heart, Locate, MapPinHouseIcon, TargetIcon } from 'lucide-rea
 import { Progress } from '@/components/ui/progress';
 
 import { MapPin } from 'lucide-react';
+import { formatCurrency } from '@/lib/utils';
 
 const ListingCard = ({
   searchTerm,
@@ -18,6 +19,7 @@ const ListingCard = ({
   price,
   sharesAvailable,
   propertyPrice,
+  handleHoverProperty,
   totalShares,
   location,
   images,
@@ -27,10 +29,12 @@ const ListingCard = ({
   locationAddress,
   selectedProperty,
   name,
+  imagesUrls,
   currentValue,
   availableShares,
   numberOfShares,
   id,
+  property,
   handleViewSelectedLocation,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -48,30 +52,33 @@ const ListingCard = ({
   }`;
   return (
     <>
-      <Card className={cardStyle} onClick={handleOpen}>
+      <Card className={cardStyle} onClick={handleOpen} onMouseEnter={() => handleHoverProperty(property)}>
         <div className='flex p-4'>
           <div className='flex-shrink-0'>
             <div>
-              {/* <Image
-                src={images[0]}
+              <Image
+                src={imagesUrls[0]}
                 width={440}
                 height={440}
                 alt={name}
-                className='h-44 w-52 rounded-xl object-cover'
-              /> */}
+                className='h-44 w-44 rounded-xl object-cover'
+              />
             </div>
           </div>
           <div className='ml-4 flex-grow space-y-2'>
             <div className='flex justify-between'>
-              <h1 className='text-sm font-medium text-muted-foreground'>
-                <span className='text-2xl font-semibold text-primary'>{currentValue / totalShares} KWD</span> /share
-              </h1>
+              <h1 className='text-base font-medium text-muted-foreground'>{locationName}</h1>
               <Heart
                 className={`h-6 w-6 cursor-pointer ${isLiked ? 'text-destructive' : 'text-muted-foreground'}`}
                 onClick={handleLike}
               />
             </div>
-            <p className='text-lg font-medium'>{locationName}</p>
+            <h1 className='ml-[-5px] text-xs font-medium text-muted-foreground'>
+              <span className='text-2xl font-semibold text-primary'>
+                {formatCurrency(currentValue / totalShares, { isCompact: false })} KWD{' '}
+              </span>
+              per share
+            </h1>{' '}
             <div>
               <div className='flex justify-between'>
                 <label className='mb-1 block text-xs font-medium text-muted-foreground sm:text-sm'>
@@ -81,7 +88,7 @@ const ListingCard = ({
                   {availableShares} / {totalShares}
                 </div>
               </div>
-              <Progress value={availableShares} />
+              <Progress value={((totalShares - availableShares) / totalShares) * 100} />
 
               <div className='mt-4 items-center text-center sm:flex sm:justify-between'>
                 <p className='text-sm font-medium text-muted-foreground'>

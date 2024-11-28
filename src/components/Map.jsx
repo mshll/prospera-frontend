@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { MapPinHouseIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import clsx from 'clsx';
+import { formatCurrency } from '@/lib/utils';
 
 const ChangeMapView = ({ center, zoom }) => {
   const map = useMap();
@@ -63,7 +64,7 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
           <Popup className='custom-popup'>
             <div className='popup-content'>
               <Image
-                // src={property.images[0]}
+                src={property.imagesUrls[0]}
                 alt={property.locationName}
                 width={300}
                 height={200}
@@ -73,12 +74,12 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
               <div className='popup-text'>
                 <h3 className='popup-title'>{property.locationName}</h3>
                 <p className='popup-location'>
-                  <MapPinHouseIcon className='inline h-4 w-4 text-secondary-foreground' /> {property.location}
+                  <MapPinHouseIcon className='inline h-4 w-4 text-secondary-foreground' /> {property.locationAddress}
                 </p>
                 <div className='popup-details'>
                   <span className='popup-price'>
-                    {property.currentValue / property.numberOfShares} KWD{' '}
-                    <span className='text-muted-foreground'> /share</span>
+                    {formatCurrency(property.currentValue / property.totalShares, { isCompact: false })} KWD
+                    <span className='text-muted-foreground'> per share</span>
                   </span>
                 </div>
                 <div className='popup-shares'>

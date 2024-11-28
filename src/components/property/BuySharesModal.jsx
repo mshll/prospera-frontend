@@ -39,9 +39,7 @@ const BuySharesModal = ({
   return (
     <ResponsiveModal className='w-full p-0'>
       <ResponsiveModalTrigger className='mt-4 w-full'>
-        <div className='inline-flex h-9 w-full items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium'>
-          Buy Shares
-        </div>
+        <Button className='w-full'>Buy Shares</Button>
       </ResponsiveModalTrigger>
       <ResponsiveModalContent>
         <ResponsiveModalHeader>
