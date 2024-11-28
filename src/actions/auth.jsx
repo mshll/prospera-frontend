@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { baseUrl, getHeaders } from './config';
-import { deleteToken, setToken } from './token';
+import { deleteToken, getUser, setToken } from './token';
 
 export async function login(data) {
   try {
@@ -13,6 +13,7 @@ export async function login(data) {
       body: JSON.stringify(data),
     });
     const { token } = await response.json();
+    if (!token) return false;
     await setToken(token);
     return true;
   } catch (error) {
@@ -34,6 +35,7 @@ export async function register(data) {
     console.log(response);
 
     const { token } = await response.json();
+    if (!token) return false;
     await setToken(token);
     return true;
   } catch (error) {

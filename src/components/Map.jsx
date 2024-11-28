@@ -1,3 +1,4 @@
+'use client';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import Image from 'next/image';
 import L from 'leaflet';

@@ -40,8 +40,7 @@ export function DataTable({ data, showOptions = true }) {
       ),
       cell: ({ row }) => (
         <Badge variant='outline' className='hidden text-xs md:inline-block'>
-          {/* {'...' + row.getValue('id').slice(-8)} */}
-          {row.getValue('id')}
+          {'...' + row.getValue('id').slice(-8)}
         </Badge>
       ),
     },

@@ -6,10 +6,13 @@ import AptOne from '@/app/assets/apt1.jpg';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Bookmark, Heart, Locate, MapPinHouseIcon, TargetIcon } from 'lucide-react';
+import { Bookmark, Locate, MapPinHouseIcon, TargetIcon } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 
 import { MapPin } from 'lucide-react';
+import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
+import { likeProperty, unlikeProperty } from '@/actions/properties';
+import { toast } from 'sonner';
 import { formatCurrency } from '@/lib/utils';
 
 const ListingCard = ({
@@ -22,7 +25,6 @@ const ListingCard = ({
   handleHoverProperty,
   totalShares,
   location,
-  images,
   pricePerShare,
   handleOpen,
   locationName,
@@ -36,13 +38,19 @@ const ListingCard = ({
   id,
   property,
   handleViewSelectedLocation,
+  profile,
 }) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(profile.likedProperties.includes(id));
 
   const handleLike = (event) => {
     event.stopPropagation();
-
-    setIsLiked(!isLiked);
+    const promise = isLiked ? unlikeProperty(id) : likeProperty(id);
+    toast.promise(promise, {
+      loading: 'Processing...',
+      success: isLiked ? 'Property unliked.' : 'Property liked.',
+      error: isLiked ? 'Failed to unlike property.' : 'Failed to like property.',
+    });
+    promise.then(() => setIsLiked(!isLiked));
   };
 
   const isSelected = selectedProperty?.id === id;
@@ -60,7 +68,7 @@ const ListingCard = ({
                 src={imagesUrls[0]}
                 width={440}
                 height={440}
-                alt={name}
+                alt={'img'}
                 className='h-44 w-44 rounded-xl object-cover'
               />
             </div>
@@ -68,17 +76,18 @@ const ListingCard = ({
           <div className='ml-4 flex-grow space-y-2'>
             <div className='flex justify-between'>
               <h1 className='text-base font-medium text-muted-foreground'>{locationName}</h1>
-              <Heart
-                className={`h-6 w-6 cursor-pointer ${isLiked ? 'text-destructive' : 'text-muted-foreground'}`}
-                onClick={handleLike}
-              />
+              {isLiked ? (
+                <IconHeartFilled className='h-6 w-6 cursor-pointer text-destructive' onClick={handleLike} />
+              ) : (
+                <IconHeart className='h-6 w-6 cursor-pointer text-muted-foreground' onClick={handleLike} />
+              )}
             </div>
-            <h1 className='ml-[-5px] text-xs font-medium text-muted-foreground'>
+            <div className='ml-[-5px] text-xs font-medium text-muted-foreground'>
               <span className='text-2xl font-semibold text-primary'>
                 {formatCurrency(currentValue / totalShares, { isCompact: false })} KWD{' '}
               </span>
               per share
-            </h1>{' '}
+            </div>
             <div>
               <div className='flex justify-between'>
                 <label className='mb-1 block text-xs font-medium text-muted-foreground sm:text-sm'>

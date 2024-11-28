@@ -2,9 +2,14 @@ import Image from 'next/image';
 import AptOne from '@/app/assets/apt1.jpg';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
-import { formatCurrency } from '@/lib/utils';
+import { calculateMonthlyIncome, formatCurrency } from '@/lib/utils';
+import SellSharesModal from '../property/SellSharesModal';
+import BuySharesModal from '../property/BuySharesModal';
 
-function MyPropertyCard({ investment, property }) {
+function MyPropertyCard({ investment, property, profile }) {
+  if (!property) {
+    return null;
+  }
   return (
     <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
       <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />
@@ -35,14 +40,15 @@ function MyPropertyCard({ investment, property }) {
             <div className='flex flex-col justify-between'>
               <div className='text-[.6rem] uppercase text-muted-foreground'>Monthly Yield (%)</div>
               <div className='font-medium text-primary'>
-                {(
-                  ((property.rentalIncome * (investment.sharesOwned / property.totalShares)) /
-                    (property.currentValue * (investment.sharesOwned / property.totalShares))) *
-                  100
-                ).toFixed(2)}
+                {calculateMonthlyIncome({
+                  rentalIncome: property.rentalIncome,
+                  sharesOwned: investment.sharesOwned,
+                  totalShares: property.totalShares,
+                  currentValue: property.currentValue,
+                })}
               </div>
             </div>
-            <div className='border-l border-border'></div>
+            {/* <div className='border-l border-border'></div> */}
             {/* <div className='flex flex-col justify-between'>
               <div className='text-[.6rem] uppercase text-muted-foreground'>Date Acquired</div>
               <div className='font-medium text-primary'>{investment.date.toLocaleDateString()}</div>
@@ -50,12 +56,16 @@ function MyPropertyCard({ investment, property }) {
           </div>
         </div>
         <div className='flex gap-3'>
-          <Button size='sm' variant='ringHover'>
-            Buy Shares
-          </Button>
-          <Button variant='ringHoverOutline' size='sm'>
-            Sell Shares
-          </Button>
+          <BuySharesModal property={property} userBalance={profile.balance}>
+            <Button size='sm' variant='ringHover'>
+              Buy Shares
+            </Button>
+          </BuySharesModal>
+          <SellSharesModal property={property} userBalance={profile.balance} sharesOwned={investment.sharesOwned}>
+            <Button variant='ringHoverOutline' size='sm'>
+              Sell Shares
+            </Button>
+          </SellSharesModal>
         </div>
       </div>
     </div>

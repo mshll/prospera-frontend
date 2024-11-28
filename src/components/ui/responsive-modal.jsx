@@ -39,7 +39,7 @@ const ResponsiveModalTrigger = ({ className, children, ...props }) => {
   const ResponsiveModalTrigger = isDesktop ? DialogTrigger : DrawerTrigger;
 
   return (
-    <ResponsiveModalTrigger className={className} {...props}>
+    <ResponsiveModalTrigger className={className} {...props} asChild>
       {children}
     </ResponsiveModalTrigger>
   );
@@ -72,7 +72,7 @@ const ResponsiveModalDescription = ({ className, children, ...props }) => {
   const ResponsiveModalDescription = isDesktop ? DialogDescription : DrawerDescription;
 
   return (
-    <ResponsiveModalDescription className={className} {...props}>
+    <ResponsiveModalDescription className={className} {...props} asChild>
       {children}
     </ResponsiveModalDescription>
   );
