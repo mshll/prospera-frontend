@@ -64,7 +64,10 @@ export function DataTable({ data, showOptions = true }) {
         const isRed = row.getValue('amount') < 0;
         const type = row.getValue('type');
         return (
-          <Badge variant='outline' className={`${isRed ? 'text-destructive' : 'text-success'}`}>
+          <Badge
+            variant='outline'
+            className={`text-xs ${isRed ? 'bg-destructive text-background' : 'bg-success text-background'}`}
+          >
             {type.charAt(0).toUpperCase() + type.slice(1)}
           </Badge>
         );
