@@ -102,7 +102,7 @@ function SideBar({ children }) {
                   href: '#',
                   icon: <IconLogout2 className='h-4 w-4 flex-shrink-0 text-foreground' />,
                 }}
-                onClick={() => logout()}
+                onClick={logout}
               />
             </div>
             <SidebarLink

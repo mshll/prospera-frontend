@@ -24,6 +24,16 @@ import { getMyProfile } from '@/actions/users';
 const AccountPage = async () => {
   const profile = await getMyProfile();
 
+  const transactions = profile.transactions
+    .map((transaction) => {
+      let isNegative = false;
+      if (transaction.type === 'withdraw') isNegative = true;
+      if (transaction.type === 'buy share') isNegative = true;
+      const newTransaction = { ...transaction, amount: isNegative ? -transaction.amount : transaction.amount };
+      return newTransaction;
+    })
+    .reverse();
+
   return (
     <SideBar>
       <main className='relative w-full overflow-auto rounded-l-2xl bg-background'>
@@ -40,9 +50,6 @@ const AccountPage = async () => {
                   </div>
                 </div>
                 <div className='flex gap-3 md:px-4'>
-                  <Button size='sm' variant='ringHoverOutline'>
-                    ?
-                  </Button>
                   <ReferButton />
                 </div>
               </div>
@@ -83,7 +90,8 @@ const AccountPage = async () => {
                   </div>
                   <div className='relative flex size-full flex-col justify-center gap-2 overflow-hidden rounded-lg border border-border bg-card'>
                     <div className='hide-scrollbar relative flex h-full flex-1 flex-col justify-start gap-2 overflow-y-auto rounded-lg p-2 max-md:overflow-y-visible'>
-                      <DataTable data={profile.transactions} />
+                      <DataTable data={transactions} />
+                      <div className='h-20 w-full'>&nbsp;</div>
                     </div>
                     <div className='pointer-events-none absolute bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-card'></div>
                   </div>

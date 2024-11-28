@@ -12,6 +12,7 @@ import { Progress } from '@/components/ui/progress';
 import { MapPin } from 'lucide-react';
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
 import { likeProperty, unlikeProperty } from '@/actions/properties';
+import { toast } from 'sonner';
 
 const ListingCard = ({
   searchTerm,
@@ -39,9 +40,14 @@ const ListingCard = ({
   const [isLiked, setIsLiked] = useState(profile.likedProperties.includes(id));
 
   const handleLike = (event) => {
-    isLiked ? unlikeProperty(id) : likeProperty(id);
-    setIsLiked(!isLiked);
     event.stopPropagation();
+    const promise = isLiked ? unlikeProperty(id) : likeProperty(id);
+    toast.promise(promise, {
+      loading: 'Processing...',
+      success: isLiked ? 'Property unliked.' : 'Property liked.',
+      error: isLiked ? 'Failed to unlike property.' : 'Failed to like property.',
+    });
+    promise.then(() => setIsLiked(!isLiked));
   };
 
   const isSelected = selectedProperty?.id === id;

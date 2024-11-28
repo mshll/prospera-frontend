@@ -13,36 +13,6 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-const chartData = [
-  // First month - steady growth with small dip
-  { date: '2024-04-01', accountValue: 220, monthlyYield: 150 },
-  { date: '2024-04-05', accountValue: 235, monthlyYield: 158 },
-  { date: '2024-04-10', accountValue: 215, monthlyYield: 145 }, // First dip
-  { date: '2024-04-12', accountValue: 210, monthlyYield: 140 },
-  { date: '2024-04-15', accountValue: 240, monthlyYield: 160 },
-  { date: '2024-04-20', accountValue: 255, monthlyYield: 170 },
-  { date: '2024-04-25', accountValue: 270, monthlyYield: 180 },
-  { date: '2024-04-30', accountValue: 285, monthlyYield: 190 },
-
-  // Second month - larger dip followed by recovery
-  { date: '2024-05-05', accountValue: 300, monthlyYield: 200 },
-  { date: '2024-05-10', accountValue: 250, monthlyYield: 170 }, // Major dip start
-  { date: '2024-05-12', accountValue: 230, monthlyYield: 155 },
-  { date: '2024-05-15', accountValue: 220, monthlyYield: 150 }, // Bottom
-  { date: '2024-05-18', accountValue: 260, monthlyYield: 175 },
-  { date: '2024-05-20', accountValue: 290, monthlyYield: 195 },
-  { date: '2024-05-25', accountValue: 320, monthlyYield: 215 },
-  { date: '2024-05-30', accountValue: 350, monthlyYield: 235 },
-
-  // Third month - steady growth with minor volatility
-  { date: '2024-06-05', accountValue: 380, monthlyYield: 255 },
-  { date: '2024-06-10', accountValue: 360, monthlyYield: 240 }, // Small dip
-  { date: '2024-06-12', accountValue: 370, monthlyYield: 248 },
-  { date: '2024-06-15', accountValue: 400, monthlyYield: 270 },
-  { date: '2024-06-20', accountValue: 420, monthlyYield: 285 },
-  { date: '2024-06-25', accountValue: 445, monthlyYield: 300 },
-  { date: '2024-06-30', accountValue: 470, monthlyYield: 315 },
-];
 
 const chartConfig = {
   accountValue: {
@@ -55,7 +25,7 @@ const chartConfig = {
   },
 };
 
-export function PortfolioChart() {
+export function PortfolioChart({ chartData }) {
   const [timeRange, setTimeRange] = React.useState('90d');
 
   const filteredData = chartData.filter((item) => {
@@ -163,6 +133,8 @@ export function PortfolioChart() {
                         month: 'long',
                         day: 'numeric',
                         year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
                       });
                     }}
                     formatter={(value, name, item, index) => (
@@ -175,8 +147,8 @@ export function PortfolioChart() {
                         />
                         {chartConfig[name]?.label || name}
                         <div className='ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums text-foreground'>
-                          {value}
-                          <span className='text-muted-foreground'>KWD</span>
+                          {value.toFixed(2)}
+                          <span className='text-muted-foreground'>{name === 'accountValue' ? ' KWD' : ' %'}</span>
                         </div>
                         {/* Add this after the last item */}
                         {/* {index === 1 && (

@@ -7,6 +7,7 @@ export const getAllProperties = async () => {
   const response = await fetch(`${baseUrl}/properties/view`, {
     method: 'GET',
     headers: await getHeaders(),
+    cache: 'no-cache',
   });
   const properties = await response.json();
   return properties;

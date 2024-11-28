@@ -2,7 +2,13 @@
 import { Button } from '../ui/button';
 import AmountCard from './AmountCard';
 import { PropertyChart } from './PropertyChart';
-import { formatCurrency, getGreeting } from '@/lib/utils';
+import {
+  calculateAccountValue,
+  calculateLastMonthAccountValue,
+  calculateTotalMonthlyYield,
+  formatCurrency,
+  getGreeting,
+} from '@/lib/utils';
 import {
   ResponsiveModal,
   ResponsiveModalBody,
@@ -22,7 +28,14 @@ import DepositForm from './DepositForm';
 import WithdrawForm from './WithdrawForm';
 
 function InfoSection({ profile }) {
-  const isCompact = profile.balance > 1000000; // make it compact if balance is greater than 1M
+  const accountValue = calculateAccountValue(profile.investments);
+  const lastMonthAccountValue = calculateLastMonthAccountValue(profile.investments);
+  const lastMonthAccountValueChange = Math.abs(accountValue - lastMonthAccountValue);
+
+  const MonthlyYield = calculateTotalMonthlyYield(profile.investments);
+  const lastMonthMonthlyYield = calculateTotalMonthlyYield(profile.investments);
+  const lastMonthMonthlyYieldChange = Math.abs(MonthlyYield - lastMonthMonthlyYield);
+
   return (
     <>
       <div className='col-span-full row-span-1'>
@@ -39,8 +52,16 @@ function InfoSection({ profile }) {
               </div>
             </div>
             <div className='flex gap-3 md:px-4'>
-              <WithdrawForm />
-              <DepositForm />
+              <WithdrawForm userBalance={profile.balance}>
+                <Button size='sm' variant='ringHoverOutline'>
+                  Withdraw Funds
+                </Button>
+              </WithdrawForm>
+              <DepositForm userBalance={profile.balance}>
+                <Button size='sm' variant='ringHover'>
+                  Add Funds
+                </Button>
+              </DepositForm>
             </div>
           </div>
         </div>
@@ -49,23 +70,35 @@ function InfoSection({ profile }) {
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
         <AmountCard
           title='Cash Balance'
-          value={formatCurrency(profile.balance, { isCompact: isCompact })}
+          value={formatCurrency(profile.balance, { isCompact: profile.balance > 1000000 })}
           currency='KWD'
-          change='1k'
+          change='1k' // TODO
           type='down'
         />
       </div>
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
-        <AmountCard title='Portfolio Value' value='105,569' currency='KWD' change='1k' type='down' />
+        <AmountCard
+          title='Portfolio Value'
+          value={formatCurrency(accountValue, { isCompact: accountValue > 1000000 })}
+          currency='KWD'
+          change={formatCurrency(lastMonthAccountValueChange, { isCompact: lastMonthAccountValueChange > 1000000 })}
+          type={accountValue > lastMonthAccountValue ? 'up' : 'down'}
+        />
       </div>
       <div className='col-span-3 row-span-2 max-md:col-span-full'>
-        <AmountCard title='Monthly Yield' value='2,098' currency='KWD' change='500' type='up' />
+        <AmountCard
+          title='Monthly Yield'
+          value={MonthlyYield.toFixed(2)}
+          currency='%'
+          change={lastMonthMonthlyYieldChange.toFixed(2)}
+          type={MonthlyYield > lastMonthMonthlyYield ? 'up' : 'down'}
+        />
       </div>
 
       <div className='col-span-3 row-span-2 max-md:order-1 max-md:col-span-full'>
         <div className='box'>
           <div className='size-full overflow-visible'>
-            <PropertyChart />
+            <PropertyChart profile={profile} />
           </div>
         </div>
       </div>

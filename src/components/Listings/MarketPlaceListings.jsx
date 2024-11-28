@@ -28,7 +28,7 @@ import { property, set } from 'lodash';
 import { Label } from '@/components/ui/label';
 import SideBar from '@/components/Sidebar';
 import ReferButton from '../ReferButton';
-// import BuyShareModal from './BuyShareModal';
+import { getPropertyTypes } from '@/lib/utils';
 
 const HouseListingsPage = ({ properties, profile }) => {
   const [inputValue, setInputValue] = useState(''); // Immediate input value
@@ -50,7 +50,7 @@ const HouseListingsPage = ({ properties, profile }) => {
     setCalculatedRent(totalRent ? totalRent : 0);
   };
 
-  const filterOptions = ['All', 'Houses', 'Apartments', 'Villas', 'Condos', 'Industrial'];
+  const filterOptions = ['All', ...getPropertyTypes(properties)];
 
   useEffect(() => {
     setSearchTerm(debouncedSearchTerm);
@@ -243,7 +243,9 @@ const HouseListingsPage = ({ properties, profile }) => {
                   </div>
                   <PropertyDetailsParagraph text={selectedProperty.description} />
 
-                  <BuySharesModal property={selectedProperty} userBalance={profile.balance} />
+                  <BuySharesModal property={selectedProperty} userBalance={profile.balance}>
+                    <Button className='mt-4 w-full'>Buy Shares</Button>
+                  </BuySharesModal>
 
                   {/* <ReferButton /> */}
                   <hr className='mt-8' />
@@ -252,20 +254,19 @@ const HouseListingsPage = ({ properties, profile }) => {
                     <div className='flex items-center justify-between'>
                       <div className='flex items-center gap-2'>
                         <Avatar className='h-20 w-20'>
-                          <AvatarImage src='https://github.com/yousefalm1.png' />
-                          <AvatarFallback>CN</AvatarFallback>
+                          <AvatarFallback>YA</AvatarFallback>
                         </Avatar>
-                        <div>
+                        <div className='ms-2'>
                           <h1 className='mb-2 font-semibold'>Yousef Almasaeed</h1>
-                          <p className='ml-4 text-sm text-muted-foreground'>Property Manager</p>
+                          <p className='text-sm text-muted-foreground'>Property Manager</p>
                         </div>
                       </div>
                       <div className='flex space-x-2'>
                         <Button className='flex w-full items-center justify-center'>
-                          <PhoneCall className='mr-1' /> Call Agent
+                          <PhoneCall className='mr-2 size-4' /> Call Agent
                         </Button>
                         <Button variant='outline' className='flex w-full items-center justify-center'>
-                          <Mail />
+                          <Mail className='size-4' />
                         </Button>
                       </div>
                     </div>

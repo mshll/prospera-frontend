@@ -1,7 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import { login } from '@/actions/auth';
 // import { login } from '@/actions/auth';
 import AutoForm, { AutoFormSubmit } from '@/components/ui/auto-form';
@@ -33,13 +31,11 @@ const formSchema = z.object({
 });
 
 function LoginForm() {
-  const router = useRouter();
-
   const [values, setValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
-  // const redirectUrl = searchParams.get('redirect') || '/dashboard';
+  const redirectUrl = searchParams.get('redirect') || '/dashboard';
 
   return (
     <>
@@ -52,15 +48,16 @@ function LoginForm() {
           });
           promise.then((res) => {
             setIsLoading(false);
+            console.log(res);
             if (!res) {
-              toast.error('email or password is incorrect, please try again.');
+              toast.error('Email or password is incorrect, please try again.');
               setValues({
                 ...values,
                 password: '',
               });
             } else {
               toast.success('Logged in successfully.');
-              router.push('/dashboard');
+              redirect(redirectUrl);
             }
           });
         }}
