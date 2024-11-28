@@ -17,10 +17,11 @@ import {
 } from '@/components/ui/responsive-modal';
 import { buyShares } from '@/actions/buyShares';
 
-const BuySharesModal = ({ property, userBalance }) => {
+const BuySharesModal = ({ property, userBalance, children }) => {
   const { totalShares, availableShares, locationName, locationAddress, rentalIncome, currentValue, id } = property;
   const [numberOfShares, setNumberOfShares] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const sharePrice = currentValue / totalShares;
   const totalInvestment = numberOfShares * sharePrice;
@@ -47,16 +48,13 @@ const BuySharesModal = ({ property, userBalance }) => {
     });
     promise.finally(() => {
       setIsLoading(false);
+      setOpen(false);
     });
   };
 
   return (
-    <ResponsiveModal className='w-full p-0'>
-      <ResponsiveModalTrigger className='mt-4 w-full'>
-        <div className='inline-flex h-9 w-full items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium'>
-          Buy Shares
-        </div>
-      </ResponsiveModalTrigger>
+    <ResponsiveModal className='w-full p-0' open={open} onOpenChange={setOpen}>
+      <ResponsiveModalTrigger>{children}</ResponsiveModalTrigger>
       <ResponsiveModalContent>
         <form onSubmit={(e) => handleBuyShares(e, id)}>
           <ResponsiveModalHeader>

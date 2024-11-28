@@ -1,9 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { TrendingUp } from 'lucide-react';
 import { Label, Pie, PieChart } from 'recharts';
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ChartConfig,
@@ -13,13 +11,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-const chartData = [
-  { property: 'homes', propertiesOwned: 2, fill: 'var(--color-homes)' },
-  { property: 'apartments', propertiesOwned: 3, fill: 'var(--color-apartments)' },
-  { property: 'condos', propertiesOwned: 4, fill: 'var(--color-condos)' },
-  { property: 'villas', propertiesOwned: 5, fill: 'var(--color-villas)' },
-  { property: 'industrial', propertiesOwned: 6, fill: 'var(--color-industrial)' },
-];
 
 const chartConfig = {
   propertiesOwned: {
@@ -47,10 +38,35 @@ const chartConfig = {
   },
 };
 
-export function PropertyChart() {
+export function PropertyChart({ profile }) {
+  const chartData = React.useMemo(() => {
+    const propertyCounts = {
+      homes: 0,
+      apartments: 0,
+      condos: 0,
+      villas: 0,
+      industrial: 0,
+    };
+
+    profile.investments.forEach((investment) => {
+      const type = investment.property.typeOfProperty.toLowerCase();
+      if (propertyCounts.hasOwnProperty(type)) {
+        propertyCounts[type] += 1;
+      }
+    });
+
+    return Object.entries(propertyCounts)
+      .filter(([_, count]) => count > 0)
+      .map(([property, count]) => ({
+        property,
+        propertiesOwned: count,
+        fill: `var(--color-${property})`,
+      }));
+  }, [profile]);
+
   const totalPropertiesOwned = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.propertiesOwned, 0);
-  }, []);
+  }, [chartData]);
 
   return (
     <Card className='flex size-full flex-col border-none bg-transparent shadow-none'>

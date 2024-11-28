@@ -71,8 +71,14 @@ function generateChartData(profile) {
   const dataPoints = {};
 
   profile.investments.forEach((investment) => {
+    const investmentDate = new Date(investment.createdAt);
+
     investment.property.propertyValues.forEach((valueEntry) => {
-      // const date = valueEntry.valueDate.split('T')[0];
+      const valueDate = new Date(valueEntry.valueDate);
+
+      // Skip if value entry is before investment date
+      if (valueDate < investmentDate) return;
+
       const date = valueEntry.valueDate;
 
       if (!dataPoints[date]) {

@@ -67,12 +67,12 @@ const MyPropertiesPage = async () => {
           </div> */}
 
           {/* Left column */}
-          <MyPropertiesList myInvestments={profile.investments} profile={profile} />
+          <MyPropertiesList myInvestments={profile.investments} profile={profile} properties={properties} />
 
           <div className='col-span-4 row-span-2 max-md:order-1 max-md:col-span-full'>
             <div className='box'>
               <div className='size-full overflow-visible'>
-                <PropertyChart />
+                <PropertyChart profile={profile} />
               </div>
             </div>
           </div>

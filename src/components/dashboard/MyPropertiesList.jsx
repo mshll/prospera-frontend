@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import PropertyCard from './PropertyCard';
 import MyPropertyCard from './MyPropertyCard';
+import { getPropertyTypes } from '@/lib/utils';
 
-function MyPropertiesList({ myInvestments, profile }) {
-  const investmentTypes = ['Homes', 'Apartments', 'Condos', 'Villas', 'Industrial'];
+function MyPropertiesList({ myInvestments, profile, properties }) {
+  const investmentTypes = getPropertyTypes(properties);
   const [selectedType, setSelectedType] = useState('All');
 
   const investments = myInvestments.filter(

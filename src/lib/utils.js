@@ -36,3 +36,46 @@ export function calculateMonthlyIncome({ rentalIncome, sharesOwned, totalShares,
 
   return asYield ? monthlyYield.toFixed(2) : formatCurrency(monthlyIncome);
 }
+
+export function getPropertyTypes(properties) {
+  const types = properties.map((property) => property.typeOfProperty);
+  return [...new Set(types)];
+}
+
+export function calculateAccountValue(investments) {
+  return investments.reduce((acc, investment) => {
+    const shareValue = investment.property.currentValue / investment.property.totalShares;
+    const investmentValue = shareValue * investment.sharesOwned;
+    return acc + investmentValue;
+  }, 0);
+}
+
+export function calculateTotalMonthlyYield(investments) {
+  return investments.reduce((acc, investment) => {
+    const monthlyYield = calculateMonthlyIncome({
+      rentalIncome: investment.property.rentalIncome,
+      sharesOwned: investment.sharesOwned,
+      totalShares: investment.property.totalShares,
+      currentValue: investment.property.currentValue,
+      asYield: true,
+    });
+    return acc + parseFloat(monthlyYield);
+  }, 0);
+}
+
+export function calculateLastMonthAccountValue(investments) {
+  const lastMonth = new Date();
+  lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+  return investments.reduce((acc, investment) => {
+    const shareValue = investment.property.currentValue / investment.property.totalShares;
+    const investmentValue = shareValue * investment.sharesOwned;
+    const valueDate = new Date(investment.createdAt);
+
+    if (valueDate < lastMonth) {
+      return acc + investmentValue;
+    }
+
+    return acc;
+  }, 0);
+}

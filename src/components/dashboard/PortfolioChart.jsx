@@ -133,6 +133,8 @@ export function PortfolioChart({ chartData }) {
                         month: 'long',
                         day: 'numeric',
                         year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
                       });
                     }}
                     formatter={(value, name, item, index) => (
@@ -145,8 +147,8 @@ export function PortfolioChart({ chartData }) {
                         />
                         {chartConfig[name]?.label || name}
                         <div className='ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums text-foreground'>
-                          {value}
-                          <span className='text-muted-foreground'>KWD</span>
+                          {value.toFixed(2)}
+                          <span className='text-muted-foreground'>{name === 'accountValue' ? ' KWD' : ' %'}</span>
                         </div>
                         {/* Add this after the last item */}
                         {/* {index === 1 && (

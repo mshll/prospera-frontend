@@ -50,9 +50,6 @@ const AccountPage = async () => {
                   </div>
                 </div>
                 <div className='flex gap-3 md:px-4'>
-                  <Button size='sm' variant='ringHoverOutline'>
-                    ?
-                  </Button>
                   <ReferButton />
                 </div>
               </div>

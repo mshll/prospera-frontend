@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { calculateMonthlyIncome, formatCurrency } from '@/lib/utils';
 import SellSharesModal from '../property/SellSharesModal';
+import BuySharesModal from '../property/BuySharesModal';
 
 function MyPropertyCard({ investment, property, profile }) {
   return (
@@ -52,9 +53,11 @@ function MyPropertyCard({ investment, property, profile }) {
           </div>
         </div>
         <div className='flex gap-3'>
-          <Button size='sm' variant='ringHover'>
-            Buy Shares
-          </Button>
+          <BuySharesModal property={property} userBalance={profile.balance}>
+            <Button size='sm' variant='ringHover'>
+              Buy Shares
+            </Button>
+          </BuySharesModal>
           <SellSharesModal property={property} userBalance={profile.balance} sharesOwned={investment.sharesOwned}>
             <Button variant='ringHoverOutline' size='sm'>
               Sell Shares
