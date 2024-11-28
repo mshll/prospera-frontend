@@ -61,10 +61,11 @@ const ListingsContainerHeadings = ({
           </h1>
         )}
 
-        <div className='flex justify-between'>
-          <div className='mb-3 block sm:hidden'>
-            {/* <Select value={selectedFilter} onValueChange={setSelectedFilter}>
-              <SelectTrigger className='w-[180px]'>
+        <div className='mb-3 flex items-center justify-end gap-3'>
+          <div className='text-xs text-muted-foreground'>Filter by type:</div>
+          <div>
+            <Select value={selectedFilter} onValueChange={setSelectedFilter}>
+              <SelectTrigger className='w-[180px] bg-background'>
                 <SelectValue placeholder='Filter' />
               </SelectTrigger>
               <SelectContent>
@@ -86,15 +87,18 @@ const ListingsContainerHeadings = ({
                   // </Button>
                 ))}
               </SelectContent>
-            </Select> */}
+            </Select>
           </div>
         </div>
       </div>
-      <ListingsHeaderButtonsSection
-        filterOptions={filterOptions}
-        setSelectedFilter={setSelectedFilter}
-        selectedFilter={selectedFilter}
-      />
+
+      <div className='hidden'>
+        <ListingsHeaderButtonsSection
+          filterOptions={filterOptions}
+          setSelectedFilter={setSelectedFilter}
+          selectedFilter={selectedFilter}
+        />
+      </div>
       <div className=''>
         <p className='font-medium text-muted-foreground'>
           <span className='text-primary'>{totalPropertiesShown}</span> of{' '}

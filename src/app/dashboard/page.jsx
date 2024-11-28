@@ -79,7 +79,8 @@ function generateChartData(profile) {
       // Skip if value entry is before investment date
       if (valueDate < investmentDate) return;
 
-      const date = valueEntry.valueDate;
+      // Truncate date to hour
+      const date = valueEntry.valueDate.split(':').slice(0, 2).join(':') + ':00.000+00:00';
 
       if (!dataPoints[date]) {
         dataPoints[date] = { date, accountValue: 0, monthlyYield: 0 };

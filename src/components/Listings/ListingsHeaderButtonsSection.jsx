@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 
 const ListingsHeaderButtonsSection = ({ filterOptions, setSelectedFilter, selectedFilter }) => {
   return (
-    <div className={'mb-4 mt-3 hidden flex-wrap justify-between gap-2 sm:flex'}>
+    <div className={'mb-4 mt-3 hidden flex-wrap justify-start gap-4 text-xs sm:flex'}>
       {filterOptions.map((item) => (
         <Button
           key={item}

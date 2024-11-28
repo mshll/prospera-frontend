@@ -22,7 +22,7 @@ function ReferButton() {
     <>
       <ResponsiveModal>
         <ResponsiveModalTrigger asChild>
-          <Button size='sm' variant='ringHover'>
+          <Button size='sm' variant='outline'>
             Refer a friend
           </Button>
         </ResponsiveModalTrigger>

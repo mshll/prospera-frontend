@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import AptOne from '@/app/assets/apt1.jpg';
 import { formatCurrency } from '@/lib/utils';
 
 function LikedPropertyCard({ property }) {
@@ -9,7 +8,13 @@ function LikedPropertyCard({ property }) {
 
   return (
     <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
-      <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />
+      <Image
+        src={property.imagesUrls[0]}
+        alt='property'
+        width={500}
+        height={500}
+        className='h-24 w-24 rounded-lg object-cover'
+      />
       <div className='flex w-full flex-col flex-wrap justify-center gap-2'>
         <div className='text-lg font-semibold'>{property.locationName}</div>
         <div className='flex w-full flex-wrap justify-between gap-1 pe-3'>

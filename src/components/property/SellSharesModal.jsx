@@ -1,7 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import AptOne from '@/app/assets/apt1.jpg';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { LoaderCircle } from 'lucide-react';
@@ -52,6 +51,10 @@ const SellSharesModal = ({ property, userBalance, sharesOwned, children }) => {
     });
   };
 
+  useEffect(() => {
+    setNumberOfShares(1);
+  }, [open]);
+
   return (
     <ResponsiveModal className='w-full p-0' open={open} onOpenChange={setOpen}>
       <ResponsiveModalTrigger>{children}</ResponsiveModalTrigger>
@@ -60,7 +63,13 @@ const SellSharesModal = ({ property, userBalance, sharesOwned, children }) => {
           <ResponsiveModalHeader>
             <ResponsiveModalTitle className='flex p-6 font-medium sm:flex-row sm:gap-6'>
               <div className='flex-shrink-0'>
-                <Image src={AptOne} alt='Property' className='hidden h-28 w-36 rounded-lg sm:block' />
+                <Image
+                  src={property.imagesUrls[0]}
+                  alt='Property'
+                  width={500}
+                  height={500}
+                  className='hidden h-28 w-36 rounded-lg sm:block'
+                />
               </div>
               <div className='flex w-full flex-col gap-1'>
                 <h1 className='font-semibold text-primary'>{locationName}</h1>

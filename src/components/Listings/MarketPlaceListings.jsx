@@ -126,7 +126,7 @@ const HouseListingsPage = ({ properties, profile }) => {
           </div>
         </div>
 
-        <div className='relative col-span-5 hidden lg:block'>
+        <div className='relative col-span-5 hidden overflow-auto lg:block'>
           <AnimatePresence mode='wait'>
             {activeView === 'map' ? (
               <motion.div
@@ -141,6 +141,7 @@ const HouseListingsPage = ({ properties, profile }) => {
                   properties={filteredProperties}
                   viewSelectedLocation={viewSelectedLocation}
                   hoveredProperty={hoveredProperty}
+                  handleDetailsOpen={handleDetailsOpen}
                 />
               </motion.div>
             ) : (
@@ -171,7 +172,7 @@ const HouseListingsPage = ({ properties, profile }) => {
                 <PropertyImagesGrid images={selectedProperty?.imagesUrls} />
 
                 {/* Property Details */}
-                <div className='px-10'>
+                <div className='px-10 pb-10'>
                   <div className='flex items-center justify-between gap-2'>
                     <div>
                       <h1 className='text-3xl font-semibold'>{selectedProperty?.locationName}</h1>
@@ -231,7 +232,7 @@ const HouseListingsPage = ({ properties, profile }) => {
                       </div>
                       <div className='text-right'>
                         <div className='font-semibold text-green-600'>{calculatedRent.toFixed(2)} KWD</div>
-                        <div className='text-xs text-muted-foreground'>Estimated Rent</div>
+                        <div className='text-xs text-muted-foreground'>Estimated Monthly Yield</div>
                       </div>
                     </div>
                     {/* <BuyShareModal /> */}

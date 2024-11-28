@@ -6,6 +6,7 @@ import { baseUrl, getHeaders } from './config';
 import { deleteToken, getUser, setToken } from './token';
 
 export async function login(data) {
+  await deleteToken();
   try {
     const response = await fetch(`${baseUrl}/auth/login`, {
       method: 'POST',
@@ -23,8 +24,6 @@ export async function login(data) {
 }
 
 export async function register(data) {
-  console.log(data);
-
   try {
     const response = await fetch(`${baseUrl}/auth/signup`, {
       method: 'POST',
@@ -32,11 +31,6 @@ export async function register(data) {
       body: JSON.stringify(data),
     });
 
-    console.log(response);
-
-    const { token } = await response.json();
-    if (!token) return false;
-    await setToken(token);
     return true;
   } catch (error) {
     console.error(error);

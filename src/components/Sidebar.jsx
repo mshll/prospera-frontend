@@ -20,6 +20,8 @@ import { ThemeSwitch } from './ThemeSwitch';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { useTheme } from 'next-themes';
 import { logout } from '@/actions/auth';
+import DepositForm from './dashboard/DepositForm';
+import { Button } from './ui/button';
 
 function SideBar({ children }) {
   const links = [
@@ -76,6 +78,19 @@ function SideBar({ children }) {
           </div>
           <div>
             <div className='mb-1 flex flex-col'>
+              {/* <SidebarLink
+                link={{
+                  label: 'Yousef Almasaeed',
+                  href: '#',
+                  icon: (
+                    <DepositForm userBalance={0}>
+                      <Button size='sm' variant='ringHover'>
+                        Add Funds
+                      </Button>
+                    </DepositForm>
+                  ),
+                }}
+              /> */}
               <SidebarLink
                 link={{
                   label: 'Toggle theme',
@@ -105,20 +120,6 @@ function SideBar({ children }) {
                 onClick={logout}
               />
             </div>
-            <SidebarLink
-              link={{
-                label: 'Yousef Almasaeed',
-                href: '#',
-                icon: (
-                  <Avatar className='h-5 w-5 flex-shrink-0'>
-                    <AvatarImage src='https://github.com/mshll.png' className='rounded-full border border-primary' />
-                    <AvatarFallback>
-                      <IconUser className='h-4 w-4 flex-shrink-0 text-foreground' />
-                    </AvatarFallback>
-                  </Avatar>
-                ),
-              }}
-            />
           </div>
         </SidebarBody>
       </Sidebar>

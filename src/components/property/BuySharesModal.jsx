@@ -1,7 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import AptOne from '@/app/assets/apt1.jpg';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { LoaderCircle } from 'lucide-react';
@@ -16,6 +15,7 @@ import {
   ResponsiveModalTrigger,
 } from '@/components/ui/responsive-modal';
 import { buyShares } from '@/actions/buyShares';
+import { formatCurrency } from '@/lib/utils';
 
 const BuySharesModal = ({ property, userBalance, children }) => {
   const { totalShares, availableShares, locationName, locationAddress, rentalIncome, currentValue, id } = property;
@@ -52,6 +52,10 @@ const BuySharesModal = ({ property, userBalance, children }) => {
     });
   };
 
+  useEffect(() => {
+    setNumberOfShares(1);
+  }, [open]);
+
   return (
     <ResponsiveModal className='w-full p-0' open={open} onOpenChange={setOpen}>
       <ResponsiveModalTrigger>{children}</ResponsiveModalTrigger>
@@ -60,7 +64,13 @@ const BuySharesModal = ({ property, userBalance, children }) => {
           <ResponsiveModalHeader>
             <ResponsiveModalTitle className='flex p-6 font-medium sm:flex-row sm:gap-6'>
               <div className='flex-shrink-0'>
-                <Image src={AptOne} alt='Property' className='hidden h-28 w-36 rounded-lg sm:block' />
+                <Image
+                  src={property.imagesUrls[0]}
+                  alt='Property'
+                  width={500}
+                  height={500}
+                  className='hidden h-28 w-36 rounded-lg sm:block'
+                />
               </div>
               <div className='flex w-full flex-col gap-1'>
                 <h1 className='font-semibold text-primary'>{locationName}</h1>
@@ -75,7 +85,9 @@ const BuySharesModal = ({ property, userBalance, children }) => {
                   </div>
                   <div className='flex flex-1 items-center justify-between'>
                     <p className='text-sm text-muted-foreground'>Current Balance</p>
-                    <p className='text-sm font-semibold'>{userBalance.toFixed(2)} KWD</p>
+                    <p className='text-sm font-semibold'>
+                      {formatCurrency(userBalance, { isCompact: userBalance > 100000 })} KWD
+                    </p>
                   </div>
                 </div>
               </div>
@@ -97,7 +109,7 @@ const BuySharesModal = ({ property, userBalance, children }) => {
 
                 <div className='mb-4 mt-6 flex flex-col gap-4'>
                   <div className='flex justify-between'>
-                    <p>Total Investment (KWD)</p>
+                    <p>Total Investment</p>
                     <p className='font-semibold'>{totalInvestment.toFixed(2)} KWD</p>
                   </div>
                   <div className='flex justify-between'>
@@ -105,11 +117,11 @@ const BuySharesModal = ({ property, userBalance, children }) => {
                     <p>{platformFee.toFixed(2)} KWD</p>
                   </div>
                   <div className='flex justify-between'>
-                    <p>Total Purchase (KWD)</p>
+                    <p>Total Purchase</p>
                     <p className='font-semibold'>{totalPurchase.toFixed(2)} KWD</p>
                   </div>
                   <div className='flex justify-between'>
-                    <p>Monthly Return (KWD)</p>
+                    <p>Monthly Return</p>
                     <p>{monthlyReturn.toFixed(2)} KWD</p>
                   </div>
                 </div>

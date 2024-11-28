@@ -52,7 +52,7 @@ export function DataTable({ data, showOptions = true }) {
         return (
           <div className='font-medium'>
             {row.getValue('amount') > 0 ? '+' : ''}
-            {amount}
+            {row.getValue('type').includes('share') ? row.getValue('amount') + ' Shares' : amount + ' KWD'}
           </div>
         );
       },

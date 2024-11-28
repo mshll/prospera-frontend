@@ -72,8 +72,6 @@ function InfoSection({ profile }) {
           title='Cash Balance'
           value={formatCurrency(profile.balance, { isCompact: profile.balance > 1000000 })}
           currency='KWD'
-          change='1k' // TODO
-          type='down'
         />
       </div>
       <div className='col-span-3 row-span-2 max-md:col-span-full'>

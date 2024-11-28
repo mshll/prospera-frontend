@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import AptOne from '@/app/assets/apt1.jpg';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -99,8 +98,8 @@ const ListingCard = ({
               </div>
               <Progress value={((totalShares - availableShares) / totalShares) * 100} />
 
-              <div className='mt-4 items-center text-center sm:flex sm:justify-between'>
-                <p className='text-sm font-medium text-muted-foreground'>
+              <div className='mt-4 items-center sm:flex sm:justify-between'>
+                <p className='text-xs font-medium text-muted-foreground'>
                   <MapPinHouseIcon className='inline h-4 w-4 text-muted-foreground' /> {locationAddress}
                 </p>
                 <Button variant='outline' size='sm' onClick={handleViewSelectedLocation}>

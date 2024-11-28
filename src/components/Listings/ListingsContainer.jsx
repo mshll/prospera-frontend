@@ -1,6 +1,5 @@
 import ListingCard from '@/components/Listings/ListingCard';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import AptOne from '@/app/assets/apt1.jpg';
 import Image from 'next/image';
 
 // const properties = [

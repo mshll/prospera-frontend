@@ -39,13 +39,13 @@ const formSchema = z
         message: 'Last name must be at least 1 character.',
       }),
 
-    username: z
-      .string({
-        required_error: 'Username is required.',
-      })
-      .min(3, {
-        message: 'Username must be at least 3 characters.',
-      }),
+    // username: z
+    //   .string({
+    //     required_error: 'Username is required.',
+    //   })
+    //   .min(3, {
+    //     message: 'Username must be at least 3 characters.',
+    //   }),
 
     email: z
       .string({
@@ -108,7 +108,7 @@ function RegisterForm() {
               });
             } else {
               toast.success('Registered successfully.');
-              redirect('/dashboard');
+              redirect('/login');
             }
           });
         }}
@@ -129,12 +129,12 @@ function RegisterForm() {
               placeholder: '••••••••',
             },
           },
-          username: {
-            inputProps: {
-              required: true,
-              placeholder: 'e.g. awesome_user',
-            },
-          },
+          // username: {
+          //   inputProps: {
+          //     required: true,
+          //     placeholder: 'e.g. awesome_user',
+          //   },
+          // },
           email: {
             inputProps: {
               required: true,

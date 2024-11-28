@@ -29,7 +29,7 @@ const ChangeMapView = ({ center, zoom }) => {
   return null;
 };
 
-const Map = ({ properties, viewSelectedLocation, className }) => {
+const Map = ({ properties, viewSelectedLocation, className, handleDetailsOpen }) => {
   const customIcon = L.icon({
     iconUrl:
       'data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItbWFwLXBpbiI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE4LjM2NCA0LjYzNmE5IDkgMCAwIDEgLjIwMyAxMi41MTlsLS4yMDMgLjIxbC00LjI0MyA0LjI0MmEzIDMgMCAwIDEgLTQuMDk3IC4xMzVsLS4xNDQgLS4xMzVsLTQuMjQ0IC00LjI0M2E5IDkgMCAwIDEgMTIuNzI4IC0xMi43Mjh6bS02LjM2NCAzLjM2NGEzIDMgMCAxIDAgMCA2YTMgMyAwIDAgMCAwIC02eiIgLz48L3N2Zz4=',
@@ -86,7 +86,7 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
                 <div className='popup-shares'>
                   <span>{property.availableShares} shares available</span>
                 </div>
-                <Button variant='secondary' className='popup-button'>
+                <Button variant='secondary' className='popup-button' onClick={() => handleDetailsOpen(property)}>
                   View Details
                 </Button>
               </div>

@@ -55,6 +55,9 @@ const Navbar = async () => {
             {user ? (
               <>
                 <Link href='/dashboard'>
+                  <Button variant='outline'>Account</Button>
+                </Link>
+                <Link href='/dashboard'>
                   <Button variant='shine'>View Dashboard</Button>
                 </Link>
               </>

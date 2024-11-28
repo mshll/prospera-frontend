@@ -1,5 +1,4 @@
 import { getAllProperties } from '@/actions/properties';
-import AptOne from '@/app/assets/apt1.jpg';
 
 import ListingCard from '@/components/ListingCard';
 import SideBar from '@/components/Sidebar';
