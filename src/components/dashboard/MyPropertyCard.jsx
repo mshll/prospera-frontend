@@ -11,7 +11,13 @@ function MyPropertyCard({ investment, property, profile }) {
   }
   return (
     <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
-      <Image src={property.imagesUrls[0]} alt='property' className='h-24 w-24 rounded-md object-cover' />
+      <Image
+        src={property.imagesUrls[0]}
+        alt='property'
+        width={500}
+        height={500}
+        className='aspect-square h-24 w-24 rounded-md object-cover'
+      />
       <div className='flex flex-1 flex-wrap items-center justify-between gap-3'>
         <div className='flex flex-col justify-center gap-2'>
           <div className='flex items-center gap-3 font-semibold'>

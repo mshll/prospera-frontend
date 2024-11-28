@@ -7,7 +7,7 @@ export const getAllProperties = async () => {
   const response = await fetch(`${baseUrl}/properties/view`, {
     method: 'GET',
     headers: await getHeaders(),
-    cache: 'no-cache',
+    // cache: 'no-cache',
   });
   const properties = await response.json();
   return properties;
@@ -29,6 +29,7 @@ export const likeProperty = async (propertyId) => {
   });
   revalidatePath('/dashboard');
   revalidatePath('/account');
+  revalidatePath('/marketplace');
 };
 
 export const unlikeProperty = async (propertyId) => {
@@ -38,4 +39,5 @@ export const unlikeProperty = async (propertyId) => {
   });
   revalidatePath('/dashboard');
   revalidatePath('/account');
+  revalidatePath('/marketplace');
 };

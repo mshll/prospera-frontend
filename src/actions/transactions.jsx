@@ -11,6 +11,7 @@ export const depositFunds = async (amount) => {
   });
 
   revalidatePath('/dashboard');
+  revalidatePath('/account');
 };
 
 export const withdrawFunds = async (amount) => {
@@ -21,4 +22,5 @@ export const withdrawFunds = async (amount) => {
   });
 
   revalidatePath('/dashboard');
+  revalidatePath('/account');
 };

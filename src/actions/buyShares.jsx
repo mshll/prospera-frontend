@@ -17,6 +17,9 @@ export async function buyShares(amount, propertyId) {
     throw new Error(`Failed to buy shares: ${response.statusText}`);
   }
 
+  revalidatePath('/dashboard');
+  revalidatePath('/account');
+  revalidatePath('/marketplace');
   return await response.json();
 }
 
@@ -30,6 +33,10 @@ export async function sellShares(amount, propertyId) {
   if (!response.ok) {
     throw new Error(`Failed to sell shares: ${response.statusText}`);
   }
+
+  revalidatePath('/dashboard');
+  revalidatePath('/account');
+  revalidatePath('/marketplace');
 
   return await response.json();
 }

@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import {
   calculateAccountValue,
   calculateLastMonthAccountValue,
+  calculateLastMonthMonthlyYield,
   calculateTotalMonthlyYield,
   formatCurrency,
   getGreeting,
@@ -36,7 +37,7 @@ const AccountPage = async () => {
   const lastMonthAccountValueChange = Math.abs(accountValue - lastMonthAccountValue);
 
   const MonthlyYield = calculateTotalMonthlyYield(profile.investments);
-  const lastMonthMonthlyYield = calculateTotalMonthlyYield(profile.investments);
+  const lastMonthMonthlyYield = calculateLastMonthMonthlyYield(profile.investments);
   const lastMonthMonthlyYieldChange = Math.abs(MonthlyYield - lastMonthMonthlyYield);
 
   const transactions = profile.transactions

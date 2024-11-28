@@ -57,7 +57,7 @@ const Faq = () => {
     <section className='w-full py-20 md:pb-32'>
       <div className='container'>
         <div className='flex w-full flex-col gap-16 overflow-hidden rounded-lg border border-border bg-card p-8 md:rounded-2xl lg:items-center lg:p-16'>
-          <h1 className='mb-4 text-3xl font-semibold md:mb-11 md:text-5xl'>Frequently asked questions</h1>
+          <h1 className='mb-4 text-3xl font-semibold md:mb-11 md:text-5xl'>Frequently Asked Questions</h1>
           <div className='w-full'>
             <Accordion type='single' collapsible>
               {faqs.map((faq, index) => (

@@ -15,7 +15,7 @@ function PropertyCard({ investment }) {
         alt='property'
         width={500}
         height={500}
-        className='h-24 w-24 rounded-lg object-cover'
+        className='aspect-square h-24 w-24 rounded-lg object-cover'
       />
       <div className='flex w-full flex-col flex-wrap justify-center gap-2'>
         <div className='text-lg font-semibold'>{property.locationName}</div>

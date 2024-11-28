@@ -45,7 +45,6 @@ const HouseListingsPage = ({ properties, profile }) => {
 
   const handleHoverProperty = (property) => {
     setHoveredProperty(property);
-    console.log(property);
   };
 
   const handleRentInputChange = (e) => {

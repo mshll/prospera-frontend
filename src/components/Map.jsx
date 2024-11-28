@@ -42,7 +42,6 @@ const Map = ({ properties, viewSelectedLocation, className, handleDetailsOpen })
   const defaultZoom = 12;
   const selectedZoom = 16;
 
-  console.log(properties);
   return (
     <MapContainer
       center={defaultCenter}

@@ -12,7 +12,6 @@ const DashboardPage = async () => {
   const profile = await getMyProfile();
 
   const chartData = generateChartData(profile);
-  console.log(chartData);
 
   return (
     <SideBar>
@@ -81,6 +80,7 @@ function generateChartData(profile) {
 
       // Truncate date to hour
       const date = valueEntry.valueDate.split(':').slice(0, 2).join(':') + ':00.000+00:00';
+      // const date = valueEntry.valueDate.split('T')[0];
 
       if (!dataPoints[date]) {
         dataPoints[date] = { date, accountValue: 0, monthlyYield: 0 };

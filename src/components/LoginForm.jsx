@@ -48,7 +48,7 @@ function LoginForm() {
           });
           promise.then((res) => {
             setIsLoading(false);
-            console.log(res);
+
             if (!res) {
               toast.error('Email or password is incorrect, please try again.');
               setValues({

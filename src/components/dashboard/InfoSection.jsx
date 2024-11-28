@@ -5,6 +5,7 @@ import { PropertyChart } from './PropertyChart';
 import {
   calculateAccountValue,
   calculateLastMonthAccountValue,
+  calculateLastMonthMonthlyYield,
   calculateTotalMonthlyYield,
   formatCurrency,
   getGreeting,
@@ -33,7 +34,7 @@ function InfoSection({ profile }) {
   const lastMonthAccountValueChange = Math.abs(accountValue - lastMonthAccountValue);
 
   const MonthlyYield = calculateTotalMonthlyYield(profile.investments);
-  const lastMonthMonthlyYield = calculateTotalMonthlyYield(profile.investments);
+  const lastMonthMonthlyYield = calculateLastMonthMonthlyYield(profile.investments);
   const lastMonthMonthlyYieldChange = Math.abs(MonthlyYield - lastMonthMonthlyYield);
 
   return (

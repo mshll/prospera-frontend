@@ -79,3 +79,25 @@ export function calculateLastMonthAccountValue(investments) {
     return acc;
   }, 0);
 }
+
+export function calculateLastMonthMonthlyYield(investments) {
+  const lastMonth = new Date();
+  lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+  return investments.reduce((acc, investment) => {
+    const valueDate = new Date(investment.createdAt);
+
+    if (valueDate < lastMonth) {
+      const monthlyYield = calculateMonthlyIncome({
+        rentalIncome: investment.property.rentalIncome,
+        sharesOwned: investment.sharesOwned,
+        totalShares: investment.property.totalShares,
+        currentValue: investment.property.currentValue,
+        asYield: true,
+      });
+      return acc + parseFloat(monthlyYield);
+    }
+
+    return acc;
+  }, 0);
+}

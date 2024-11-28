@@ -69,7 +69,7 @@ const BuySharesModal = ({ property, userBalance, children }) => {
                   alt='Property'
                   width={500}
                   height={500}
-                  className='hidden h-28 w-36 rounded-lg sm:block'
+                  className='hidden aspect-square h-28 w-36 rounded-lg sm:block'
                 />
               </div>
               <div className='flex w-full flex-col gap-1'>

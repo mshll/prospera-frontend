@@ -17,7 +17,7 @@ export const getMyProfile = async () => {
   const response = await fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: await getHeaders(),
-    cache: 'no-cache',
+    // cache: 'no-cache',
   });
   const profile = await response.json();
   return profile;

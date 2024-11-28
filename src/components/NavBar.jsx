@@ -54,7 +54,7 @@ const Navbar = async () => {
             <ThemeSwitch variant='ghost' />
             {user ? (
               <>
-                <Link href='/dashboard'>
+                <Link href='/account'>
                   <Button variant='outline'>Account</Button>
                 </Link>
                 <Link href='/dashboard'>

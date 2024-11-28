@@ -68,7 +68,7 @@ const ListingCard = ({
                 width={440}
                 height={440}
                 alt={'img'}
-                className='h-44 w-44 rounded-xl object-cover'
+                className='aspect-square h-44 w-44 rounded-xl object-cover'
               />
             </div>
           </div>
