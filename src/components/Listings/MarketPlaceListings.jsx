@@ -28,6 +28,7 @@ import { property, set } from 'lodash';
 import { Label } from '@/components/ui/label';
 import SideBar from '@/components/Sidebar';
 import ReferButton from '../ReferButton';
+import { formatCurrency } from '@/lib/utils';
 import { getPropertyTypes } from '@/lib/utils';
 
 const HouseListingsPage = ({ properties, profile }) => {
@@ -40,6 +41,12 @@ const HouseListingsPage = ({ properties, profile }) => {
   const [selectedFilter, setSelectedFilter] = useState('All');
   const [userNumberOfShares, setUserNumberOfShares] = useState(1);
   const [calculatedRent, setCalculatedRent] = useState(1);
+  const [hoveredProperty, setHoveredProperty] = useState(null);
+
+  const handleHoverProperty = (property) => {
+    setHoveredProperty(property);
+    console.log(property);
+  };
 
   const handleRentInputChange = (e) => {
     const rentInput = Math.min(parseInt(e.target.value), selectedProperty?.availableShares);
@@ -84,7 +91,7 @@ const HouseListingsPage = ({ properties, profile }) => {
   );
 
   const filteredProperties = filteredPropertiesSearch.filter(
-    (property) => selectedFilter === 'All' || property.type === selectedFilter,
+    (property) => selectedFilter === 'All' || property.typeOfProperty === selectedFilter,
   );
 
   const totalPropertiesShown = filteredProperties.length;
@@ -109,6 +116,7 @@ const HouseListingsPage = ({ properties, profile }) => {
             <ListingsContainer
               filteredProperties={filteredProperties}
               handleOpen={handleDetailsOpen}
+              handleHoverProperty={handleHoverProperty}
               // selectedFilterOption={selectedFilterOption}
               properties={properties}
               selectedProperty={selectedProperty}
@@ -129,7 +137,11 @@ const HouseListingsPage = ({ properties, profile }) => {
                 transition={{ duration: 0.3 }}
                 className='h-full w-full'
               >
-                <Map properties={filteredProperties} viewSelectedLocation={viewSelectedLocation} />
+                <Map
+                  properties={filteredProperties}
+                  viewSelectedLocation={viewSelectedLocation}
+                  hoveredProperty={hoveredProperty}
+                />
               </motion.div>
             ) : (
               <motion.div
@@ -156,7 +168,7 @@ const HouseListingsPage = ({ properties, profile }) => {
                 </div>
 
                 {/* Property Images */}
-                {/* <PropertyImagesGrid images={selectedProperty?.images} /> */}
+                <PropertyImagesGrid images={selectedProperty?.imagesUrls} />
 
                 {/* Property Details */}
                 <div className='px-10'>
@@ -173,10 +185,13 @@ const HouseListingsPage = ({ properties, profile }) => {
                     </div>
                     <div>
                       <p className='text-2xl font-bold text-primary'>
-                        {selectedProperty.currentValue / selectedProperty.totalShares} KWD{' '}
+                        {formatCurrency(selectedProperty.currentValue / selectedProperty.totalShares, {
+                          isCompact: false,
+                        })}{' '}
+                        KWD <span className='text-sm font-medium text-muted-foreground'>per share</span>
                       </p>
                       <p className='text-right text-2xl font-medium text-muted-foreground'>
-                        {selectedProperty.currentValue} KWD
+                        {formatCurrency(selectedProperty.currentValue, { isCompact: false })} KWD
                       </p>
                     </div>
                   </div>
@@ -191,12 +206,12 @@ const HouseListingsPage = ({ properties, profile }) => {
                       <Bath className='mr-1 h-4 w-4' /> {selectedProperty.numberOfBathrooms} Bathrooms
                     </Button>
 
-                    <Button variant='outline' className='w-full sm:w-auto'>
+                    <Button variant='outline' size='sm' className='w-full sm:w-auto'>
                       <CameraIcon className='mr-1 h-4 w-4' /> 24/7 security
                     </Button>
                   </div>
 
-                  <div className='rounded-lg bg-card p-3 text-sm'>
+                  <div className='space-y-1 rounded-lg bg-card p-3 text-sm'>
                     <div className='mb-2 flex items-center justify-between'>
                       <div className='flex items-center space-x-2'>
                         <Input
@@ -226,7 +241,7 @@ const HouseListingsPage = ({ properties, profile }) => {
                       onValueChange={(value) => handleRentInputChange({ target: { value: value[0] } })}
                       max={selectedProperty?.availableShares}
                       step={1}
-                      className='my-2'
+                      className='pb-2 pt-5'
                       min={1}
                     />
 

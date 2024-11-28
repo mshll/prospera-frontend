@@ -100,6 +100,7 @@ export const ListingsContainer = ({
   properties,
   handleViewSelectedLocation,
   event,
+  handleHoverProperty,
   selectedProperty,
   selectedFilterOption,
   filteredProperties,
@@ -117,11 +118,13 @@ export const ListingsContainer = ({
       <div className='gap-6 overflow-y-auto pb-4'>
         {filteredProperties.map((property) => (
           <ListingCard
+            handleHoverProperty={handleHoverProperty}
             key={property.id}
             searchTerm={searchTerm}
             onSearchChange={onSearchChange}
             selectedProperty={selectedProperty}
             {...property}
+            property={property}
             handleOpen={() => handleOpen(property)}
             handleViewSelectedLocation={(event) => handleViewSelectedLocation(property, event)}
             profile={profile}

@@ -13,6 +13,7 @@ import { MapPin } from 'lucide-react';
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
 import { likeProperty, unlikeProperty } from '@/actions/properties';
 import { toast } from 'sonner';
+import { formatCurrency } from '@/lib/utils';
 
 const ListingCard = ({
   searchTerm,
@@ -21,19 +22,21 @@ const ListingCard = ({
   price,
   sharesAvailable,
   propertyPrice,
+  handleHoverProperty,
   totalShares,
   location,
-  imagesUrls,
   pricePerShare,
   handleOpen,
   locationName,
   locationAddress,
   selectedProperty,
   name,
+  imagesUrls,
   currentValue,
   availableShares,
   numberOfShares,
   id,
+  property,
   handleViewSelectedLocation,
   profile,
 }) => {
@@ -57,7 +60,7 @@ const ListingCard = ({
   }`;
   return (
     <>
-      <Card className={cardStyle} onClick={handleOpen}>
+      <Card className={cardStyle} onClick={handleOpen} onMouseEnter={() => handleHoverProperty(property)}>
         <div className='flex p-4'>
           <div className='flex-shrink-0'>
             <div>
@@ -65,23 +68,26 @@ const ListingCard = ({
                 src={imagesUrls[0]}
                 width={440}
                 height={440}
-                alt={name}
+                alt={'img'}
                 className='h-44 w-44 rounded-xl object-cover'
               />
             </div>
           </div>
           <div className='ml-4 flex-grow space-y-2'>
             <div className='flex justify-between'>
-              <h1 className='text-sm font-medium text-muted-foreground'>
-                <span className='text-2xl font-semibold text-primary'>{currentValue / totalShares} KWD</span> /share
-              </h1>
+              <h1 className='text-base font-medium text-muted-foreground'>{locationName}</h1>
               {isLiked ? (
                 <IconHeartFilled className='h-6 w-6 cursor-pointer text-destructive' onClick={handleLike} />
               ) : (
                 <IconHeart className='h-6 w-6 cursor-pointer text-muted-foreground' onClick={handleLike} />
               )}
             </div>
-            <p className='text-lg font-medium'>{locationName}</p>
+            <div className='ml-[-5px] text-xs font-medium text-muted-foreground'>
+              <span className='text-2xl font-semibold text-primary'>
+                {formatCurrency(currentValue / totalShares, { isCompact: false })} KWD{' '}
+              </span>
+              per share
+            </div>
             <div>
               <div className='flex justify-between'>
                 <label className='mb-1 block text-xs font-medium text-muted-foreground sm:text-sm'>
@@ -91,7 +97,7 @@ const ListingCard = ({
                   {availableShares} / {totalShares}
                 </div>
               </div>
-              <Progress value={availableShares} />
+              <Progress value={((totalShares - availableShares) / totalShares) * 100} />
 
               <div className='mt-4 items-center text-center sm:flex sm:justify-between'>
                 <p className='text-sm font-medium text-muted-foreground'>
