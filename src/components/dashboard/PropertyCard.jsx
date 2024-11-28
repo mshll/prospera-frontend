@@ -5,6 +5,10 @@ import { formatCurrency } from '@/lib/utils';
 function PropertyCard({ investment }) {
   const property = investment.property;
 
+  if (!property) {
+    return null;
+  }
+
   return (
     <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
       <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />

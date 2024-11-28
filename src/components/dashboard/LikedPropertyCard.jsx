@@ -3,7 +3,9 @@ import AptOne from '@/app/assets/apt1.jpg';
 import { formatCurrency } from '@/lib/utils';
 
 function LikedPropertyCard({ property }) {
-  console.log('PROPERTY:???????', property);
+  if (!property) {
+    return null;
+  }
 
   return (
     <div className='flex gap-3 rounded-md border border-border bg-card p-4'>

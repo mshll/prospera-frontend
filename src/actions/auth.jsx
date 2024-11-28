@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { baseUrl, getHeaders } from './config';
-import { deleteToken, setToken } from './token';
+import { deleteToken, getUser, setToken } from './token';
 
 export async function login(data) {
   try {

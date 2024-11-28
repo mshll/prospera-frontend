@@ -94,7 +94,7 @@ const MyPropertiesPage = async () => {
                       {profile.likedProperties.map((propertyId) => (
                         <LikedPropertyCard
                           key={'likedproperty-' + propertyId}
-                          property={properties.find((property) => property.id === propertyId)}
+                          property={properties?.find((property) => property.id === propertyId)}
                         />
                       ))}
                       {profile.likedProperties.length == 0 && (

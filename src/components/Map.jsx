@@ -63,7 +63,7 @@ const Map = ({ properties, viewSelectedLocation, className }) => {
           <Popup className='custom-popup'>
             <div className='popup-content'>
               <Image
-                // src={property.images[0]}
+                src={property.imagesUrls[0]}
                 alt={property.locationName}
                 width={300}
                 height={200}

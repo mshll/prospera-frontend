@@ -23,7 +23,7 @@ const ListingCard = ({
   propertyPrice,
   totalShares,
   location,
-  images,
+  imagesUrls,
   pricePerShare,
   handleOpen,
   locationName,
@@ -61,13 +61,13 @@ const ListingCard = ({
         <div className='flex p-4'>
           <div className='flex-shrink-0'>
             <div>
-              {/* <Image
-                src={images[0]}
+              <Image
+                src={imagesUrls[0]}
                 width={440}
                 height={440}
                 alt={name}
-                className='h-44 w-52 rounded-xl object-cover'
-              /> */}
+                className='h-44 w-44 rounded-xl object-cover'
+              />
             </div>
           </div>
           <div className='ml-4 flex-grow space-y-2'>

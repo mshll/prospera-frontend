@@ -7,6 +7,9 @@ import SellSharesModal from '../property/SellSharesModal';
 import BuySharesModal from '../property/BuySharesModal';
 
 function MyPropertyCard({ investment, property, profile }) {
+  if (!property) {
+    return null;
+  }
   return (
     <div className='flex gap-3 rounded-md border border-border bg-card p-4'>
       <Image src={AptOne} alt='Luxury Apartment' className='h-24 w-24 rounded-md object-cover' />
